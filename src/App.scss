@@ -1,0 +1,58 @@
+@import './global.scss';
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html body {
+
+  font-family: $mainFont;
+  overflow-x: hidden;
+  font-size: 18px;
+  background-color: $colorNavBg;
+}
+
+ul {
+  list-style: none;
+}
+
+h2 {
+  font-size: clamp(35px, 5vw, 90px);
+  color: $colorTitle;
+  font-family: $fontTitle;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: $colorTitle;
+  border: 31px none #ffffff;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(128, 128, 190);
+}
+::-webkit-scrollbar-thumb:active {
+  background: rgb(128, 128, 190);
+}
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #f2f2f2;
+}
+::-webkit-scrollbar-track:active {
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
