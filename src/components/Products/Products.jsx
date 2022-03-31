@@ -4,6 +4,8 @@ import Product from "./Product/Product";
 
 
 const Products = ({ products, onAddToCart }) => {
+
+ 
   
   return (
     <main>

@@ -14,6 +14,8 @@ import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({})
+  const [errorMessage, setErrorMessage] = useState('')
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -49,6 +51,27 @@ function App() {
     setCart(item.cart)
   }
 
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+
+    setCart(newCart)
+  }
+
+
+
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+        const inComingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder)
+
+        
+        setOrder(inComingOrder)
+        refreshCart();
+    } catch (error) {
+      
+      setErrorMessage(error.data.error.message)
+    }
+  }
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -74,9 +97,15 @@ function App() {
           handleUpdateCartQty={handleUpdateCartQty}
           handleRemoveFromCart={handleRemoveFromCart}
           handleEmptyCart={handleEmptyCart}
+          
           />} />
 
-          <Route exact='true' path="/checkout" element={<Checkout cart={cart} />} />
+          <Route exact='true' path="/checkout" element={<Checkout 
+          cart={cart} 
+          order={order}
+          error={errorMessage}
+          handleCaptureCheckout={handleCaptureCheckout} 
+          />} />
         </Routes>
       </BrowserRouter>
     </div>
