@@ -6,6 +6,7 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
 
 const PaymentForm = ({
   checkoutToken,
@@ -13,8 +14,10 @@ const PaymentForm = ({
   handleCaptureCheckout,
 }) => {
   const stripePromise = loadStripe(
-    process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY
+    "pk_test_51K4lNJIpyCJRUeoekz4uR5OJqEv2Pppdl7C8s9Ubea50j0TA2LtYuwh9X1sistyM6H3ma5wbLLyD4WJPYWgdQvcS00gQMa4Gkn"
   );
+
+  const navigate = useNavigate()
 
   const handleSumbitPayment = async (e, elements, stripe) => {
     e.preventDefault();
@@ -26,8 +29,6 @@ const PaymentForm = ({
       type: "card",
       card: cardElement,
     });
-
-    console.log(stripe);
 
     if (error) {
       console.log(error);
@@ -49,7 +50,8 @@ const PaymentForm = ({
         },
         fulfillment: { shipping_method: shippingData.shippingOption },
         payment: {
-          gateway: 'stripe',
+          gateway: "stripe",
+
           stripe: {
             payment_method_id: paymentMethod.id,
           },
@@ -57,8 +59,11 @@ const PaymentForm = ({
       };
 
       handleCaptureCheckout(checkoutToken.id, orderData);
+      navigate('/')
     }
   };
+
+  
 
   return (
     <ul>
@@ -70,6 +75,7 @@ const PaymentForm = ({
       ))}
 
       <li> SubTotal : {checkoutToken.live.subtotal.formatted_with_symbol}</li>
+
 
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -85,7 +91,7 @@ const PaymentForm = ({
             </form>
           )}
         </ElementsConsumer>
-      </Elements>
+      </Elements> 
     </ul>
   );
 };

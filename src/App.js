@@ -17,6 +17,8 @@ function App() {
   const [order, setOrder] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
 
+  
+
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
 
@@ -66,6 +68,7 @@ function App() {
         
         setOrder(inComingOrder)
         refreshCart();
+        
     } catch (error) {
       
       setErrorMessage(error.data.error.message)
