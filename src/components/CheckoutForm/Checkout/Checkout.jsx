@@ -11,6 +11,7 @@ const Checkout = ({ cart, handleCaptureCheckout, order, error }) => {
   const [shippingData, setShippingData] = useState({})
 
 
+  console.log(cart);
   const navigate = useNavigate()
 
 

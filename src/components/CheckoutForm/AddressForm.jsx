@@ -31,6 +31,13 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
     label: ` ${sO.description} -(${sO.price.formatted_with_symbol})`,
   }));
 
+
+  useEffect(() => {
+    const calculShipping = () => {
+      
+    }
+  }, [])
+
   const fetchShippingCountries = async (checkoutTokenId) => {
     const response = await commerce.services.localeListShippingCountries(
       checkoutTokenId
