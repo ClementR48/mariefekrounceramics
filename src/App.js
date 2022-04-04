@@ -11,6 +11,7 @@ import Contact from "./components/Contact/Contact";
 import Cart from "./components/Cart/Cart";
 import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 import ShowProduct from "./components/ShowProduct/ShowProduct";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -158,6 +159,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

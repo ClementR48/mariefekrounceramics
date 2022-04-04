@@ -6,10 +6,12 @@
 }
 
 html body {
-
+  min-height: 100vh;
+  position: relative;
   font-family: $mainFont;
   overflow-x: hidden;
   font-size: 18px;
+  color: $colorTextMain;
   background-color: $colorNavBg;
 }
 
@@ -18,7 +20,7 @@ ul {
 }
 
 h2 {
-  font-size: clamp(35px, 5vw, 90px);
+  font-size: clamp(25px, 5vw, 45px);
   color: $colorTitle;
   font-family: $fontTitle;
 }

@@ -33,7 +33,6 @@ const Navbar = ({ totalItems }) => {
 
 
   const hover = (e) => {
-    console.log(divAnim);
     const size = e.target.offsetLeft + e.target.offsetWidth / 2;
     divAnim.style.transform = `translateX(${size}px)`;
     divAnim.style.opacity = `1`;
@@ -46,9 +45,9 @@ const Navbar = ({ totalItems }) => {
   useEffect(() => {
     if (location.pathname === "/") {
       setHomePage(true);
-      setDivAnim(allLink.current[5])
+     
     } else {
-      setDivAnim(allLink.current[11])
+      
       setHomePage(false);
     }
   }, [location.pathname]);

@@ -1,0 +1,116 @@
+@import "../../global.scss";
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $colorFooterText;
+
+  
+
+  .logo1 {
+    position: absolute;
+    top: 50%;
+    left: 5vw;
+    transform: translateY(-50%);
+    width: 110px;
+
+    @include mobile {
+      width: 100px;
+      left: 3vw;
+    }
+  }
+
+  .logo2 {
+    position: absolute;
+    top: 50%;
+    right: 5vw;
+    transform: translateY(-50%);
+    width: 110px;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .list-contact {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    @include desktop {
+      flex-direction: column;
+    }
+    @include mobile {
+      width: 90%;
+      align-items: flex-end;
+    }
+
+    li {
+      overflow-x: hidden;
+
+      color: rgb(246, 136, 119);
+      display: flex;
+      align-items: center;
+      
+      @include mobile {
+        font-size: 16px;
+      }
+
+      svg {
+        stroke: rgb(246, 136, 119);
+      }
+
+      a {
+        text-decoration: none;
+        color: rgb(246, 136, 119);
+        display: flex;
+        align-items: center;
+        position: relative;
+        transition: 0.5s;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: -100%;
+          height: 1px;
+          width: 100%;
+          background-color: rgb(246, 136, 119);
+          transition: 0.5s;
+        }
+
+        &:hover::before {
+          left: 0;
+        }
+      }
+      .footer-contact {
+        text-decoration: none;
+        color: rgb(246, 136, 119);
+
+        position: relative;
+        transition: 0.5s;
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: -100%;
+          height: 1px;
+          width: 100%;
+          background-color: rgb(246, 136, 119);
+          transition: 0.5s;
+        }
+
+        &:hover::before {
+          left: 0;
+        }
+      }
+    }
+  }
+}

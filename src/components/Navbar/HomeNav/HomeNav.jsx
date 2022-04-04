@@ -2,6 +2,7 @@ import React from "react";
 import { ShoppingCart } from "react-feather";
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logoBlanc.png";
+import './HomeNav.scss';
 
 
 const HomeNav = ({ totalItems, addRefLink, hover, hoverOff }) => {
@@ -10,7 +11,7 @@ const HomeNav = ({ totalItems, addRefLink, hover, hoverOff }) => {
       <div className="nav_logo">
         <img src={logo} alt="logo" />
       </div>
-      <nav className="nav_links">
+      <nav className="homenav_links">
         <NavLink
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={() => hoverOff()}
