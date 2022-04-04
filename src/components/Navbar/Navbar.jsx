@@ -1,27 +1,66 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import HomeNav from "./HomeNav/HomeNav";
+import Nav from "./Nav/Nav";
+
+import "./Navbar.scss";
 
 const Navbar = ({ totalItems }) => {
+  const [homePage, setHomePage] = useState(true);
+  const [divAnim, setDivAnim] = useState({})
+  
+  
+  const location = useLocation();
+
+  const allLink = useRef([]);
+
+  const addRefLink = (el) => {
+    if (el && !allLink.current.includes(el)) {
+      allLink.current.push(el);
+    }
+  };
+
+  useEffect(() => {
+    setDivAnim(allLink.current[5])
+    
+  }, [])
+  
+
+ 
+
+  
+
+
+
+  const hover = (e) => {
+    console.log(divAnim);
+    const size = e.target.offsetLeft + e.target.offsetWidth / 2;
+    divAnim.style.transform = `translateX(${size}px)`;
+    divAnim.style.opacity = `1`;
+  };
+
+  const hoverOff = () => {
+    allLink.current[5].style.opacity = 0;
+  }
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setHomePage(true);
+      setDivAnim(allLink.current[5])
+    } else {
+      setDivAnim(allLink.current[11])
+      setHomePage(false);
+    }
+  }, [location.pathname]);
 
   return (
-    <nav>
-      <NavLink exact="true" to='/'>
-        Acceuil
-      </NavLink>
-      <NavLink exact="true" to='/products'>
-        Boutique
-      </NavLink>
-      <NavLink exact="true" to='/contact'>
-        Contact
-      </NavLink>
-      <NavLink exact="true" to='/about'>
-        A propos
-      </NavLink>
-      <NavLink exact="true" to='/cart'>
-        Cart<span>{totalItems}</span>
-      </NavLink>
-     
-    </nav>
+    <header className="header">
+      {homePage ? (
+        <HomeNav addRefLink={addRefLink} totalItems={totalItems} hover={hover} hoverOff={hoverOff} />
+      ) : (
+        <Nav hover={hover} addRefLink={addRefLink} totalItems={totalItems} hoverOff={hoverOff} />
+      )}
+    </header>
   );
 };
 
