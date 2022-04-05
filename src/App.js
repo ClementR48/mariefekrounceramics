@@ -16,36 +16,41 @@ import Footer from "./components/Footer/Footer";
 function App() {
   const [products, setProducts] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
-  const [product, setProduct] = useState()
+  const [product, setProduct] = useState();
   const [cart, setCart] = useState({});
   const [categories, setCategories] = useState([]);
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
 
     setProducts(data);
-    setProductsToShow(data)
+    setProductsToShow(data);
   };
 
   const changeListProducts = (idCategory) => {
-    setLoading(true)
-    commerce.products.list({
-      category_id: [idCategory],
-    }).then(data => {
-      setLoading(false)
-      setProductsToShow(data.data)
-    })
-    
+    if (products) {
+      const filteredProducts = products.filter(
+        (product) => product.categories[0].id === idCategory
+      );
+
+      setProductsToShow(filteredProducts);
+    }
   };
 
-  const fetchOneProduct = async (idProduct) => {
-    setProduct()
+  const fetchOneProduct = (idProduct) => {
+    /* setProduct();
     const product = await commerce.products.retrieve(idProduct);
-    setProduct(product);
-  }
+    setProduct(product); */
+
+    const filteredProduct = products.filter(
+      (product) => product.id === idProduct
+    );
+
+    setProduct(filteredProduct[0]);
+  };
 
   const fetchCart = async () => {
     const cart = await commerce.cart.retrieve();
@@ -115,7 +120,19 @@ function App() {
           <Route exact="true" path="/" element={<Home />} />
           <Route exact="true" path="/about" element={<About />} />
           <Route exact="true" path="/contact" element={<Contact />} />
-          <Route exact="true" path="/products/:id" element={<ShowProduct fetchOneProduct={fetchOneProduct} product={product} setProduct={setProduct} />} />
+          <Route
+            exact="true"
+            path="/products/:id"
+            element={
+              <ShowProduct
+                fetchOneProduct={fetchOneProduct}
+                product={product}
+                setProduct={setProduct}
+                cart={cart}
+                onAddToCart={handleAddToCart}
+              />
+            }
+          />
           <Route
             exact="true"
             path="/products"
@@ -128,6 +145,7 @@ function App() {
                 categories={categories}
                 changeListProducts={changeListProducts}
                 loading={loading}
+                setProductsToShow={setProductsToShow}
               />
             }
           />

@@ -9,7 +9,7 @@ const ImageHome = () => {
     <div className="image-home-container">
 
       <picture >
-        <source srcset={imgDesktop} media="(min-width: 1000px)" />
+        <source srcSet={imgDesktop} media="(min-width: 1000px)" />
         
         <img src={imgTablet} alt="vases" />
       </picture>

@@ -1,18 +1,1 @@
-@import "../../global.scss";
 
-.home {
-  background-image:linear-gradient(rgba(0, 0, 0, 0.011), rgba(0, 0, 0, 0.1)),
-    url("../../assets/images/bg/bgDesktop.png");
-  background-size: cover;
-
-  @include desktop {
-    background-image: url("../../assets/images/bg/bgDesktop2.png");
-    background-size: contain;
-  }
-  @include tablet {
-    background-image: url("../../assets/images/bg/bgTablet.png");
-  }
-  @include mobile {
-    background-image: url("../../assets/images/bg/bgMobile.png");
-  }
-}

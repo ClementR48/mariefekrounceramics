@@ -1,0 +1,70 @@
+@import '../../global.scss';
+
+
+.products {
+  padding: 120px 5vw;
+  @include mobile {
+    padding: 120px 0;
+  }
+
+  .list_categories {
+    margin: 50px 0 ;
+      width: 70%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      
+      @include tablet {
+        justify-content: space-evenly;
+        width: 100%;
+      }
+    }
+  .list_products{
+    /* -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    column-gap: 80px;
+    column-fill: balance;
+    column-width: 10%;
+   
+  
+    @include tablet {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+    }
+  
+    @include mobile {
+      -webkit-column-count: 1;
+      -moz-column-count: 1;
+      column-count: 1;
+    }*/
+    
+    
+    width: 100%;
+    padding: 20px;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &.apparition {
+      transform: translateY(100%);
+      animation: apparition 2s forwards;
+    }
+
+    @include tablet {
+      padding: 20px 0;
+    }
+
+    @keyframes apparition {
+      100%{
+        transform: translateY(0%);
+      }
+    }
+  } 
+
+}

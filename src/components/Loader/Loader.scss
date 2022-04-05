@@ -1,0 +1,31 @@
+@import "../../global.scss";
+.loader {
+  width: 100vw;
+  height: 100vh;
+  background-color: $colorNavBg;
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 300px;
+    animation: turn 10s infinite linear;
+
+    @include mobile {
+      width: 150px;
+    }
+  }
+
+  @keyframes turn {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}

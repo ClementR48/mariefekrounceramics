@@ -1,0 +1,51 @@
+@import '../../../global.scss';
+
+.product {
+  
+  width: 300px;
+  height: 400px;
+  margin: 15px;
+  overflow: hidden;
+
+  a{
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s ease-in-out;
+      filter: grayscale(50%);
+    }
+
+    .caption{
+      padding: 7px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: $colorTextMain;
+      background-color: white;
+      transition: 0.5s ease-in-out;
+      
+
+      @include tablet {
+        transform: translateY(-100%);
+      }
+    }
+
+    &:hover .caption{
+      transform: translateY(-100%);
+      @include tablet {
+        transform: translateY(0);
+      }
+
+    }
+    &:hover img{
+      transform: scale(1.1);
+      filter: grayscale(0%);
+    }
+  }
+}

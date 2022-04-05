@@ -1,45 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import "./Product.scss";
 
-const Product = ({ product, onAddToCart, cart }) => {
+const Product = ({ product }) => {
 
-  
-  const [available, setAvailable] = useState(true);
-
-  useEffect(() => {
-    const isAvailable = () => {
-      
-        const productInCart = cart.line_items.filter(
-          (item) => item.product_id === product.id
-        );
-
-        if (productInCart.length !== 0) {
-          if (productInCart[0].quantity === product.inventory.available) {
-            setAvailable(false);
-          }
-        }
-      
-    };
-
-    if(cart.line_items) isAvailable();
-  }, [cart]);
 
 
 
   return (
-    <li>
-      <Link to={`/products/${product.id}`} >
-      <p>{product.name}</p>
-      <img src={product.image.url} alt={product.name} />
-      <p>{product.description}</p>
-      <p>{product.attributes.hauteur}</p>
-      {available ? (
-        <button onClick={() => onAddToCart(product.id, 1)}>
-          Ajouter au painier
-        </button>
-      ) : (
-        <p>a plus</p>
-      )}
+    <li className="product">
+      <Link to={`/products/${product.id}`}>
+        <img src={product.image.url} alt={product.name} />
+        <div className="caption">
+          <p>{product.name}</p>
+          <p>{product.price.formatted_with_code}</p>
+        </div>
+
+        
       </Link>
     </li>
   );
