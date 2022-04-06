@@ -3,11 +3,14 @@ import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import "./ShowProduct.scss";
 
-const ShowProduct = ({ fetchOneProduct, product, cart, onAddToCart }) => {
-  const id = useParams();
+const ShowProduct = ({ fetchOneProduct, product, cart,products, onAddToCart,fetchProducts }) => {
+  const {id} = useParams();
+
+ 
+  
+
 
   const [available, setAvailable] = useState(true);
-  console.log(product);
 
   let cursorRef = useRef();
 
@@ -39,12 +42,18 @@ const ShowProduct = ({ fetchOneProduct, product, cart, onAddToCart }) => {
   }, [cart]);
 
   useEffect(() => {
-    fetchOneProduct(id.id);
-  }, []);
+
+    products ? fetchOneProduct(id) : fetchProducts()
+    
+   
+  }, [products])
+  console.log(product);
+
+  
 
   return (
     <div className="showproduct">
-      {product ? (
+      {product? (
         <div className="product_info">
           <div
             onMouseLeave={mouseLeave}
@@ -66,8 +75,8 @@ const ShowProduct = ({ fetchOneProduct, product, cart, onAddToCart }) => {
             <p>{product.description}</p>
             {product.attributes.map((att) => (
               <div key={att.id}>
-                <p>{att.name}</p>
-                <p>{att.value}</p>
+                <p>{att.name}: {att.value} </p>
+                
               </div>
             ))}
             <p>{product.price.formatted_with_code}</p>

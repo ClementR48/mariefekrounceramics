@@ -40,13 +40,13 @@ function App() {
     }
   };
 
-  const fetchOneProduct = (idProduct) => {
+  const fetchOneProduct = (permalink) => {
     /* setProduct();
     const product = await commerce.products.retrieve(idProduct);
     setProduct(product); */
 
     const filteredProduct = products.filter(
-      (product) => product.id === idProduct
+      (product) => product.permalink === permalink
     );
 
     setProduct(filteredProduct[0]);
@@ -129,7 +129,9 @@ function App() {
                 product={product}
                 setProduct={setProduct}
                 cart={cart}
-                onAddToCart={handleAddToCart}
+                onAddToCart={handleAddToCart }
+                products={products}
+                fetchProducts={fetchProducts}
               />
             }
           />

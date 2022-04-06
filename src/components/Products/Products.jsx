@@ -14,18 +14,15 @@ const Products = ({
   changeListProducts,
   cart,
 }) => {
-  const [activeCateg, setActiveCateg] = useState(-1);
+  const [activeCateg, setActiveCateg] = useState("all");
 
-  const handleClickCateg = (index, idCateg) => {
-    setActiveCateg(index);
-    changeListProducts(idCateg);
-  };
-  const handleClickCategAll = () => {
-    setActiveCateg(-1);
-    setProductsToShow(products);
-  };
-
-
+  useEffect(() => {
+    if (activeCateg !== "all") {
+      changeListProducts(activeCateg);
+    } else {
+      setProductsToShow(products);
+    }
+  }, [activeCateg]);
 
   return (
     <main className="products">
@@ -38,11 +35,12 @@ const Products = ({
                 return (
                   <li
                     className={
-                      index === activeCateg ? "category selected" : "category"
+                      category.id === activeCateg
+                        ? "category selected"
+                        : "category"
                     }
                     key={category.id}
-                    onClick={() => handleClickCateg(index, category.id)}
-                    
+                    onClick={() => setActiveCateg(category.id)}
                   >
                     <Categories
                       setActiveCateg={setActiveCateg}
@@ -53,11 +51,18 @@ const Products = ({
                   </li>
                 );
               })}
-              <li><span className={
-                      -1 === activeCateg ? "category selected" : "category"
-                    } onClick={() => handleClickCategAll()}>Tout</span></li>
+            <li>
+              <span
+                className={
+                  "all" === activeCateg ? "category selected" : "category"
+                }
+                onClick={() => setActiveCateg("all")}
+              >
+                Tout
+              </span>
+            </li>
           </ul>
-          <ul className= "list_products">
+          <ul className="list_products">
             {productsToShow.map((product) => {
               return (
                 <Product
