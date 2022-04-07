@@ -41,10 +41,6 @@ function App() {
   };
 
   const fetchOneProduct = (permalink) => {
-    /* setProduct();
-    const product = await commerce.products.retrieve(idProduct);
-    setProduct(product); */
-
     const filteredProduct = products.filter(
       (product) => product.permalink === permalink
     );
@@ -63,9 +59,14 @@ function App() {
     setCategories(data);
   };
 
-  const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-    setCart(item.cart);
+  const handleAddToCart = (productId, quantity) => {
+    /*  const item = await commerce.cart.add(productId, quantity);
+    setCart(item.cart); */
+    setLoading(true);
+    commerce.cart
+      .add(productId, quantity)
+      .then((item) => setCart(item.cart))
+      .then(() => setLoading(false));
   };
 
   const handleUpdateCartQty = async (productId, quantity) => {
@@ -129,9 +130,10 @@ function App() {
                 product={product}
                 setProduct={setProduct}
                 cart={cart}
-                onAddToCart={handleAddToCart }
+                onAddToCart={handleAddToCart}
                 products={products}
                 fetchProducts={fetchProducts}
+                loading={loading}
               />
             }
           />
@@ -162,6 +164,7 @@ function App() {
                 handleRemoveFromCart={handleRemoveFromCart}
                 handleEmptyCart={handleEmptyCart}
                 products={products}
+                categories={categories}
               />
             }
           />

@@ -1,0 +1,83 @@
+@import '../../../global.scss';
+.cart_empty {
+  .text_empty {
+    margin-bottom: 10vh;
+    display: flex;
+  }
+  svg {
+    width: 1000px;
+    text {
+      font-size: 30px;
+      letter-spacing: 5px;
+    }
+  }
+
+  .carousel-empty {
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+
+    cursor: none;
+
+    @include mobile {
+      padding: 10px;
+    }
+
+    .cursor {
+      z-index: 1000;
+      background-color: white;
+      width: 80px;
+      height: 80px;
+      font-size: 16px;
+      border: 1px white solid;
+      color: black;
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      mix-blend-mode: screen;
+    }
+
+    .carousel-container {
+      cursor: none;
+      display: flex;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .image-container {
+      cursor: none;
+      display: flex;
+      align-items: center;
+      animation: carousel infinite linear 20s;
+      margin: 0;
+
+      img {
+        object-fit: cover;
+        cursor: none;
+        width: 15vw;
+        height: 15vw;
+        margin: 20px;
+        @include tablet {
+          width: 20vw;
+          height: 20vw;
+        }
+        @include mobile {
+          width: 100px;
+          height: 100px;
+          margin: 10px;
+        }
+      }
+    }
+
+    @keyframes carousel {
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+  }
+}

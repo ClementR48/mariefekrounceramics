@@ -1,0 +1,87 @@
+@import "../../../../global.scss";
+
+.cartitem {
+  @include tablet {
+    border-bottom: 5px solid $colorTitle;
+    display: block;
+  }
+  td {
+    border-bottom: 1px solid $colorTitle;
+    padding: 5px 0;
+    text-align: center;
+    height: 120px;
+    min-width: 90px;
+    @include tablet {
+      height: auto;
+      border-bottom: 1px solid $colorTitle;
+      display: block;
+      font-size: 0.8em;
+      text-align: center;
+    }
+
+    a {
+      text-transform: none;
+      color: $colorTextMain;
+    }
+
+    img {
+      width: 80%;
+      height: 100%;
+      object-fit: cover;
+
+      @include tablet {
+        width: 30%;
+        min-width: 150px;
+      }
+    }
+  }
+
+  .modify_item {
+    height: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    @include tablet {
+      height: 50px;
+
+      justify-content: space-evenly;
+    }
+
+    .delete_item {
+      background-color: none;
+      transition: 0.5s all;
+
+      &:hover {
+        background-color: transparent;
+      }
+      &:hover svg {
+        transform: scale(1.2);
+        color: white;
+      }
+    }
+
+    button {
+      outline: none;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border: 1px solid $colorTextMain;
+      border-radius: 50%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover svg {
+        transform: scale(1.2);
+        color: white;
+      }
+      &:hover {
+        background-color: $colorTextMain;
+      }
+    }
+  }
+}

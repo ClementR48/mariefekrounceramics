@@ -1,50 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CartItem from "./CartItem/CartItem";
+import EmptyCart from "./EmptyCart/EmptyCart";
+import CartItem from "./FullCart/CartItem/CartItem";
+import FullCart from "./FullCart/FullCart";
+import './Cart.scss';
+import Loader from "../Loader/Loader";
 
 const Cart = ({
   cart,
   handleEmptyCart,
   handleRemoveFromCart,
   handleUpdateCartQty,
-  products
+  products,
+  categories
 }) => {
-
   
 
 
-  const EmptyCart = () => {
-    return <div>La cart est Vide</div>;
-  };
-  const FullCart = () => {
-    return (
-      <>
-        <ul>
-          {cart.line_items.map((item) => (
-            <CartItem
-              key={item.id}
-              item={item}
-              handleRemoveFromCart={handleRemoveFromCart}
-              handleUpdateCartQty={handleUpdateCartQty}
-              products={products}
-            />
-          ))}
-        </ul>
+  if (!cart.line_items) return <Loader />;
 
-        <div>
-          details : {cart.subtotal.formatted_with_symbol}
-          <button onClick={() => handleEmptyCart()}>Empty Cart</button>
-          <Link to="/checkout" exact="true">
-            Checkout
-          </Link>
-        </div>
-      </>
-    );
-  };
-
-  if (!cart.line_items) return "...Wait";
-
-  return <div>{!cart.line_items.length ? <EmptyCart /> : <FullCart />}</div>;
+  return (
+    <div className="cart">
+      <h2>Votre panier</h2>
+      {!cart.line_items.length ? (
+        <EmptyCart categories={categories} />
+      ) : (
+        <FullCart
+          cart={cart}
+          handleEmptyCart={handleEmptyCart}
+          handleRemoveFromCart={handleRemoveFromCart}
+          handleUpdateCartQty={handleUpdateCartQty}
+          products={products}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Cart;

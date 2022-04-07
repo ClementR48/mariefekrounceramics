@@ -1,16 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import "./ShowProduct.scss";
+import striptags from "striptags";
 
-const ShowProduct = ({ fetchOneProduct, product, cart,products, onAddToCart,fetchProducts }) => {
-  const {id} = useParams();
-
- 
-  
-
-
+const ShowProduct = ({
+  fetchOneProduct,
+  product,
+  cart,
+  products,
+  onAddToCart,
+  fetchProducts,
+  loading
+}) => {
+  const { id } = useParams();
   const [available, setAvailable] = useState(true);
+  const [buttonAddProduct, setButtonAddProduct] = useState('Panier');
+
+  const textButtonLetters = buttonAddProduct.split("");
+
+  useEffect(() => {
+    
+    loading ? setButtonAddProduct('Wait'):setButtonAddProduct('Panier')
+  }, [loading])
+
+  let navigate = useNavigate()
 
   let cursorRef = useRef();
 
@@ -42,52 +56,109 @@ const ShowProduct = ({ fetchOneProduct, product, cart,products, onAddToCart,fetc
   }, [cart]);
 
   useEffect(() => {
+    products ? fetchOneProduct(id) : fetchProducts();
+  }, [products]);
 
-    products ? fetchOneProduct(id) : fetchProducts()
-    
-   
-  }, [products])
-  console.log(product);
 
-  
+
 
   return (
     <div className="showproduct">
-      {product? (
+      {product ? (
         <div className="product_info">
           <div
             onMouseLeave={mouseLeave}
             onMouseMove={mousepos}
-            className="images"
+            className="left"
           >
             {product.assets.map((img) => (
               <img key={img.id} src={img.url} alt={product.name} />
             ))}
-            {product.assets.map((img) => (
-              <img key={img.id} src={img.url} alt={product.name} />
-            ))}
+
             <div ref={cursorRef} className="cursor">
               <span>Scroll</span>
             </div>
           </div>
-          <div className="info">
+          <div className="right">
             <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            {product.attributes.map((att) => (
-              <div key={att.id}>
-                <p>{att.name}: {att.value} </p>
-                
+            
+              <p>{striptags(product.description)} </p>
+              <div className="attributes_product">
+                {product.attributes.map((att) => (
+                  <p key={att.id}>
+                    {att.name}: {att.value}{" "}
+                  </p>
+                ))}
               </div>
-            ))}
-            <p>{product.price.formatted_with_code}</p>
-            {available ? (
-              <button onClick={() => onAddToCart(product.id, 1)}>
-                Ajouter au painier
+              <p className="price">{product.price.formatted_with_code}</p>
+              {available ? (
+                /* <button >
+                  Ajouter au painier
+                </button> */
+                <button className={!loading ? "checkout" : 'checkout none' } onClick={() => !loading && onAddToCart(product.id, 1) } >
+                <div className="span-container s1">
+                  {textButtonLetters.map((letter, index) => {
+                    return (
+                      <>
+                        {letter !== " " ? (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            {letter}
+                          </span>
+                        ) : (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            &nbsp;
+                          </span>
+                        )}
+                      </>
+                    );
+                  })}
+                </div>
+                <div className="span-container s2">
+                  {textButtonLetters.map((letter, index) => {
+                    return (
+                      <>
+                        {letter !== " " ? (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            {letter}
+                          </span>
+                        ) : (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            &nbsp;
+                          </span>
+                        )}
+                      </>
+                    );
+                  })}
+                </div>
               </button>
-            ) : (
-              <p>a plus</p>
-            )}
-          </div>
+                
+              ) : (
+                <p>&Eacute;PUIS&Eacute;</p>
+              )}
+
+              <button onClick={() => navigate('/products')} className="back"><span>Shop</span></button>
+            </div>
+          
         </div>
       ) : (
         <Loader />
