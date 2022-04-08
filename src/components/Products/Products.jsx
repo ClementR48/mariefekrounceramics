@@ -43,10 +43,8 @@ const Products = ({
                     onClick={() => setActiveCateg(category.id)}
                   >
                     <Categories
-                      setActiveCateg={setActiveCateg}
                       category={category}
-                      changeListProducts={changeListProducts}
-                      index={index}
+                      
                     />
                   </li>
                 );

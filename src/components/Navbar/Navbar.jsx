@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import HomeNav from "./HomeNav/HomeNav";
 import Nav from "./Nav/Nav";
 
 import "./Navbar.scss";
 
-const Navbar = ({ totalItems }) => {
+const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
   const [homePage, setHomePage] = useState(true);
-  const [divAnim, setDivAnim] = useState({})
+  const [divAnim, setDivAnim] = useState({});
+
   
-  
+
   const location = useLocation();
 
   const allLink = useRef([]);
@@ -20,17 +21,27 @@ const Navbar = ({ totalItems }) => {
     }
   };
 
+  const [changeWidth, setChangeWidth] = useState(window.innerWidth)
+
+
   useEffect(() => {
-    setDivAnim(allLink.current[5])
-    
+    const changeWidth = () => {
+      if(window.innerWidth === 400){
+       
+        console.log(window.innerWidth);
+      }
+    }
+    window.addEventListener('resize', changeWidth)
+
+    return () => {
+      window.removeEventListener('resize', changeWidth)
+    }
   }, [])
-  
-
- 
-
-  
 
 
+  useEffect(() => {
+    setDivAnim(allLink.current[5]);
+  }, []);
 
   const hover = (e) => {
     const size = e.target.offsetLeft + e.target.offsetWidth / 2;
@@ -40,25 +51,45 @@ const Navbar = ({ totalItems }) => {
 
   const hoverOff = () => {
     allLink.current[5].style.opacity = 0;
-  }
+  };
+
+  
 
   useEffect(() => {
     if (location.pathname === "/") {
       setHomePage(true);
-     
     } else {
-      
       setHomePage(false);
     }
   }, [location.pathname]);
 
+ 
+
   return (
     <header className="header">
       {homePage ? (
-        <HomeNav addRefLink={addRefLink} totalItems={totalItems} hover={hover} hoverOff={hoverOff} />
+        <HomeNav
+          addRefLink={addRefLink}
+          totalItems={totalItems}
+          hover={hover}
+          hoverOff={hoverOff}
+        />
       ) : (
-        <Nav hover={hover} addRefLink={addRefLink} totalItems={totalItems} hoverOff={hoverOff} />
+        <Nav
+          hover={hover}
+          addRefLink={addRefLink}
+          totalItems={totalItems}
+          hoverOff={hoverOff}
+        />
       )}
+      <div
+        className={openMenu ? "hamburger active" : "hamburger"}
+        onClick={() => openMenuFunc()}
+      >
+        <span className="line1"></span>
+        <span className="line2"></span>
+        <span className="line3"></span>
+      </div>
     </header>
   );
 };

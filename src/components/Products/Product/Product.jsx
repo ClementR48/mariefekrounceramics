@@ -4,7 +4,7 @@ import "./Product.scss";
 
 const Product = ({ product }) => {
 
-
+  
 
 
   return (

@@ -64,15 +64,28 @@ const EmptyCart = ({ categories }) => {
           </div>
           <Link to="/products" className="image-container">
             {categories.map((category) => (
-              
-                <img key={category.id} src={category.assets[0].url} alt={category.name}></img>
-                
-              
+              <img
+                key={category.id}
+                src={
+                  category.assets.filter(
+                    (img) => img.image_dimensions.width > 300
+                  )[0].url
+                }
+                alt={category.name}
+              ></img>
             ))}
           </Link>
           <Link to="/products" className="image-container second">
             {categories.map((category) => (
-              <img src={category.assets[0].url} alt={category.name}></img>
+              <img
+                key={category.id}
+                src={
+                  category.assets.filter(
+                    (img) => img.image_dimensions.width > 300
+                  )[0].url
+                }
+                alt={category.name}
+              ></img>
             ))}
           </Link>
         </div>

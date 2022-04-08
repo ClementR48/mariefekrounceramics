@@ -1,9 +1,7 @@
 @import "../../global.scss";
 .about {
   padding: 120px 5vw;
-  
- 
-  
+
   h2 {
     margin-top: 50px;
     font-size: 60px;
@@ -14,6 +12,7 @@
 
   .container-about {
     padding: 100px 10vw;
+    
 
     @include desktop {
       display: flex;
@@ -27,9 +26,8 @@
 
     picture {
       width: 50%;
-      
-      
-      @include desktop{
+
+      @include desktop {
         width: 100%;
         display: flex;
         align-items: center;
@@ -49,31 +47,29 @@
       margin-bottom: 150px;
 
       @include desktop {
-  
         margin-right: 0;
         float: none;
-        
+
         box-shadow: 30px 35px rgba(255, 239, 168, 1);
       }
       @include mobile {
         width: 300px;
-      height: 300px;
+        height: 300px;
         box-shadow: 20px 25px rgba(255, 239, 168, 1);
       }
     }
-    
-      p {
-        
-        color: $colorTextMain;
-        line-height: 1.5;
-        @include tablet {
-          font-size: 16px;
-          text-align: justify;
-        }
-        @include mobile {
-          font-size: 14px;
-        }
+
+    p {
+
+      color: $colorTextMain;
+      line-height: 1.5;
+      @include tablet {
+        font-size: 16px;
+        text-align: justify;
+      }
+      @include mobile {
+        font-size: 14px;
       }
     }
-  
+  }
 }

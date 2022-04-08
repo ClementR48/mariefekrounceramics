@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from "../../../assets/images/image_article_home.jpg";
-import './ArticleHome.scss';
+import imgDesktop from "../../../assets/images/homeArticle650.jpg";
+import imgMobile from "../../../assets/images/homeArticle400.jpg";
+import "./ArticleHome.scss";
 
 const ArticleHome = () => {
   return (
@@ -18,9 +19,10 @@ const ArticleHome = () => {
           </p>
           <Link to="/products">Accéder au shop</Link>
         </div>
-        <div className="picture">
-          <img src={img} alt="vase"></img>
-        </div>
+        <picture className="picture">
+          <source srcSet={imgDesktop} media="(min-width: 400px)" />
+          <img src={imgMobile} alt="vases" />
+        </picture>
       </div>
       <div className="article2">
         <div className="informations">
@@ -34,9 +36,10 @@ const ArticleHome = () => {
           </p>
           <Link to="/products">Accéder au shop</Link>
         </div>
-        <div className="picture">
-          <img src={img} alt="vase"></img>
-        </div>
+        <picture className="picture">
+          <source srcSet={imgDesktop} media="(min-width: 400px)" />
+          <img src={imgMobile} alt="vases" />
+        </picture>
       </div>
     </div>
   );

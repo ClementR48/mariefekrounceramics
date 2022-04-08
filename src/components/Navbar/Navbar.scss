@@ -1,10 +1,51 @@
+@import "../../global.scss";
 .header {
   width: 100%;
   height: 90px;
-  padding: 5px 0 ;
+  padding: 5px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
+  position: fixed;
   z-index: 500;
+
+  .hamburger {
+    z-index: 1000;
+    position: absolute;
+    right: 5vw;
+    width: 32px;
+    height: 27px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    @include tablet {
+      display: flex;
+    }
+
+    span {
+      width: 100%;
+      height: 3px;
+      background-color: $colorNavText;
+      transform-origin: left;
+      transition: all 0.7s ease;
+    }
+
+    &.active {
+      span {
+        &:first-child {
+          background-color: $colorTitle;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          background-color: $colorTitle;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
 }

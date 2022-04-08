@@ -2,8 +2,7 @@ import React from "react";
 import { ShoppingCart } from "react-feather";
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logoBlanc.png";
-import './HomeNav.scss';
-
+import "./HomeNav.scss";
 
 const HomeNav = ({ totalItems, addRefLink, hover, hoverOff }) => {
   return (
@@ -61,7 +60,9 @@ const HomeNav = ({ totalItems, addRefLink, hover, hoverOff }) => {
         <div className="anim_hover">
           <div ref={addRefLink} className="anim_hover_move"></div>
         </div>
+        
       </nav>
+      
     </>
   );
 };

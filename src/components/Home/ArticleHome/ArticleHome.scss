@@ -1,13 +1,13 @@
-@import '../../../global.scss';
+@import "../../../global.scss";
 
-.home-article{
+.home-article {
   padding: 5vw 5vw calc((5vw + 180px)) 5vw;
   .article {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+   
 
     @include tablet {
       flex-direction: column-reverse;
@@ -18,6 +18,8 @@
     }
 
     .informations {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
       height: 100%;
       width: 50%;
       padding: 0 50px;
@@ -101,7 +103,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      
 
       img {
         width: 100%;
@@ -111,7 +112,6 @@
       }
     }
   }
-
 
   /* =============article 2=============== */
 
@@ -138,6 +138,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
 
       @include desktop {
         width: 70%;
@@ -213,7 +215,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      
 
       img {
         width: 100%;

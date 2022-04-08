@@ -12,6 +12,8 @@ import Cart from "./components/Cart/Cart";
 import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 import ShowProduct from "./components/ShowProduct/ShowProduct";
 import Footer from "./components/Footer/Footer";
+import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
+import Overlay from "./components/Overlay/Overlay";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -22,6 +24,17 @@ function App() {
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const openMenuFunc = (value = "") => {
+    if(value !== ""){
+      setOpenMenu(value) 
+      console.log('value');
+    }else {
+      console.log('normal');
+      setOpenMenu((prevState) => !prevState);
+    } 
+  };
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -116,7 +129,17 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar totalItems={cart.total_items} />
+        {openMenu && <Overlay openMenuFunc={openMenuFunc} />}
+        <Navbar
+          totalItems={cart.total_items}
+          openMenu={openMenu}
+          openMenuFunc={openMenuFunc}
+        />
+        <Menuresponsive
+          openMenuFunc={openMenuFunc}
+          openMenu={openMenu}
+          totalItems={cart.total_items}
+        />
         <Routes>
           <Route exact="true" path="/" element={<Home />} />
           <Route exact="true" path="/about" element={<About />} />

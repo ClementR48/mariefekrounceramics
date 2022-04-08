@@ -11,20 +11,19 @@ const ShowProduct = ({
   products,
   onAddToCart,
   fetchProducts,
-  loading
+  loading,
 }) => {
   const { id } = useParams();
   const [available, setAvailable] = useState(true);
-  const [buttonAddProduct, setButtonAddProduct] = useState('Panier');
+  const [buttonAddProduct, setButtonAddProduct] = useState("Panier");
 
   const textButtonLetters = buttonAddProduct.split("");
 
   useEffect(() => {
-    
-    loading ? setButtonAddProduct('Wait'):setButtonAddProduct('Panier')
-  }, [loading])
+    loading ? setButtonAddProduct("Wait") : setButtonAddProduct("Panier");
+  }, [loading]);
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   let cursorRef = useRef();
 
@@ -59,8 +58,24 @@ const ShowProduct = ({
     products ? fetchOneProduct(id) : fetchProducts();
   }, [products]);
 
+  const [widthScreen, setWidthScreen] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const changeWidth = () => {
+      setWidthScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", changeWidth);
 
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, []);
+
+  const attributes = (idAtt) => {
+    const att = product.attributes.filter((att) => att.id === idAtt);
+
+    return `${att[0].name} : ${att[0].value}`;
+  };
 
   return (
     <div className="showproduct">
@@ -71,9 +86,27 @@ const ShowProduct = ({
             onMouseMove={mousepos}
             className="left"
           >
-            {product.assets.map((img) => (
-              <img key={img.id} src={img.url} alt={product.name} />
-            ))}
+            {widthScreen > 1199
+              ? product.assets
+                  .filter((img) => img.image_dimensions.width > 1200)
+                  .map((img) => {
+                    return <img src={img.url} alt={product.name} />;
+                  })
+              : widthScreen > 424 && widthScreen < 1200
+              ? product.assets
+                  .filter(
+                    (img) =>
+                      img.image_dimensions.width > 750 &&
+                      img.image_dimensions.width < 1200
+                  )
+                  .map((img) => {
+                    return <img src={img.url} alt={product.name} />;
+                  })
+              : product.assets
+                  .filter((img) => img.image_dimensions.width < 425)
+                  .map((img) => {
+                    return <img src={img.url} alt={product.name} />;
+                  })}
 
             <div ref={cursorRef} className="cursor">
               <span>Scroll</span>
@@ -81,21 +114,21 @@ const ShowProduct = ({
           </div>
           <div className="right">
             <h2>{product.name}</h2>
-            
-              <p>{striptags(product.description)} </p>
-              <div className="attributes_product">
-                {product.attributes.map((att) => (
-                  <p key={att.id}>
-                    {att.name}: {att.value}{" "}
-                  </p>
-                ))}
-              </div>
-              <p className="price">{product.price.formatted_with_code}</p>
-              {available ? (
-                /* <button >
-                  Ajouter au painier
-                </button> */
-                <button className={!loading ? "checkout" : 'checkout none' } onClick={() => !loading && onAddToCart(product.id, 1) } >
+
+            <p>{striptags(product.description)} </p>
+            <div className="attributes_product">
+              <p>{attributes("attr_RyWOwmdnWlnEa2")}</p>
+              <p>{attributes("attr_31q0o3LJ85DdjR")}</p>
+              <p>{attributes("attr_BkyN5YV7Rl0b69")} g</p>
+              <p>{attributes("attr_8XO3wpWzXlYAzQ")}</p>
+              <p>{attributes("attr_aZWNoyYPzo80JA")} cm</p>
+            </div>
+            <p className="price">{product.price.formatted_with_code}</p>
+            {available ? (
+              <button
+                className={!loading ? "checkout" : "checkout none"}
+                onClick={() => !loading && onAddToCart(product.id, 1)}
+              >
                 <div className="span-container s1">
                   {textButtonLetters.map((letter, index) => {
                     return (
@@ -151,14 +184,14 @@ const ShowProduct = ({
                   })}
                 </div>
               </button>
-                
-              ) : (
-                <p>&Eacute;PUIS&Eacute;</p>
-              )}
+            ) : (
+              <p>&Eacute;PUIS&Eacute;</p>
+            )}
 
-              <button onClick={() => navigate('/products')} className="back"><span>Shop</span></button>
-            </div>
-          
+            <button onClick={() => navigate("/products")} className="back">
+              <span>Shop</span>
+            </button>
+          </div>
         </div>
       ) : (
         <Loader />

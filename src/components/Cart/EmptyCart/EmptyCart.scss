@@ -1,4 +1,4 @@
-@import '../../../global.scss';
+@import "../../../global.scss";
 .cart_empty {
   .text_empty {
     margin-bottom: 10vh;
@@ -13,7 +13,8 @@
   }
 
   .carousel-empty {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    
     padding: 20px;
     width: 100%;
 
@@ -78,6 +79,5 @@
         transform: translateX(-100%);
       }
     }
-
   }
 }

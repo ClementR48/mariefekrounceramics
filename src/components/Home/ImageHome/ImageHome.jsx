@@ -1,17 +1,17 @@
 import React from "react";
 import './ImageHome.scss';
-import imgDesktop from "../../../assets/images/imageHomeDesktop.jpg";
-import imgTablet from "../../../assets/images/imageHomeTablet.jpg";
-import imgMobile from "../../../assets/images/imageHomeMobile.jpg";
+import imgDesktop from "../../../assets/images/imageHome1900.jpg";
+import imgTablet from "../../../assets/images/imageHome800.jpg";
+import imgMobile from "../../../assets/images/imageHome500.jpg";
+
 
 const ImageHome = () => {
   return (
     <div className="image-home-container">
 
       <picture >
-        <source srcSet={imgDesktop} media="(min-width: 1000px)" />
+        <source srcSet={imgDesktop} media="(min-width: 800px)" />
         <source srcSet={imgTablet} media="(min-width: 500px)" />
-        
         <img src={imgMobile} alt="vases" />
       </picture>
       <div className="text">

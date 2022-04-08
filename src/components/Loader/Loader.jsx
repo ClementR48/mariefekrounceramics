@@ -1,17 +1,16 @@
-import React from 'react';
-import './Loader.scss';
-import imgDesktop from '../../assets/images/logoRose.png'
+import React from "react";
+import "./Loader.scss";
+import imgDesktop from "../../assets/images/logoRoseDesktop.png";
+import imgMobile from "../../assets/images/logoRose.png";
 
 const Loader = () => {
   return (
     <div className="loader">
-      
-      <picture >
-        <source srcSet={imgDesktop} media="(min-width: 1000px)" />
-        
-        <img src={imgDesktop} alt="vases" />
+      <picture>
+        <source srcSet={imgDesktop} media="(min-width: 700px)" />
+
+        <img src={imgMobile} alt="vases" />
       </picture>
-      
     </div>
   );
 };
