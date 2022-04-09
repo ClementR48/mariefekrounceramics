@@ -12,7 +12,8 @@ const Cart = ({
   handleRemoveFromCart,
   handleUpdateCartQty,
   products,
-  categories
+  categories,
+  openCheckoutFunc
 }) => {
   
 
@@ -31,6 +32,7 @@ const Cart = ({
           handleRemoveFromCart={handleRemoveFromCart}
           handleUpdateCartQty={handleUpdateCartQty}
           products={products}
+          openCheckoutFunc={openCheckoutFunc}
         />
       )}
     </div>

@@ -15,6 +15,9 @@
   justify-content: space-around;
 
   a{
+    color: $colorNavText;
+    color: white;
+    text-decoration: none;
     position: relative;
     &::after{
       content: "";
@@ -51,13 +54,6 @@
   
   }
 
-
-
-  a{
-    color: $colorNavText;
-    text-decoration: none;
-
-  }
 
   @include tablet {
     display: none;

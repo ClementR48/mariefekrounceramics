@@ -25,16 +25,37 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [openCheckout, setOpenCheckout] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
 
   const openMenuFunc = (value = "") => {
-    if(value !== ""){
-      setOpenMenu(value) 
-      console.log('value');
-    }else {
-      console.log('normal');
+    if (value !== "") {
+      setOpenMenu(value);
+    } else {
       setOpenMenu((prevState) => !prevState);
-    } 
+    }
   };
+
+  const openCheckoutFunc = (value = "") => {
+    if (value !== "") {
+      setOpenCheckout(value);
+    } else {
+      setOpenCheckout((prevState) => !prevState);
+    }
+  };
+
+  useEffect(() => {
+    const changeWidth = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", changeWidth);
+
+    if (width > 767) setOpenMenu(false);
+
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, [width]);
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -127,18 +148,32 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className={openCheckout ? "app checkout_active" : "app"}>
       <BrowserRouter>
-        {openMenu && <Overlay openMenuFunc={openMenuFunc} />}
-        <Navbar
+        {(openMenu || openCheckout) && (
+          <Overlay
+            openMenuFunc={openMenuFunc}
+            openCheckoutFunc={openCheckoutFunc}
+          />
+        )}
+        {!openCheckout && <Navbar
           totalItems={cart.total_items}
           openMenu={openMenu}
           openMenuFunc={openMenuFunc}
-        />
+        
+        />}
         <Menuresponsive
           openMenuFunc={openMenuFunc}
           openMenu={openMenu}
           totalItems={cart.total_items}
+        />
+        <Checkout
+          cart={cart}
+          order={order}
+          error={errorMessage}
+          handleCaptureCheckout={handleCaptureCheckout}
+          openCheckout={openCheckout}
+          openCheckoutFunc={openCheckoutFunc}
         />
         <Routes>
           <Route exact="true" path="/" element={<Home />} />
@@ -176,7 +211,6 @@ function App() {
               />
             }
           />
-
           <Route
             exact="true"
             path="/cart"
@@ -188,11 +222,11 @@ function App() {
                 handleEmptyCart={handleEmptyCart}
                 products={products}
                 categories={categories}
+                openCheckoutFunc={openCheckoutFunc}
               />
             }
           />
-
-          <Route
+          {/* <Route
             exact="true"
             path="/checkout"
             element={
@@ -203,7 +237,7 @@ function App() {
                 handleCaptureCheckout={handleCaptureCheckout}
               />
             }
-          />
+          /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -9,8 +9,6 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
   const [homePage, setHomePage] = useState(true);
   const [divAnim, setDivAnim] = useState({});
 
-  
-
   const location = useLocation();
 
   const allLink = useRef([]);
@@ -20,24 +18,6 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
       allLink.current.push(el);
     }
   };
-
-  const [changeWidth, setChangeWidth] = useState(window.innerWidth)
-
-
-  useEffect(() => {
-    const changeWidth = () => {
-      if(window.innerWidth === 400){
-       
-        console.log(window.innerWidth);
-      }
-    }
-    window.addEventListener('resize', changeWidth)
-
-    return () => {
-      window.removeEventListener('resize', changeWidth)
-    }
-  }, [])
-
 
   useEffect(() => {
     setDivAnim(allLink.current[5]);
@@ -53,8 +33,6 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
     allLink.current[5].style.opacity = 0;
   };
 
-  
-
   useEffect(() => {
     if (location.pathname === "/") {
       setHomePage(true);
@@ -62,8 +40,6 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
       setHomePage(false);
     }
   }, [location.pathname]);
-
- 
 
   return (
     <header className="header">

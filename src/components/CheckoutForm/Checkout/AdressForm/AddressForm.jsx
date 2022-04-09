@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import "./AddressForm.scss";
 
-import { commerce } from "../../lib/commerce";
+import { commerce } from "../../../../lib/commerce";
+import { ArrowLeft } from "react-feather";
 
-const AddressForm = ({ checkoutToken, setShippingData }) => {
+const AddressForm = ({
+  checkoutToken,
+  setShippingData,
+  openCheckoutFunc,
+  setValidateAdressForm,
+}) => {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [city, setCity] = useState('')
-  const [codePost, setCodePost] = useState('')
-  const [address, setAddress] = useState('')
+  const [city, setCity] = useState("");
+  const [codePost, setCodePost] = useState("");
+  const [address, setAddress] = useState("");
 
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
@@ -31,12 +37,9 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
     label: ` ${sO.description} -(${sO.price.formatted_with_symbol})`,
   }));
 
-
   useEffect(() => {
-    const calculShipping = () => {
-      
-    }
-  }, [])
+    const calculShipping = () => {};
+  }, []);
 
   const fetchShippingCountries = async (checkoutTokenId) => {
     const response = await commerce.services.localeListShippingCountries(
@@ -102,8 +105,13 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
     });
   };
 
+  const validation = () => {
+    setValidateAdressForm(true);
+  };
+
   return (
-    <form onSubmit={(e) => handleSubmitAdressForm(e)}>
+    <form className="address_form" onSubmit={(e) => handleSubmitAdressForm(e)}>
+      <h3>Informations</h3>
       <label>
         Nom
         <input
@@ -156,7 +164,11 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
       </label>
       <label>
         address
-        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+        <input
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
       </label>
       <label>
         city
@@ -174,7 +186,6 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
           onChange={(e) => setCodePost(e.target.value)}
         />
       </label>
-      
 
       <label>
         price shipping
@@ -189,9 +200,14 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
           ))}
         </select>
       </label>
-
-      <Link to="/cart">Back to shop</Link>
-      <button>Payment</button>
+      <div className="btn_address_form">
+        <button className="back" type="button" onClick={() => openCheckoutFunc(false)}>
+          <ArrowLeft size={17} color='red' />
+        </button>
+        <button type="submit" onClick={() => validation()}>
+          Payment
+        </button>
+      </div>
     </form>
   );
 };

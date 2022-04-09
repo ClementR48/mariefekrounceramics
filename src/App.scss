@@ -12,7 +12,7 @@ html body {
   position: relative;
   font-family: $mainFont;
   overflow-x: hidden;
-  font-size: 18px;
+  font-size: 17px;
   color: $colorTextMain;
   background-image: linear-gradient(rgba(0, 0, 0, 0.011), rgba(0, 0, 0, 0.1)),
     url("./assets/images/bg/bgDesktop.png");
@@ -30,6 +30,8 @@ html body {
     background-image: url("./assets/images/bg/bgMobile.png");
     background-size: contain;
   }
+
+
 }
 
 ul {

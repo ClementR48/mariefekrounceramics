@@ -1,0 +1,20 @@
+@import '../../../global.scss';
+.checkout_page {
+  position: absolute;
+  background-color: $colorNavBg;
+  transform: translateX(-100%);
+  transition: 0.5s transform ease-in-out;
+  z-index: 500;
+  width: 40vw;
+  height: 100vh;
+  position: fixed;
+  overflow-y: scroll;
+
+  @include tablet {
+    width: 60vw;
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+}

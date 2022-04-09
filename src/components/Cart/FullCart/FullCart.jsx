@@ -9,6 +9,7 @@ const FullCart = ({
   handleUpdateCartQty,
   products,
   handleEmptyCart,
+  openCheckoutFunc
 }) => {
   const [buttonAddProduct, setButtonAddProduct] = useState("Paiement");
 
@@ -48,8 +49,8 @@ const FullCart = ({
       <div className="subtotal">
         <p>Sous-total : {cart.subtotal.formatted_with_code}</p>
 
-        <Link to="/checkout" exact="true">
-          <button className="checkout">
+        
+          <button className="checkout" onClick={() => openCheckoutFunc()}>
             <div className="span-container s1">
               {textButtonLetters.map((letter, index) => {
                 return (
@@ -105,7 +106,7 @@ const FullCart = ({
               })}
             </div>
           </button>
-        </Link>
+        
       </div>
     </div>
   );

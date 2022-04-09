@@ -12,6 +12,7 @@ const PaymentForm = ({
   checkoutToken,
   shippingData,
   handleCaptureCheckout,
+  setValidateAdressForm
 }) => {
   const stripePromise = loadStripe(
     "pk_test_51K4lNJIpyCJRUeoekz4uR5OJqEv2Pppdl7C8s9Ubea50j0TA2LtYuwh9X1sistyM6H3ma5wbLLyD4WJPYWgdQvcS00gQMa4Gkn"
@@ -84,7 +85,7 @@ const PaymentForm = ({
               <CardElement />
               <br />
 
-              <button type="button">Back</button>
+              <button onClick={() => setValidateAdressForm(false)} type="button">Back</button>
               <button type="submit">
                 pay {checkoutToken.live.subtotal.formatted_with_symbol}
               </button>
