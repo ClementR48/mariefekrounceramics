@@ -1,17 +1,23 @@
-@import '../../../global.scss';
+@import "../../../global.scss";
 
-.homenav_links {
+.homenav_link {
   position: relative;
   width: 70%;
   display: flex;
   align-items: baseline;
   justify-content: space-around;
 
-  
+  &.change_color {
+    a {
+      color: $colorNavText;
+    }
+  }
 
-  a{
+  a {
     position: relative;
-    &::after{
+    color: white;
+    text-decoration: none;
+    &::after {
       content: "";
       position: absolute;
       width: 7px;
@@ -20,22 +26,20 @@
       left: 50%;
       background-color: transparent;
       border-radius: 50%;
-
     }
-   &.active::after{
-    background-color: blue;
-   } 
+    &.active::after {
+      background-color: blue;
+    }
   }
 
-  .anim_hover{
+  .anim_hover {
     position: absolute;
-    bottom:-10px;
-    height:7px;
+    bottom: -10px;
+    height: 7px;
     width: 100%;
     background-color: transparent;
-    
-  
-    .anim_hover_move{
+
+    .anim_hover_move {
       width: 7px;
       height: 100%;
       background-color: blue;
@@ -43,19 +47,9 @@
       transition: 0.3s all ease-in-out;
       opacity: 0;
     }
-  
-  }
-
-
-
-  a{
-    color: white;
-    text-decoration: none;
-
   }
 
   @include tablet {
     display: none;
   }
-
 }

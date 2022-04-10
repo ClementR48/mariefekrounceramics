@@ -2,15 +2,30 @@ import React from "react";
 import { ShoppingCart } from "react-feather";
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logoBlanc.png";
+import logo2 from "../../../assets/images/logoRose.png";
 import "./HomeNav.scss";
 
-const HomeNav = ({ totalItems, addRefLink, hover, hoverOff }) => {
+const HomeNav = ({
+  totalItems,
+  addRefLink,
+  hover,
+  hoverOff,
+  navBarScrollBackground,
+  openMenu,
+}) => {
   return (
     <>
       <div className="nav_logo">
-        <img src={logo} alt="logo" />
+        <img
+          src={openMenu ? logo2 : navBarScrollBackground ? logo2 : logo}
+          alt="logo"
+        />
       </div>
-      <nav className="homenav_links">
+      <nav
+        className={
+          navBarScrollBackground ? "homenav_link change_color" : "homenav_link "
+        }
+      >
         <NavLink
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={() => hoverOff()}
@@ -60,9 +75,7 @@ const HomeNav = ({ totalItems, addRefLink, hover, hoverOff }) => {
         <div className="anim_hover">
           <div ref={addRefLink} className="anim_hover_move"></div>
         </div>
-        
       </nav>
-      
     </>
   );
 };

@@ -1,9 +1,9 @@
-@import '../../global.scss';
+@import "../../global.scss";
 
 .menuresponsive {
   width: 70vw;
   height: 100vh;
-  background-color: $colorNavText;
+  background-color: $colorNavBg;
   position: fixed;
   top: 0;
   right: 0;
@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   transform: translateX(100%);
-  transition: 0.3s transform ease-in-out;
+  transition: 0.2s transform ease-in-out;
   display: none;
 
   @include tablet {
@@ -22,21 +22,39 @@
 
   &.active {
     transform: translateX(0);
+
+    a {
+      animation: apparition 1s forwards;
+    }
   }
 
-  a{
+  a {
     text-decoration: none;
-    color: $colorTitle;
+    color: $colorNavText;
     margin-top: 50px;
     position: relative;
+    transition: 0.2s ease-in-out color;
+    transform: translateY(200%);
+    opacity: 0;
+
+    @keyframes apparition {
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      color: $colorTitle;
+    }
 
     &::before {
-      content: '';
+      content: "";
       height: 5px;
       width: 5px;
       border-radius: 50%;
       position: absolute;
-      background-color: blue;
+      background-color: $colorTitle;
       left: -10px;
       top: 50%;
       display: none;
@@ -46,6 +64,8 @@
       display: block;
     }
 
+    &.active {
+      color: $colorTitle;
+    }
   }
-
 }

@@ -1,0 +1,120 @@
+@import "../../../global.scss";
+.address_form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+
+  @include tablet {
+    padding: 10px;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 16px;
+    width: 70%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      width: 90%;
+    }
+
+    input,
+    select {
+      margin-top: 5px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px dashed black;
+      outline: none;
+    }
+  }
+
+  .btn_address_form {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    @include tablet {
+      width: 90%;
+      justify-content: space-between;
+    }
+    @include mobile {
+      
+      flex-direction: column-reverse;
+    }
+
+    .back {
+      background-color: transparent;
+      padding: 5px 15px;
+      outline: none;
+      border: 1px solid $colorNavText;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include mobile {
+      
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      
+
+      span{
+        transition: 0.2s transform ease-in-out;
+        color: $colorNavText;
+      }
+
+      svg {
+        transition: 0.2s transform ease-in-out;
+      }
+
+      &:hover svg {
+        transform: translateX(-10px);
+      }
+      &:hover span {
+        transform: translateX(-5px);
+      }
+    }
+
+    .submit_btn {
+      background-color: transparent;
+      padding: 5px 15px;
+      outline: none;
+      border: 1px solid $colorTitle;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include mobile {
+      
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      
+
+      span{
+        transition: 0.2s transform ease-in-out;
+        color: $colorTitle;
+      }
+
+      svg {
+        transition: 0.2s transform ease-in-out;
+      }
+
+      &:hover svg {
+        transform: translateX(10px);
+      }
+      &:hover span {
+        transform: translateX(5px);
+      }
+    }
+  }
+}

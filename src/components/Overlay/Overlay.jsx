@@ -7,6 +7,8 @@ const Overlay = ({ openMenuFunc, openCheckoutFunc }) => {
     openMenuFunc(false);
   };
 
+  
+
   let cursorRef = useRef();
 
   const mousepos = (e) => {
@@ -27,7 +29,7 @@ const Overlay = ({ openMenuFunc, openCheckoutFunc }) => {
       onClick={() => handleClick()}
     >
       <div ref={cursorRef} className="cursor">
-        <span>Scroll</span>
+        <span>Site</span>
       </div>
     </div>
   );

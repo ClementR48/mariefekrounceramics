@@ -1,22 +1,19 @@
-@import '../../../global.scss';
+@import "../../../global.scss";
 
-.fullcart{
-  
+.fullcart {
   display: flex;
-  justify-content: space-evenly ;
+  justify-content: space-evenly;
   align-items: flex-end;
 
-  @include desktop{
+  @include desktop {
     flex-direction: column;
   }
-  @include tablet{
+  @include tablet {
     align-items: center;
   }
-  
 
   .list_cart {
-    
-    background-color: rgba(255, 255,255 ,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
     width: 60%;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
@@ -24,21 +21,21 @@
       width: 100%;
     }
 
-    caption{
+    caption {
       margin-bottom: 15px;
       font-style: italic;
     }
 
-    .thead{
+    .thead {
       height: 50px;
-     
+
       @include tablet {
         border-bottom: 5px solid $colorTitle;
         display: block;
       }
     }
 
-    .btn_delete{
+    .btn_delete {
       text-align: center;
 
       @include tablet {
@@ -48,9 +45,8 @@
         justify-content: center;
         font-size: 0.8em;
         text-align: center;
-        
       }
-      .delete_items{
+      .delete_items {
         cursor: pointer;
         border: none;
         color: red;
@@ -63,13 +59,12 @@
           background-color: red;
           color: black;
         }
-        
       }
     }
   }
 
   .subtotal {
-    background-color: rgba(255, 255,255 ,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
     width: 20%;
     min-width: 250px;
@@ -77,10 +72,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 
-    
-
-    p{
+    p {
       margin: 20px 0;
     }
 
@@ -113,36 +108,36 @@
       .span-container {
         padding: 10px 17px;
       }
-    
-    span {
-      font-family: "Caladea", sans-serif;
-      color: $colorPointNav;
-      transition: 0.25s;
-      will-change: transform;
-      display: inline-block;
-      font-size: 25px;
-      letter-spacing: 5px;
-      @include mobile {
-        font-size: 20px;
+
+      span {
+        font-family: "Caladea", sans-serif;
+        color: $colorPointNav;
+        transition: 0.25s;
+        will-change: transform;
+        display: inline-block;
+        font-size: 25px;
+        letter-spacing: 5px;
+        @include mobile {
+          font-size: 20px;
+        }
+      }
+
+      .s1 span {
+        transform-origin: bottom;
+      }
+
+      .s2 span {
+        transform-origin: top;
+        transform: translateY(100%) rotateX(-90deg);
+      }
+
+      .s2 {
+        position: absolute;
+
+        width: 100%;
+        top: 0;
       }
     }
-
-    .s1 span {
-      transform-origin: bottom;
-    }
-
-    .s2 span {
-      transform-origin: top;
-      transform: translateY(100%) rotateX(-90deg);
-    }
-
-    .s2 {
-      position: absolute;
-
-      width: 100%;
-      top: 0;
-    }
-  }
     @include desktop {
       margin-top: 25px;
     }

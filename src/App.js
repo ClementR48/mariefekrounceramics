@@ -9,11 +9,12 @@ import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Cart from "./components/Cart/Cart";
-import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 import ShowProduct from "./components/ShowProduct/ShowProduct";
 import Footer from "./components/Footer/Footer";
 import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
+import ScrollToTop from "./components/ScrollToTop.jsx";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -150,18 +151,20 @@ function App() {
   return (
     <div className={openCheckout ? "app checkout_active" : "app"}>
       <BrowserRouter>
+        <ScrollToTop />
         {(openMenu || openCheckout) && (
           <Overlay
             openMenuFunc={openMenuFunc}
             openCheckoutFunc={openCheckoutFunc}
           />
         )}
-        {!openCheckout && <Navbar
-          totalItems={cart.total_items}
-          openMenu={openMenu}
-          openMenuFunc={openMenuFunc}
-        
-        />}
+        {!openCheckout && (
+          <Navbar
+            totalItems={cart.total_items}
+            openMenu={openMenu}
+            openMenuFunc={openMenuFunc}
+          />
+        )}
         <Menuresponsive
           openMenuFunc={openMenuFunc}
           openMenu={openMenu}
@@ -226,18 +229,6 @@ function App() {
               />
             }
           />
-          {/* <Route
-            exact="true"
-            path="/checkout"
-            element={
-              <Checkout
-                cart={cart}
-                order={order}
-                error={errorMessage}
-                handleCaptureCheckout={handleCaptureCheckout}
-              />
-            }
-          /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

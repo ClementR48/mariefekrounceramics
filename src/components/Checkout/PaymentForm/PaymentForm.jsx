@@ -12,13 +12,13 @@ const PaymentForm = ({
   checkoutToken,
   shippingData,
   handleCaptureCheckout,
-  setValidateAdressForm
+  setValidateAdressForm,
 }) => {
   const stripePromise = loadStripe(
     "pk_test_51K4lNJIpyCJRUeoekz4uR5OJqEv2Pppdl7C8s9Ubea50j0TA2LtYuwh9X1sistyM6H3ma5wbLLyD4WJPYWgdQvcS00gQMa4Gkn"
   );
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSumbitPayment = async (e, elements, stripe) => {
     e.preventDefault();
@@ -60,23 +60,20 @@ const PaymentForm = ({
       };
 
       handleCaptureCheckout(checkoutToken.id, orderData);
-      navigate('/')
+      navigate("/");
     }
   };
-
-  
 
   return (
     <ul>
       {checkoutToken.live.line_items.map((product) => (
         <li key={product.id}>
           <p>{product.name}</p>
-          <p>{product.line_total.formatted_with_symbol}</p>
+          <p>{product.line_total.formatted_with_code}</p>
         </li>
       ))}
 
-      <li> SubTotal : {checkoutToken.live.subtotal.formatted_with_symbol}</li>
-
+      <li> SubTotal : {checkoutToken.live.subtotal.formatted_with_code}</li>
 
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -85,14 +82,19 @@ const PaymentForm = ({
               <CardElement />
               <br />
 
-              <button onClick={() => setValidateAdressForm(false)} type="button">Back</button>
+              <button
+                onClick={() => setValidateAdressForm(false)}
+                type="button"
+              >
+                Back
+              </button>
               <button type="submit">
-                pay {checkoutToken.live.subtotal.formatted_with_symbol}
+                pay {checkoutToken.live.subtotal.formatted_with_code}
               </button>
             </form>
           )}
         </ElementsConsumer>
-      </Elements> 
+      </Elements>
     </ul>
   );
 };

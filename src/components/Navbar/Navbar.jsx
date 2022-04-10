@@ -8,6 +8,7 @@ import "./Navbar.scss";
 const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
   const [homePage, setHomePage] = useState(true);
   const [divAnim, setDivAnim] = useState({});
+  const [navBarScrollBackground, setNavBarScrollBackground] = useState(false)
 
   const location = useLocation();
 
@@ -41,14 +42,32 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
     }
   }, [location.pathname]);
 
+   useEffect(() => {
+    const animNav = () => {
+      if(window.scrollY > 1){
+        setNavBarScrollBackground(true)
+      }else {
+        setNavBarScrollBackground(false)
+      }
+      
+    }
+    window.addEventListener('scroll', animNav)
+
+    return() => {
+      window.removeEventListener('scroll', animNav)
+    }
+  }, [])
+
   return (
-    <header className="header">
+    <header  className={openMenu ? "header active": navBarScrollBackground ? 'header change_color' : "header"}>
       {homePage ? (
         <HomeNav
           addRefLink={addRefLink}
           totalItems={totalItems}
           hover={hover}
           hoverOff={hoverOff}
+          navBarScrollBackground={navBarScrollBackground}
+          openMenu={openMenu}
         />
       ) : (
         <Nav

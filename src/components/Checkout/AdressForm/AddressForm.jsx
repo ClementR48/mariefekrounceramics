@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./AddressForm.scss";
 
-import { commerce } from "../../../../lib/commerce";
-import { ArrowLeft } from "react-feather";
+import { commerce } from "../../../lib/commerce";
+import { ArrowLeft, ArrowRight } from "react-feather";
 
 const AddressForm = ({
   checkoutToken,
@@ -116,20 +116,22 @@ const AddressForm = ({
         Nom
         <input
           type="text"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+          
+        />
+      </label>
+      <label>
+        Prénom
+        <input
+          type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </label>
+
       <label>
-        Prenom
-        <input
-          type="text"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
-      </label>
-      <label>
-        email
+        Email
         <input
           type="email"
           value={email}
@@ -137,7 +139,7 @@ const AddressForm = ({
         />
       </label>
       <label>
-        country
+        Pays
         <select
           value={shippingCountry}
           onChange={(e) => setShippingCountry(e.target.value)}
@@ -163,7 +165,7 @@ const AddressForm = ({
         </select>
       </label>
       <label>
-        address
+        Adresse
         <input
           type="text"
           value={address}
@@ -171,7 +173,7 @@ const AddressForm = ({
         />
       </label>
       <label>
-        city
+        Ville
         <input
           type="text"
           value={city}
@@ -179,7 +181,7 @@ const AddressForm = ({
         />
       </label>
       <label>
-        CodePost
+        Code Postal
         <input
           type="text"
           value={codePost}
@@ -201,11 +203,15 @@ const AddressForm = ({
         </select>
       </label>
       <div className="btn_address_form">
-        <button className="back" type="button" onClick={() => openCheckoutFunc(false)}>
-          <ArrowLeft size={17} color='red' />
+        <button
+          className="back"
+          type="button"
+          onClick={() => openCheckoutFunc(false)}
+        >
+          <ArrowLeft size={17} color="red" /><span>Panier</span>
         </button>
-        <button type="submit" onClick={() => validation()}>
-          Payment
+        <button className="submit_btn" type="submit" onClick={() => validation()}>
+        <span>Paiement</span><ArrowRight size={17} color="blue"/>
         </button>
       </div>
     </form>

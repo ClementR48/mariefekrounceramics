@@ -4,10 +4,10 @@ import "./Checkout.scss";
 
 import { useNavigate } from "react-router-dom";
 
-import { commerce } from "../../../lib/commerce";
+import { commerce } from "../../lib/commerce";
 import AddressForm from "./AdressForm/AddressForm";
 import PaymentForm from "./PaymentForm/PaymentForm";
-import Loader from "../../Loader/Loader";
+import Loader from "../Loader/Loader";
 
 const Checkout = ({
   cart,
@@ -15,11 +15,11 @@ const Checkout = ({
   order,
   error,
   openCheckout,
-  openCheckoutFunc
+  openCheckoutFunc,
 }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
-  const [validateAdressForm, setValidateAdressForm] = useState(false)
+  const [validateAdressForm, setValidateAdressForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -46,19 +46,23 @@ const Checkout = ({
     <div className={openCheckout ? "checkout_page active" : "checkout_page"}>
       {checkoutToken ? (
         <>
-          {!validateAdressForm && <AddressForm
-            checkoutToken={checkoutToken}
-            setShippingData={setShippingData}
-            openCheckoutFunc={openCheckoutFunc}
-            setValidateAdressForm={setValidateAdressForm}
-          />}
-          {validateAdressForm && <PaymentForm
-            checkoutToken={checkoutToken}
-            shippingData={shippingData}
-            handleCaptureCheckout={handleCaptureCheckout}
-            order={order}
-            setValidateAdressForm={setValidateAdressForm}
-          />}
+          {!validateAdressForm && (
+            <AddressForm
+              checkoutToken={checkoutToken}
+              setShippingData={setShippingData}
+              openCheckoutFunc={openCheckoutFunc}
+              setValidateAdressForm={setValidateAdressForm}
+            />
+          )}
+          {validateAdressForm && (
+            <PaymentForm
+              checkoutToken={checkoutToken}
+              shippingData={shippingData}
+              handleCaptureCheckout={handleCaptureCheckout}
+              order={order}
+              setValidateAdressForm={setValidateAdressForm}
+            />
+          )}
         </>
       ) : (
         <Loader />
