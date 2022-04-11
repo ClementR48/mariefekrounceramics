@@ -1,0 +1,84 @@
+@import '../../../global.scss';
+
+.payment_form {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  ul {
+    width: 70%;
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    li {
+      border-bottom: 1px solid black;
+      margin: 5px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .card_field {
+    width: 70%;
+    margin: 20px;
+
+    @include tablet {
+      width: 90%;
+      
+    }
+
+    .btn_form {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      @include tablet {
+        
+        justify-content: space-between;
+      }
+      @include mobile {
+        flex-direction: column-reverse;
+      }
+
+      .back {
+        background-color: transparent;
+        padding: 5px 15px;
+        outline: none;
+        border: 1px solid $colorNavText;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include mobile {
+        
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        
+  
+        span{
+          transition: 0.2s transform ease-in-out;
+          color: $colorNavText;
+        }
+  
+        svg {
+          transition: 0.2s transform ease-in-out;
+        }
+  
+        &:hover svg {
+          transform: translateX(-10px);
+        }
+        &:hover span {
+          transform: translateX(-5px);
+        }
+      }
+    }
+  }
+}

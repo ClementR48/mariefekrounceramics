@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./EmptyCart.scss";
 
 const EmptyCart = ({ categories }) => {
-  console.log(categories);
 
   let cursorRef = useRef();
 

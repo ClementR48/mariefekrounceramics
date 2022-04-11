@@ -9,6 +9,7 @@ const AddressForm = ({
   setShippingData,
   openCheckoutFunc,
   setValidateAdressForm,
+  weight,
 }) => {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
@@ -22,7 +23,7 @@ const AddressForm = ({
   const [shippingSubDivisions, setShippingSubDivisions] = useState([]);
   const [shippingSubDivision, setShippingSubDivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOption, setShippingOption] = useState("");
+  const [shippingOption, setShippingOption] = useState();
 
   const countries = Object.entries(shippingCountries).map(([code, name]) => ({
     id: code,
@@ -31,15 +32,6 @@ const AddressForm = ({
   const subdivisions = Object.entries(shippingSubDivisions).map(
     ([code, name]) => ({ id: code, label: name })
   );
-
-  const options = shippingOptions.map((sO) => ({
-    id: sO.id,
-    label: ` ${sO.description} -(${sO.price.formatted_with_symbol})`,
-  }));
-
-  useEffect(() => {
-    const calculShipping = () => {};
-  }, []);
 
   const fetchShippingCountries = async (checkoutTokenId) => {
     const response = await commerce.services.localeListShippingCountries(
@@ -59,6 +51,44 @@ const AddressForm = ({
     setShippingSubDivision(Object.keys(response.subdivisions)[0]);
   };
 
+  const calculShipping = (state) => {
+    if (weight < 250) {
+      const obj = state.filter((option) => option.description === "250");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    } else if (weight < 500) {
+      const obj = state.filter((option) => option.description === "500");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    } else if (weight < 750) {
+      const obj = state.filter((option) => option.description === "750");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    } else if (weight < 1000) {
+      const obj = state.filter((option) => option.description === "1");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    } else if (weight < 2000) {
+      const obj = state.filter((option) => option.description === "2");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    } else if (weight < 5000) {
+      const obj = state.filter((option) => option.description === "5");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    } else if (weight < 10000) {
+      const obj = state.filter((option) => option.description === "10");
+
+      setShippingOption(obj[0].price.formatted_with_code);
+    }
+  };
+
+  useEffect(() => {
+    if (shippingOptions.length !== 0) {
+      calculShipping(shippingOptions);
+    }
+  }, [weight]);
+
   const fetchShippingOptions = async (
     checkoutTokenId,
     country,
@@ -70,7 +100,7 @@ const AddressForm = ({
     );
 
     setShippingOptions(options);
-    setShippingOption(options[0].id);
+    calculShipping(options);
   };
 
   useEffect(() => {
@@ -118,7 +148,6 @@ const AddressForm = ({
           type="text"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
-          
         />
       </label>
       <label>
@@ -195,11 +224,7 @@ const AddressForm = ({
           value={shippingOption}
           onChange={(e) => setShippingOption(e.target.value)}
         >
-          {options.map((option) => (
-            <option key={option.id} value={option.id}>
-              {option.label}
-            </option>
-          ))}
+          <option value={shippingOption}>{shippingOption}</option>
         </select>
       </label>
       <div className="btn_address_form">
@@ -208,10 +233,16 @@ const AddressForm = ({
           type="button"
           onClick={() => openCheckoutFunc(false)}
         >
-          <ArrowLeft size={17} color="red" /><span>Panier</span>
+          <ArrowLeft size={17} color="red" />
+          <span>Panier</span>
         </button>
-        <button className="submit_btn" type="submit" onClick={() => validation()}>
-        <span>Paiement</span><ArrowRight size={17} color="blue"/>
+        <button
+          className="submit_btn"
+          type="submit"
+          onClick={() => validation()}
+        >
+          <span>Paiement</span>
+          <ArrowRight size={17} color="blue" />
         </button>
       </div>
     </form>

@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import HomeNav from "./HomeNav/HomeNav";
 import Nav from "./Nav/Nav";
+import { motion } from "framer-motion";
 
 import "./Navbar.scss";
 
 const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
   const [homePage, setHomePage] = useState(true);
   const [divAnim, setDivAnim] = useState({});
-  const [navBarScrollBackground, setNavBarScrollBackground] = useState(false)
+  const [navBarScrollBackground, setNavBarScrollBackground] = useState(false);
 
   const location = useLocation();
 
@@ -42,24 +43,35 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
     }
   }, [location.pathname]);
 
-   useEffect(() => {
+  useEffect(() => {
     const animNav = () => {
-      if(window.scrollY > 1){
-        setNavBarScrollBackground(true)
-      }else {
-        setNavBarScrollBackground(false)
+      if (window.scrollY > 1) {
+        setNavBarScrollBackground(true);
+      } else {
+        setNavBarScrollBackground(false);
       }
-      
-    }
-    window.addEventListener('scroll', animNav)
+    };
+    window.addEventListener("scroll", animNav);
 
-    return() => {
-      window.removeEventListener('scroll', animNav)
-    }
-  }, [])
+    return () => {
+      window.removeEventListener("scroll", animNav);
+    };
+  }, []);
 
   return (
-    <header  className={openMenu ? "header active": navBarScrollBackground ? 'header change_color' : "header"}>
+    <motion.header
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      
+      className={
+        openMenu
+          ? "header active"
+          : navBarScrollBackground
+          ? "header change_color"
+          : "header"
+      }
+    >
       {homePage ? (
         <HomeNav
           addRefLink={addRefLink}
@@ -85,7 +97,7 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
         <span className="line2"></span>
         <span className="line3"></span>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

@@ -12,9 +12,10 @@ const ShowProduct = ({
   onAddToCart,
   fetchProducts,
   loading,
+  weightCart
 }) => {
   const { id } = useParams();
-  const [available, setAvailable] = useState(true);
+  const [available, setAvailable] = useState();
   const [buttonAddProduct, setButtonAddProduct] = useState("Panier");
 
   const textButtonLetters = buttonAddProduct.split("");
@@ -39,26 +40,32 @@ const ShowProduct = ({
   };
 
   useEffect(() => {
-    const isAvailable = () => {
+    if (cart && product) {
       const productInCart = cart.line_items.filter(
         (item) => item.product_id === product.id
       );
-
       if (productInCart.length !== 0) {
-        if (productInCart[0].quantity === product.inventory.available) {
+        if (productInCart[0].quantity >= product.inventory.available) {
           setAvailable(false);
+        } else {
+          setAvailable(true);
         }
+      } else {
+        setAvailable(true);
       }
-    };
-
-    if (cart.line_items && product) isAvailable();
-  }, [cart]);
+    }
+  }, [cart, product]);
 
   useEffect(() => {
     products ? fetchOneProduct(id) : fetchProducts();
   }, [products]);
 
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
+
+  const handleAddToCart = () => {
+    onAddToCart(product.id, 1)
+    weightCart(product.attributes[0].value)
+  }
 
   useEffect(() => {
     const changeWidth = () => {
@@ -120,14 +127,14 @@ const ShowProduct = ({
               <p>{attributes("attr_RyWOwmdnWlnEa2")}</p>
               <p>{attributes("attr_31q0o3LJ85DdjR")}</p>
               <p>{attributes("attr_BkyN5YV7Rl0b69")} g</p>
-              <p>{attributes("attr_8XO3wpWzXlYAzQ")}</p>
+              <p>{attributes("attr_8XO3wpWzXlYAzQ")} cm</p>
               <p>{attributes("attr_aZWNoyYPzo80JA")} cm</p>
             </div>
             <p className="price">{product.price.formatted_with_code}</p>
             {available ? (
               <button
                 className={!loading ? "checkout" : "checkout none"}
-                onClick={() => !loading && onAddToCart(product.id, 1)}
+                onClick={() => !loading && handleAddToCart()}
               >
                 <div className="span-container s1">
                   {textButtonLetters.map((letter, index) => {

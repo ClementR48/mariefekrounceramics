@@ -4,7 +4,7 @@ import { commerce } from "./lib/commerce";
 import Navbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
@@ -15,6 +15,8 @@ import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Checkout from "./components/Checkout/Checkout";
+
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -28,6 +30,39 @@ function App() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openCheckout, setOpenCheckout] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const [weight, setWeight] = useState(0);
+
+  const weightProductsInCart = () => {
+    if (cart.line_items !== undefined) {
+      
+      let productInCartInfo = [];
+      for (let index = 0; index < cart.line_items.length; index++) {
+        for (let j = 0; j < products.length; j++) {
+          if (products[j].id === cart.line_items[index].product_id) {
+            productInCartInfo.push({
+              id: products[j].id,
+              qty: cart.line_items[index].quantity,
+              weight: products[j].attributes[0].value,
+            });
+          }
+        }
+      }
+
+      const gramme = [0];
+      for (let index = 0; index < productInCartInfo.length; index++) {
+        gramme.push(productInCartInfo[index].qty * parseInt(productInCartInfo[index].weight));
+      }
+
+      const reducer = (accumulator, curr) => accumulator + curr;
+      setWeight(gramme.reduce(reducer));
+      
+      
+    }
+  };
+
+  useEffect(() => {
+    weightProductsInCart();
+  }, [cart]);
 
   const openMenuFunc = (value = "") => {
     if (value !== "") {
@@ -130,11 +165,12 @@ function App() {
 
   const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
     try {
+      
       const inComingOrder = await commerce.checkout.capture(
         checkoutTokenId,
         newOrder
       );
-
+      weightProductsInCart();
       setOrder(inComingOrder);
       refreshCart();
     } catch (error) {
@@ -148,37 +184,44 @@ function App() {
     fetchCategories();
   }, []);
 
+  const location = useLocation();
+
   return (
     <div className={openCheckout ? "app checkout_active" : "app"}>
-      <BrowserRouter>
-        <ScrollToTop />
-        {(openMenu || openCheckout) && (
-          <Overlay
-            openMenuFunc={openMenuFunc}
-            openCheckoutFunc={openCheckoutFunc}
-          />
-        )}
-        {!openCheckout && (
+      <ScrollToTop />
+      {(openMenu || openCheckout) && (
+        <Overlay
+          openMenuFunc={openMenuFunc}
+          openCheckoutFunc={openCheckoutFunc}
+        />
+      )}
+      {!openCheckout && (
+        <AnimatePresence exitBeforeEnter>
           <Navbar
+            location={location}
+            key={location.pathname}
             totalItems={cart.total_items}
             openMenu={openMenu}
             openMenuFunc={openMenuFunc}
           />
-        )}
-        <Menuresponsive
-          openMenuFunc={openMenuFunc}
-          openMenu={openMenu}
-          totalItems={cart.total_items}
-        />
-        <Checkout
-          cart={cart}
-          order={order}
-          error={errorMessage}
-          handleCaptureCheckout={handleCaptureCheckout}
-          openCheckout={openCheckout}
-          openCheckoutFunc={openCheckoutFunc}
-        />
-        <Routes>
+        </AnimatePresence>
+      )}
+      <Menuresponsive
+        openMenuFunc={openMenuFunc}
+        openMenu={openMenu}
+        totalItems={cart.total_items}
+      />
+      <Checkout
+        cart={cart}
+        order={order}
+        error={errorMessage}
+        handleCaptureCheckout={handleCaptureCheckout}
+        openCheckout={openCheckout}
+        openCheckoutFunc={openCheckoutFunc}
+        weight={weight}
+      />
+      <AnimatePresence exitBeforeEnter>
+        <Routes location={location} key={location.pathname}>
           <Route exact="true" path="/" element={<Home />} />
           <Route exact="true" path="/about" element={<About />} />
           <Route exact="true" path="/contact" element={<Contact />} />
@@ -226,12 +269,13 @@ function App() {
                 products={products}
                 categories={categories}
                 openCheckoutFunc={openCheckoutFunc}
+                weightProductsInCart={weightProductsInCart}
               />
             }
           />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+      </AnimatePresence>
+      <Footer />
     </div>
   );
 }

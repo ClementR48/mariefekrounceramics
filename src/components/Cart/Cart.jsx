@@ -13,9 +13,13 @@ const Cart = ({
   handleUpdateCartQty,
   products,
   categories,
-  openCheckoutFunc
+  openCheckoutFunc,
+  weightProductsInCart
 }) => {
   
+  useEffect(() => {
+    weightProductsInCart()
+  }, [])
 
 
   if (!cart.line_items) return <Loader />;

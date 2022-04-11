@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem/CartItem";
 import "./FullCart.scss";
@@ -13,7 +13,10 @@ const FullCart = ({
 }) => {
   const [buttonAddProduct, setButtonAddProduct] = useState("Paiement");
 
+
   const textButtonLetters = buttonAddProduct.split("");
+
+
   return (
     <div className="fullcart">
       <table className="list_cart">

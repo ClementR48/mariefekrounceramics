@@ -14,24 +14,20 @@ html body {
   overflow-x: hidden;
   font-size: 17px;
   color: $colorTextMain;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.011), rgba(0, 0, 0, 0.1)),
-    url("./assets/images/bg/bgDesktop.png");
+  background-color: $colorNavBg;
+/*   background-image: url("./assets/images/bg/bgDesktop.png");
   background-size: cover;
 
   @include desktop {
     background-image: url("./assets/images/bg/bgDesktop2.png");
-    
   }
   @include tablet {
     background-image: url("./assets/images/bg/bgTablet.png");
-    
   }
   @include mobile {
     background-image: url("./assets/images/bg/bgMobile.png");
     background-size: contain;
-  }
-
-
+  } */
 }
 
 ul {

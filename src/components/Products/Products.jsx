@@ -1,10 +1,11 @@
+import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 
 import Categories from "./Category/Category";
 import Product from "./Product/Product";
 import "./Products.scss";
-
+import { motion } from "framer-motion";
 const Products = ({
   setProductsToShow,
   products,
@@ -25,7 +26,13 @@ const Products = ({
   }, [activeCateg]);
 
   return (
-    <main className="products">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ delay: 0.5 }}
+      className="products"
+    >
       {categories.length !== 0 || productsToShow.length !== 0 ? (
         <>
           <ul className="list_categories">
@@ -42,10 +49,7 @@ const Products = ({
                     key={category.id}
                     onClick={() => setActiveCateg(category.id)}
                   >
-                    <Categories
-                      category={category}
-                      
-                    />
+                    <Categories category={category} />
                   </li>
                 );
               })}
@@ -76,7 +80,7 @@ const Products = ({
       ) : (
         <Loader />
       )}
-    </main>
+    </motion.main>
   );
 };
 

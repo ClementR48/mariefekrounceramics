@@ -1,4 +1,5 @@
 import React from "react";
+import "./PaymentForm.scss";
 
 import {
   Elements,
@@ -7,6 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
+import { ArrowDownLeft, ArrowLeft } from "react-feather";
 
 const PaymentForm = ({
   checkoutToken,
@@ -65,37 +67,48 @@ const PaymentForm = ({
   };
 
   return (
-    <ul>
-      {checkoutToken.live.line_items.map((product) => (
-        <li key={product.id}>
-          <p>{product.name}</p>
-          <p>{product.line_total.formatted_with_code}</p>
+    <div className="payment_form">
+      <h3>Paiement</h3>
+      <ul>
+        {checkoutToken.live.line_items.map((product) => (
+          <li key={product.id}>
+            <p>{product.name}</p>
+            <p>{product.line_total.formatted_with_code}</p>
+          </li>
+        ))}
+        <li>
+          <p>Livraison</p>
+          <p>5.00 EUR</p>
         </li>
-      ))}
+      </ul>
 
-      <li> SubTotal : {checkoutToken.live.subtotal.formatted_with_code}</li>
+      <p> Total à payer : {checkoutToken.live.subtotal.formatted_with_code}</p>
 
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
-            <form onSubmit={(e) => handleSumbitPayment(e, elements, stripe)}>
+            <form
+              className="card_field"
+              onSubmit={(e) => handleSumbitPayment(e, elements, stripe)}
+            >
               <CardElement />
               <br />
-
-              <button
-                onClick={() => setValidateAdressForm(false)}
-                type="button"
-              >
-                Back
-              </button>
-              <button type="submit">
-                pay {checkoutToken.live.subtotal.formatted_with_code}
-              </button>
+              <div className="btn_form">
+                <button
+                className="back"
+                  onClick={() => setValidateAdressForm(false)}
+                  type="button"
+                >
+                  <ArrowLeft size={17} color="red" />
+                  <span>Informations</span>
+                </button>
+                <button type="submit">Confirmer</button>
+              </div>
             </form>
           )}
         </ElementsConsumer>
       </Elements>
-    </ul>
+    </div>
   );
 };
 
