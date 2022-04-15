@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import "./ShowProduct.scss";
 import striptags from "striptags";
+import { motion } from "framer-motion";
+import ScrollToTop from "../ScrollToTop";
 
 const ShowProduct = ({
   fetchOneProduct,
@@ -12,7 +14,7 @@ const ShowProduct = ({
   onAddToCart,
   fetchProducts,
   loading,
-  weightCart
+  weightCart,
 }) => {
   const { id } = useParams();
   const [available, setAvailable] = useState();
@@ -40,11 +42,13 @@ const ShowProduct = ({
   };
 
   useEffect(() => {
-    if (cart && product) {
+    if (cart !== "" && product !== undefined) {
       const productInCart = cart.line_items.filter(
         (item) => item.product_id === product.id
       );
-      if (productInCart.length !== 0) {
+      if (product.inventory.available === 0) {
+        setAvailable(false);
+      } else if (productInCart.length !== 0) {
         if (productInCart[0].quantity >= product.inventory.available) {
           setAvailable(false);
         } else {
@@ -63,9 +67,9 @@ const ShowProduct = ({
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
 
   const handleAddToCart = () => {
-    onAddToCart(product.id, 1)
-    weightCart(product.attributes[0].value)
-  }
+    onAddToCart(product.id, 1);
+    weightCart(product.attributes[0].value);
+  };
 
   useEffect(() => {
     const changeWidth = () => {
@@ -85,10 +89,15 @@ const ShowProduct = ({
   };
 
   return (
-    <div className="showproduct">
+    <main className="showproduct">
+      <ScrollToTop />
       {product ? (
         <div className="product_info">
-          <div
+          <motion.div
+            initial={{ translateX: -300, opacity: 0 }}
+            exit={{ translateX: -300, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
             onMouseLeave={mouseLeave}
             onMouseMove={mousepos}
             className="left"
@@ -118,8 +127,14 @@ const ShowProduct = ({
             <div ref={cursorRef} className="cursor">
               <span>Scroll</span>
             </div>
-          </div>
-          <div className="right">
+          </motion.div>
+          <motion.div
+            initial={{ translateX: 300, opacity: 0 }}
+            exit={{ translateX: 300, opacity: 0 }}
+            animate={{ translateX: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="right"
+          >
             <h2>{product.name}</h2>
 
             <p>{striptags(product.description)} </p>
@@ -198,12 +213,12 @@ const ShowProduct = ({
             <button onClick={() => navigate("/products")} className="back">
               <span>Shop</span>
             </button>
-          </div>
+          </motion.div>
         </div>
       ) : (
         <Loader />
       )}
-    </div>
+    </main>
   );
 };
 

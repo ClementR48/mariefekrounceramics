@@ -65,6 +65,7 @@ const Checkout = ({
               handleCaptureCheckout={handleCaptureCheckout}
               order={order}
               setValidateAdressForm={setValidateAdressForm}
+              openCheckoutFunc={openCheckoutFunc}
             />
           )}
         </>

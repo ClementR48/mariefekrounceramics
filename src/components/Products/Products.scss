@@ -21,7 +21,7 @@
       }
     }
   .list_products{
-    /* -webkit-column-count: 3;
+  /*   -webkit-column-count: 3;
     -moz-column-count: 3;
     column-count: 3;
     column-gap: 80px;
@@ -39,17 +39,17 @@
       -webkit-column-count: 1;
       -moz-column-count: 1;
       column-count: 1;
-    }*/
+    }
+     */
     
-    
-    width: 100%;
+     width: 100%;
     padding: 20px;
     background-color: transparent;
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
 
     &.apparition {
       transform: translateY(100%);

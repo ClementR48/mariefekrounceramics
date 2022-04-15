@@ -1,4 +1,3 @@
-import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 
@@ -6,6 +5,8 @@ import Categories from "./Category/Category";
 import Product from "./Product/Product";
 import "./Products.scss";
 import { motion } from "framer-motion";
+import ScrollToTop from "../ScrollToTop";
+
 const Products = ({
   setProductsToShow,
   products,
@@ -33,9 +34,26 @@ const Products = ({
       transition={{ delay: 0.5 }}
       className="products"
     >
+      <ScrollToTop />
+
       {categories.length !== 0 || productsToShow.length !== 0 ? (
         <>
-          <ul className="list_categories">
+          <motion.ul
+            transition={{ duration: 1 }}
+            initial={{
+              translateY: -100,
+              opacity: 0,
+            }}
+            animate={{
+              translateY: 0,
+              opacity: 1,
+            }}
+            exit={{
+              translateY: -100,
+              opacity: 0,
+            }}
+            className="list_categories"
+          >
             {categories
               .filter((category) => category.products !== 0)
               .map((category, index) => {
@@ -63,8 +81,23 @@ const Products = ({
                 Tout
               </span>
             </li>
-          </ul>
-          <ul className="list_products">
+          </motion.ul>
+          <motion.ul
+            transition={{ duration: 1 }}
+            initial={{
+              translateY: 100,
+              opacity: 0,
+            }}
+            animate={{
+              translateY: 0,
+              opacity: 1,
+            }}
+            exit={{
+              translateY: 100,
+              opacity: 0,
+            }}
+            className="list_products"
+          >
             {productsToShow.map((product) => {
               return (
                 <Product
@@ -75,7 +108,7 @@ const Products = ({
                 />
               );
             })}
-          </ul>
+          </motion.ul>
         </>
       ) : (
         <Loader />

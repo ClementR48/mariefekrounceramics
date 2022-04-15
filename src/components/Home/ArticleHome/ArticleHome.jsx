@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import imgDesktop from "../../../assets/images/homeArticle650.jpg";
 import imgMobile from "../../../assets/images/homeArticle400.jpg";
 import "./ArticleHome.scss";
+import { motion } from "framer-motion";
 
 const ArticleHome = () => {
   return (
-    <div className="home-article">
+    <motion.div
+      exit={{ translateX: 100, opacity: 0 }}
+      transition={{ duration: 1 }}
+      className="home-article"
+    >
       <div className="article">
         <div className="informations">
           <h2 className="title">Parler avec la nature</h2>
@@ -41,7 +46,7 @@ const ArticleHome = () => {
           <img src={imgMobile} alt="vases" />
         </picture>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

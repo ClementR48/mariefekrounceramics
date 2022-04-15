@@ -17,13 +17,18 @@ const AddressForm = ({
   const [city, setCity] = useState("");
   const [codePost, setCodePost] = useState("");
   const [address, setAddress] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false)
 
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubDivisions, setShippingSubDivisions] = useState([]);
   const [shippingSubDivision, setShippingSubDivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOption, setShippingOption] = useState();
+  const [shippingOption, setShippingOption] = useState({
+    id: "",
+    price_code: "",
+    price: "",
+  });
 
   const countries = Object.entries(shippingCountries).map(([code, name]) => ({
     id: code,
@@ -55,39 +60,77 @@ const AddressForm = ({
     if (weight < 250) {
       const obj = state.filter((option) => option.description === "250");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 500) {
       const obj = state.filter((option) => option.description === "500");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 750) {
       const obj = state.filter((option) => option.description === "750");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 1000) {
       const obj = state.filter((option) => option.description === "1");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 2000) {
       const obj = state.filter((option) => option.description === "2");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 5000) {
       const obj = state.filter((option) => option.description === "5");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 10000) {
       const obj = state.filter((option) => option.description === "10");
 
-      setShippingOption(obj[0].price.formatted_with_code);
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     }
   };
 
   useEffect(() => {
-    if (shippingOptions.length !== 0) {
-      calculShipping(shippingOptions);
+    if (shippingOptions !== "") {
+      if (shippingOptions[0]) {
+        if (shippingOptions[0].description === "International") {
+          setShippingOption({
+            id: shippingOptions[0].id,
+            price_code: shippingOptions[0].price.formatted_with_code,
+            price: shippingOptions[0].price.raw,
+          });
+        } else {
+          calculShipping(shippingOptions);
+        }
+      }
     }
-  }, [weight]);
+  }, [shippingOptions, weight, shippingCountry]);
 
   const fetchShippingOptions = async (
     checkoutTokenId,
@@ -100,7 +143,7 @@ const AddressForm = ({
     );
 
     setShippingOptions(options);
-    calculShipping(options);
+    if (shippingCountry === "FR") calculShipping(options);
   };
 
   useEffect(() => {
@@ -122,26 +165,49 @@ const AddressForm = ({
 
   const handleSubmitAdressForm = (e) => {
     e.preventDefault();
-    setShippingData({
-      name: name,
-      lastname: lastname,
-      email: email,
-      shippingCountry: shippingCountry,
-      shippingSubDivision: shippingSubDivision,
-      shippingCity: city,
-      shippingPostCode: codePost,
-      shippingAddress: address,
-      shippingOption: shippingOption,
-    });
-  };
 
-  const validation = () => {
-    setValidateAdressForm(true);
+    if (
+      name !== "" &&
+      lastname !== "" &&
+      email !== "" &&
+      city !== "" &&
+      codePost !== "" &&
+      address !== "" &&
+      shippingOption !== ""
+    ) {
+      setValidateAdressForm(true);
+      setShippingData({
+        name: name,
+        lastname: lastname,
+        email: email,
+        shippingCountry: shippingCountry,
+        shippingSubDivision: shippingSubDivision,
+        shippingCity: city,
+        shippingPostCode: codePost,
+        shippingAddress: address,
+        shippingOption: shippingOption,
+      });
+    } else {
+      setErrorMessage(true)
+      setValidateAdressForm(true);
+      setShippingData({
+        name: name,
+        lastname: lastname,
+        email: email,
+        shippingCountry: shippingCountry,
+        shippingSubDivision: shippingSubDivision,
+        shippingCity: city,
+        shippingPostCode: codePost,
+        shippingAddress: address,
+        shippingOption: shippingOption,
+      });
+    }
   };
 
   return (
     <form className="address_form" onSubmit={(e) => handleSubmitAdressForm(e)}>
       <h3>Informations</h3>
+      {errorMessage && <span className="error_message">Tous les champs doivent être remplis</span>}
       <label>
         Nom
         <input
@@ -217,16 +283,10 @@ const AddressForm = ({
           onChange={(e) => setCodePost(e.target.value)}
         />
       </label>
-
-      <label>
-        price shipping
-        <select
-          value={shippingOption}
-          onChange={(e) => setShippingOption(e.target.value)}
-        >
-          <option value={shippingOption}>{shippingOption}</option>
-        </select>
-      </label>
+      <div className="price_delivery">
+        <p>Livraison</p>
+        <p className="price">{shippingOption.price_code}</p>
+      </div>
       <div className="btn_address_form">
         <button
           className="back"
@@ -236,11 +296,7 @@ const AddressForm = ({
           <ArrowLeft size={17} color="red" />
           <span>Panier</span>
         </button>
-        <button
-          className="submit_btn"
-          type="submit"
-          onClick={() => validation()}
-        >
+        <button className="submit_btn" type="submit">
           <span>Paiement</span>
           <ArrowRight size={17} color="blue" />
         </button>

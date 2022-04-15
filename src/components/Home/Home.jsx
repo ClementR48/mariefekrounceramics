@@ -3,6 +3,7 @@ import ArticleHome from "./ArticleHome/ArticleHome";
 import ImageHome from "./ImageHome/ImageHome";
 import { motion } from "framer-motion";
 import "./Home.scss";
+import ScrollToTop from "../ScrollToTop";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       transition={{ delay: 0.5 }}
       className="home"
     >
+      <ScrollToTop />
       <ImageHome />
       <ArticleHome />
     </motion.main>

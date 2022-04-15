@@ -8,12 +8,22 @@
   align-items: center;
   justify-content: center;
 
+  @include tablet {
+    padding: 10px;
+  }
+
   ul {
     width: 70%;
-    border: 1px solid black;
+    
     padding: 5px;
     margin-bottom: 20px;
     margin-top: 20px;
+
+    @include tablet {
+      width: 100%;
+      padding: 0;
+      
+    }
 
     li {
       border-bottom: 1px solid black;
@@ -22,7 +32,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      font-size: 16px;
+
+      @include tablet {
+        margin: 5px 0 ;
+        padding: 15px 0;
+      }
     }
+  }
+
+  p{
+    text-align: center;
   }
 
   .card_field {
@@ -30,7 +50,7 @@
     margin: 20px;
 
     @include tablet {
-      width: 90%;
+      width: 100%;
       
     }
 
@@ -47,6 +67,15 @@
         flex-direction: column-reverse;
       }
 
+      .submit_btn{
+        background-color: $colorTitle;
+        margin: 10px;
+        outline: none;
+        border: none;
+        padding: 10px 17px;
+        color: white;
+      }
+
       .back {
         background-color: transparent;
         padding: 5px 15px;
@@ -57,7 +86,7 @@
         align-items: center;
         justify-content: center;
         @include mobile {
-        
+
           width: 100%;
           margin-bottom: 10px;
         }

@@ -1,10 +1,10 @@
+//Style
 import "./App.scss";
 
-import { commerce } from "./lib/commerce";
+// Components
+import Checkout from "./components/Checkout/Checkout";
 import Navbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
-import { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
@@ -14,55 +14,28 @@ import Footer from "./components/Footer/Footer";
 import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
 import ScrollToTop from "./components/ScrollToTop.jsx";
-import Checkout from "./components/Checkout/Checkout";
 
+//Library
+import { commerce } from "./lib/commerce";
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
   const [product, setProduct] = useState();
-  const [cart, setCart] = useState({});
   const [categories, setCategories] = useState([]);
+  const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openCheckout, setOpenCheckout] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [weight, setWeight] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  const weightProductsInCart = () => {
-    if (cart.line_items !== undefined) {
-      
-      let productInCartInfo = [];
-      for (let index = 0; index < cart.line_items.length; index++) {
-        for (let j = 0; j < products.length; j++) {
-          if (products[j].id === cart.line_items[index].product_id) {
-            productInCartInfo.push({
-              id: products[j].id,
-              qty: cart.line_items[index].quantity,
-              weight: products[j].attributes[0].value,
-            });
-          }
-        }
-      }
-
-      const gramme = [0];
-      for (let index = 0; index < productInCartInfo.length; index++) {
-        gramme.push(productInCartInfo[index].qty * parseInt(productInCartInfo[index].weight));
-      }
-
-      const reducer = (accumulator, curr) => accumulator + curr;
-      setWeight(gramme.reduce(reducer));
-      
-      
-    }
-  };
-
-  useEffect(() => {
-    weightProductsInCart();
-  }, [cart]);
+  //============================ Open modals ============================
 
   const openMenuFunc = (value = "") => {
     if (value !== "") {
@@ -80,18 +53,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const changeWidth = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", changeWidth);
-
-    if (width > 767) setOpenMenu(false);
-
-    return () => {
-      window.removeEventListener("resize", changeWidth);
-    };
-  }, [width]);
+  //============================ Products ============================
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -118,10 +80,7 @@ function App() {
     setProduct(filteredProduct[0]);
   };
 
-  const fetchCart = async () => {
-    const cart = await commerce.cart.retrieve();
-    setCart(cart);
-  };
+  //Categories
 
   const fetchCategories = async () => {
     const { data } = await commerce.categories.list();
@@ -129,9 +88,14 @@ function App() {
     setCategories(data);
   };
 
+  //============================ Cart ============================
+
+  const fetchCart = async () => {
+    const cart = await commerce.cart.retrieve();
+    setCart(cart);
+  };
+
   const handleAddToCart = (productId, quantity) => {
-    /*  const item = await commerce.cart.add(productId, quantity);
-    setCart(item.cart); */
     setLoading(true);
     commerce.cart
       .add(productId, quantity)
@@ -139,10 +103,12 @@ function App() {
       .then(() => setLoading(false));
   };
 
-  const handleUpdateCartQty = async (productId, quantity) => {
-    const item = await commerce.cart.update(productId, { quantity });
-
-    setCart(item.cart);
+  const handleUpdateCartQty = (productId, quantity) => {
+    setLoading(true);
+    commerce.cart
+      .update(productId, { quantity })
+      .then((item) => setCart(item.cart))
+      .then(() => setLoading(false));
   };
 
   const handleRemoveFromCart = async (productId) => {
@@ -163,20 +129,61 @@ function App() {
     setCart(newCart);
   };
 
+  //Calculate the weight
+
+  const weightProductsInCart = () => {
+    if (cart.line_items !== undefined) {
+      let productInCartInfo = [];
+      let gramme = [0];
+
+      for (let index = 0; index < cart.line_items.length; index++) {
+        for (let j = 0; j < products.length; j++) {
+          if (products[j].id === cart.line_items[index].product_id) {
+            productInCartInfo.push({
+              id: products[j].id,
+              qty: cart.line_items[index].quantity,
+              weight: products[j].attributes.filter(
+                (att) => att.name === "Poids"
+              )[0].value,
+            });
+          }
+        }
+      }
+
+      for (let index = 0; index < productInCartInfo.length; index++) {
+        gramme.push(
+          productInCartInfo[index].qty *
+            parseInt(productInCartInfo[index].weight)
+        );
+      }
+
+      const reducer = (accumulator, curr) => accumulator + curr;
+      setWeight(gramme.reduce(reducer));
+    }
+  };
+
+  // ============================ Checkout ============================
+
   const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
     try {
-      
       const inComingOrder = await commerce.checkout.capture(
         checkoutTokenId,
         newOrder
       );
-      weightProductsInCart();
+
       setOrder(inComingOrder);
       refreshCart();
     } catch (error) {
+      console.log(error);
       setErrorMessage(error.data.error.message);
     }
   };
+
+  //useEffect for the weight
+
+  useEffect(() => {
+    weightProductsInCart();
+  }, [cart, products]);
 
   useEffect(() => {
     fetchProducts();
@@ -184,11 +191,26 @@ function App() {
     fetchCategories();
   }, []);
 
+  //useEffect Responsive
+
+  useEffect(() => {
+    const changeWidth = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", changeWidth);
+
+    if (width > 767) setOpenMenu(false);
+
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, [width]);
+
   const location = useLocation();
 
   return (
     <div className={openCheckout ? "app checkout_active" : "app"}>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       {(openMenu || openCheckout) && (
         <Overlay
           openMenuFunc={openMenuFunc}
@@ -196,15 +218,11 @@ function App() {
         />
       )}
       {!openCheckout && (
-        <AnimatePresence exitBeforeEnter>
-          <Navbar
-            location={location}
-            key={location.pathname}
-            totalItems={cart.total_items}
-            openMenu={openMenu}
-            openMenuFunc={openMenuFunc}
-          />
-        </AnimatePresence>
+        <Navbar
+          totalItems={cart.total_items}
+          openMenu={openMenu}
+          openMenuFunc={openMenuFunc}
+        />
       )}
       <Menuresponsive
         openMenuFunc={openMenuFunc}

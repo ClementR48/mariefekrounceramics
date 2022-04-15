@@ -8,16 +8,17 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
-import { ArrowDownLeft, ArrowLeft } from "react-feather";
+import {ArrowLeft } from "react-feather";
 
 const PaymentForm = ({
   checkoutToken,
   shippingData,
   handleCaptureCheckout,
   setValidateAdressForm,
+  openCheckoutFunc
 }) => {
   const stripePromise = loadStripe(
-    "pk_test_51K4lNJIpyCJRUeoekz4uR5OJqEv2Pppdl7C8s9Ubea50j0TA2LtYuwh9X1sistyM6H3ma5wbLLyD4WJPYWgdQvcS00gQMa4Gkn"
+    process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY
   );
 
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const PaymentForm = ({
           postal_zip_code: shippingData.shippingPostCode,
           street: shippingData.shippingAddress,
         },
-        fulfillment: { shipping_method: shippingData.shippingOption },
+        fulfillment: { shipping_method: shippingData.shippingOption.id },
         payment: {
           gateway: "stripe",
 
@@ -63,8 +64,12 @@ const PaymentForm = ({
 
       handleCaptureCheckout(checkoutToken.id, orderData);
       navigate("/");
+      setValidateAdressForm(false)
+      openCheckoutFunc(false)
     }
   };
+
+ 
 
   return (
     <div className="payment_form">
@@ -78,11 +83,11 @@ const PaymentForm = ({
         ))}
         <li>
           <p>Livraison</p>
-          <p>5.00 EUR</p>
+          <p>{shippingData.shippingOption.price_code}</p>
         </li>
       </ul>
 
-      <p> Total à payer : {checkoutToken.live.subtotal.formatted_with_code}</p>
+      <p> Total à payer : {(checkoutToken.live.subtotal.raw + shippingData.shippingOption.price).toFixed(2)} EUR </p>
 
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -102,7 +107,7 @@ const PaymentForm = ({
                   <ArrowLeft size={17} color="red" />
                   <span>Informations</span>
                 </button>
-                <button type="submit">Confirmer</button>
+                <button className="submit_btn" type="submit">Confirmer</button>
               </div>
             </form>
           )}
