@@ -13,7 +13,6 @@ import Footer from "./components/Footer/Footer";
 import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
 
-
 //Library
 import { commerce } from "./lib/commerce";
 import { useEffect, useState } from "react";
@@ -110,16 +109,20 @@ function App() {
       .then(() => setLoading(false));
   };
 
-  const handleRemoveFromCart = async (productId) => {
-    const item = await commerce.cart.remove(productId);
-
-    setCart(item.cart);
+  const handleRemoveFromCart = (productId) => {
+    setLoading(true);
+    commerce.cart
+      .remove(productId)
+      .then((item) => setCart(item.cart))
+      .then(() => setLoading(false));
   };
 
-  const handleEmptyCart = async () => {
-    const item = await commerce.cart.empty();
-
-    setCart(item.cart);
+  const handleEmptyCart = () => {
+    setLoading(true);
+    commerce.cart
+      .empty()
+      .then((item) => setCart(item.cart))
+      .then(() => setLoading(false));
   };
 
   const refreshCart = async () => {
@@ -286,6 +289,7 @@ function App() {
                 categories={categories}
                 openCheckoutFunc={openCheckoutFunc}
                 weightProductsInCart={weightProductsInCart}
+                loading={loading}
               />
             }
           />

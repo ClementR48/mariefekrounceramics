@@ -16,6 +16,7 @@ const Cart = ({
   categories,
   openCheckoutFunc,
   weightProductsInCart,
+  loading
 }) => {
   useEffect(() => {
     weightProductsInCart();
@@ -42,6 +43,7 @@ const Cart = ({
           handleUpdateCartQty={handleUpdateCartQty}
           products={products}
           openCheckoutFunc={openCheckoutFunc}
+          loading={loading}
         />
       )}
     </motion.div>

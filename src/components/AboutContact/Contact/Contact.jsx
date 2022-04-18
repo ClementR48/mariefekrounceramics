@@ -1,42 +1,59 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 import "./Contact.scss";
 import { Instagram } from "react-feather";
 
 import logo from "../../../assets/images/logoBlanc.png";
 
 const Contact = () => {
-
-  const [validate, setValidate] = useState(false)
+  const [validate, setValidate] = useState(false);
 
   const [name, setName] = useState("");
   const [objet, setObjet] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  const [successMessage, setSuccessMessage] = useState(false)
+
+  const [buttonAddProduct, setButtonAddProduct] = useState("Confirmer");
+
+  const textButtonLetters = buttonAddProduct.split("");
+
   const handleSubmit = (e) => {
-    console.log(e.target);
+    
     e.preventDefault();
-    if(name !== "" && email !== "" && objet !== "" && message !== ""){
+    if (name !== "" && email !== "" && objet !== "" && message !== "") {
       emailjs
-          .sendForm(
-            "service_p1h4m9i",
-            "template_o4g4vph",
-            e.target,
-            "user_S6W9cox0UxXXczGLydsea"
-          ).then((result) => {
-            console.log(result);
-          },(error) => {
+        .sendForm(
+          "service_p1h4m9i",
+          "template_o4g4vph",
+          e.target,
+          "user_S6W9cox0UxXXczGLydsea"
+        )
+        .then(
+          (result) => {
+           
+            setSuccessMessage(true)
+            setTimeout(() => {
+              setSuccessMessage(false)
+              setEmail('')
+              setMessage('')
+              setName('')
+              setObjet('')
+            }, [7000])
+          },
+          (error) => {
             console.log(error);
-          })  
-    }else{
-      setValidate(true)
+          }
+        );
+    } else {
+      setValidate(true);
       setTimeout(() => {
-        setValidate(false)
-      }, 5000)
+        setValidate(false);
+      }, 5000);
     }
-  }
+  };
 
   return (
     <div className="contact">
@@ -50,27 +67,106 @@ const Contact = () => {
         >
           <Instagram />
         </a>
+        <div className={successMessage ? "success_message send" : "success_message"}>Votre message a bien été envoyé.</div>
       </div>
-      <form onSubmit={(e) => handleSubmit(e)} className="right">
-        {validate && <p className="error_message">Tous les champs doivent être remplis</p>}
+      <form onSubmit={(e) => handleSubmit(e)} className={successMessage ? "right send" : "right"}>
+      
+        {validate && (
+          <p className="error_message">Tous les champs doivent être remplis.</p>
+        )}
         <label>
           Nom
-          <input value={name} onChange={(e) => setName(e.target.value)} type='text'></input>
+          <input
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+          ></input>
         </label>
         <label>
           Email
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type='email'></input>
+          <input
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+          ></input>
         </label>
         <label>
           Objet
-          <input value={objet} onChange={(e) => setObjet(e.target.value)} type='text'></input>
+          <input
+            name="objet"
+            value={objet}
+            onChange={(e) => setObjet(e.target.value)}
+            type="text"
+          ></input>
         </label>
         <label>
           Message
-          <textarea value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+          <textarea
+            name="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          ></textarea>
         </label>
-        <button type="submit">Confirmer</button>
+        <button type="submit" className="checkout">
+                <div className="span-container s1">
+                  {textButtonLetters.map((letter, index) => {
+                    return (
+                      <>
+                        {letter !== " " ? (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            {letter}
+                          </span>
+                        ) : (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            &nbsp;
+                          </span>
+                        )}
+                      </>
+                    );
+                  })}
+                </div>
+                <div className="span-container s2">
+                  {textButtonLetters.map((letter, index) => {
+                    return (
+                      <>
+                        {letter !== " " ? (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            {letter}
+                          </span>
+                        ) : (
+                          <span
+                            key={index}
+                            style={{
+                              transitionDelay: ` ${0.05 * index}s`,
+                            }}
+                          >
+                            &nbsp;
+                          </span>
+                        )}
+                      </>
+                    );
+                  })}
+                </div>
+              </button>
       </form>
+      
     </div>
   );
 };

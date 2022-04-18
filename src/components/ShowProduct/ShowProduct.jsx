@@ -14,7 +14,7 @@ const ShowProduct = ({
   onAddToCart,
   fetchProducts,
   loading,
-  weightCart,
+  
 }) => {
   const { id } = useParams();
   const [available, setAvailable] = useState();
@@ -23,7 +23,7 @@ const ShowProduct = ({
   const textButtonLetters = buttonAddProduct.split("");
 
   useEffect(() => {
-    loading ? setButtonAddProduct("Wait") : setButtonAddProduct("Panier");
+    loading ? setButtonAddProduct("Patientez") : setButtonAddProduct("Panier");
   }, [loading]);
 
   let navigate = useNavigate();
@@ -68,7 +68,6 @@ const ShowProduct = ({
 
   const handleAddToCart = () => {
     onAddToCart(product.id, 1);
-    weightCart(product.attributes[0].value);
   };
 
   useEffect(() => {
