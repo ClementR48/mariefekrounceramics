@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import HomeNav from "./HomeNav/HomeNav";
 import Nav from "./Nav/Nav";
+
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import "./Navbar.scss";
 
 const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
-  const [homePage, setHomePage] = useState(true);
-  const [divAnim, setDivAnim] = useState({});
+  const [colorNavHome, setColorNavHome] = useState(true);
+  const [divAnim, setDivAnim] = useState(0);
   const [navBarScrollBackground, setNavBarScrollBackground] = useState(false);
 
   const location = useLocation();
-
   const allLink = useRef([]);
 
   const addRefLink = (el) => {
@@ -22,24 +21,31 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
   };
 
   useEffect(() => {
-    setDivAnim(allLink.current[5]);
-  }, []);
+    const anim = allLink.current.filter(
+      (link) => link.className === "anim_hover_move"
+    );
+    anim[0].style.left = `${divAnim}px`;
+  }, [divAnim]);
+
+  useEffect(() => {
+    const currentLink = allLink.current.filter(link => link.className === "active")
+    setDivAnim(currentLink[0].getBoundingClientRect().left + currentLink[0].offsetWidth / 2);
+  }, [location]);
 
   const hover = (e) => {
-    const size = e.target.offsetLeft + e.target.offsetWidth / 2;
-    divAnim.style.transform = `translateX(${size}px)`;
-    divAnim.style.opacity = `1`;
+    setDivAnim(e.target.getBoundingClientRect().left + e.target.offsetWidth / 2); 
   };
 
   const hoverOff = () => {
-    allLink.current[5].style.opacity = 0;
+    const currentLink = allLink.current.filter(link => link.className === "active")
+    setDivAnim(currentLink[0].getBoundingClientRect().left + currentLink[0].offsetWidth / 2);
   };
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setHomePage(true);
+      setColorNavHome(true);
     } else {
-      setHomePage(false);
+      setColorNavHome(false);
     }
   }, [location.pathname]);
 
@@ -63,7 +69,6 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      
       className={
         openMenu
           ? "header active"
@@ -72,23 +77,15 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
           : "header"
       }
     >
-      {homePage ? (
-        <HomeNav
-          addRefLink={addRefLink}
-          totalItems={totalItems}
-          hover={hover}
-          hoverOff={hoverOff}
-          navBarScrollBackground={navBarScrollBackground}
-          openMenu={openMenu}
-        />
-      ) : (
-        <Nav
-          hover={hover}
-          addRefLink={addRefLink}
-          totalItems={totalItems}
-          hoverOff={hoverOff}
-        />
-      )}
+      <Nav
+        navBarScrollBackground={navBarScrollBackground}
+        colorNavHome={colorNavHome}
+        hover={hover}
+        addRefLink={addRefLink}
+        totalItems={totalItems}
+        hoverOff={hoverOff}
+      />
+
       <div
         className={openMenu ? "hamburger active" : "hamburger"}
         onClick={() => openMenuFunc()}

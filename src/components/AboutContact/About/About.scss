@@ -1,0 +1,63 @@
+@import '../../../global.scss';
+.container-about {
+  padding: 100px 10vw;
+  
+
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0;
+  }
+  @include mobile {
+    padding: 0;
+  }
+
+  picture {
+    width: 50%;
+
+    @include desktop {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  img {
+    object-fit: cover;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    box-shadow: 55px 60px rgba(255, 239, 168, 1);
+    float: left;
+    shape-outside: circle();
+    margin-right: 150px;
+    margin-bottom: 150px;
+
+    @include desktop {
+      margin-right: 0;
+      float: none;
+
+      box-shadow: 30px 35px rgba(255, 239, 168, 1);
+    }
+    @include mobile {
+      width: 300px;
+      height: 300px;
+      box-shadow: 20px 25px rgba(255, 239, 168, 1);
+    }
+  }
+
+  p {
+
+    color: $colorTextMain;
+    line-height: 1.5;
+    @include tablet {
+      font-size: 16px;
+      text-align: justify;
+    }
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+}

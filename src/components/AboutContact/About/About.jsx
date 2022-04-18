@@ -1,30 +1,12 @@
-import React from "react";
-import imgDesktop from "../../assets/images/marieAboutDesktop.jpg";
-import imgMobile from "../../assets/images/marieAboutMobile.jpg";
-import "./About.scss";
+import React from 'react';
+import imgDesktop from "../../../assets/images/marieAboutDesktop.jpg";
+import imgMobile from "../../../assets/images/marieAboutMobile.jpg";
 import { motion } from "framer-motion";
-import ScrollToTop from "../ScrollToTop";
+import './About.scss'
 
 const About = () => {
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ delay: 0.5 }}
-      className="about"
-    >
-      <ScrollToTop />
-      <motion.h2
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        À propos
-      </motion.h2>
-
-      <div className="container-about">
+    <div className="container-about">
         <picture>
           <source srcSet={imgDesktop} media="(min-width: 1000px)" />
 
@@ -61,7 +43,6 @@ const About = () => {
           doigts. Chaque détail qui rendra la pièce unique et pleine d'émotion.
         </motion.p>
       </div>
-    </motion.main>
   );
 };
 

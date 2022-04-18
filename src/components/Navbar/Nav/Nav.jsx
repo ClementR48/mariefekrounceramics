@@ -1,16 +1,41 @@
 import React from "react";
 import { ShoppingCart } from "react-feather";
 import { NavLink } from "react-router-dom";
-import logo from "../../../assets/images/logoRose.png";
+import logoPink from "../../../assets/images/logoRose.png";
+import logoWhite from "../../../assets/images/logoBlanc.png";
 import "./Nav.scss";
 
-const Nav = ({ totalItems, addRefLink, hover, hoverOff }) => {
+const Nav = ({
+  totalItems,
+  colorNavHome,
+  navBarScrollBackground,
+  addRefLink,
+  hover,
+  hoverOff,
+}) => {
   return (
     <>
       <div className="nav_logo">
-        <img src={logo} alt="logo" />
+        <img
+          src={
+            colorNavHome
+              ? navBarScrollBackground
+                ? logoPink
+                : logoWhite
+              : logoPink
+          }
+          alt="logo"
+        />
       </div>
-      <nav className="nav_links">
+      <nav
+        className={
+          colorNavHome
+            ? navBarScrollBackground
+              ? "nav_links"
+              : "nav_links home_nav"
+            : "nav_links"
+        }
+      >
         <NavLink
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={() => hoverOff()}
@@ -29,15 +54,7 @@ const Nav = ({ totalItems, addRefLink, hover, hoverOff }) => {
         >
           Boutique
         </NavLink>
-        <NavLink
-          onMouseEnter={(e) => hover(e)}
-          onMouseLeave={() => hoverOff()}
-          ref={addRefLink}
-          exact="true"
-          to="/contact"
-        >
-          Contact
-        </NavLink>
+
         <NavLink
           onMouseEnter={(e) => hover(e)}
           onMouseLeave={() => hoverOff()}
@@ -57,10 +74,10 @@ const Nav = ({ totalItems, addRefLink, hover, hoverOff }) => {
           <ShoppingCart />
           <span>{totalItems}</span>
         </NavLink>
-        <div className="anim_hover">
+      </nav>
+        <div className={colorNavHome ? navBarScrollBackground ?  "anim_hover" : "anim_hover home" : "anim_hover" }>
           <div ref={addRefLink} className="anim_hover_move"></div>
         </div>
-      </nav>
     </>
   );
 };

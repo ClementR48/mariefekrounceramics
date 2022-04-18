@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@chec/commerce.js": "^2.8.0",
+    "@emailjs/browser": "^3.6.2",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.26.0",
     "@testing-library/jest-dom": "^5.16.3",
@@ -14,6 +15,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-feather": "^2.0.9",
+    "react-intersection-observer": "^8.34.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "striptags": "^3.2.0",

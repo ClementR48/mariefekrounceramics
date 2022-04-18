@@ -6,14 +6,13 @@ import Checkout from "./components/Checkout/Checkout";
 import Navbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
 import Home from "./components/Home/Home";
-import About from "./components/About/About";
-import Contact from "./components/Contact/Contact";
+import AboutContact from "./components/AboutContact/AboutContact";
 import Cart from "./components/Cart/Cart";
 import ShowProduct from "./components/ShowProduct/ShowProduct";
 import Footer from "./components/Footer/Footer";
 import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
-import ScrollToTop from "./components/ScrollToTop.jsx";
+
 
 //Library
 import { commerce } from "./lib/commerce";
@@ -241,8 +240,7 @@ function App() {
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
           <Route exact="true" path="/" element={<Home />} />
-          <Route exact="true" path="/about" element={<About />} />
-          <Route exact="true" path="/contact" element={<Contact />} />
+          <Route exact="true" path="/about" element={<AboutContact />} />
           <Route
             exact="true"
             path="/products/:id"

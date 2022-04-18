@@ -1,10 +1,36 @@
-@import '../../../global.scss';
+@import "../../../global.scss";
 
 .nav_logo {
   width: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.anim_hover {
+  position: absolute;
+  bottom: 10px;
+  height: 7px;
+  width: 100%;
+
+  @include tablet {
+    display: none;
+  }
+
+  &.home {
+    .anim_hover_move{
+      background-color: white;
+    }
+  }
+
+  .anim_hover_move {
+    width: 7px;
+    height: 100%;
+    background-color: $colorTitle;
+    border-radius: 50%;
+    transition: 0.5s all ease-in-out;
+    opacity: 1;
+    position: absolute;
+  }
 }
 
 .nav_links {
@@ -14,49 +40,19 @@
   align-items: baseline;
   justify-content: space-around;
 
-  a{
+  &.home_nav {
+    a {
+      color: white;
+    }
+  }
+
+  a {
     color: $colorNavText;
     text-decoration: none;
     position: relative;
-    &::after{
-      content: "";
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      bottom: -10px;
-      left: 50%;
-      background-color: transparent;
-      border-radius: 50%;
-
-    }
-   &.active::after{
-    background-color: blue;
-   } 
   }
-
-  .anim_hover{
-    position: absolute;
-    bottom:-10px;
-    height:7px;
-    width: 100%;
-    background-color: transparent;
-    
-  
-    .anim_hover_move{
-      width: 7px;
-      height: 100%;
-      background-color: blue;
-      border-radius: 50%;
-      transition: 0.3s all ease-in-out;
-      opacity: 0;
-    }
-  
-  }
-
 
   @include tablet {
     display: none;
   }
-
 }
-

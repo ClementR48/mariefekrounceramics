@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Loader from "../Loader/Loader";
 
 import Categories from "./Category/Category";
@@ -82,6 +82,7 @@ const Products = ({
               </span>
             </li>
           </motion.ul>
+
           <motion.ul
             transition={{ duration: 1 }}
             initial={{
@@ -98,6 +99,26 @@ const Products = ({
             }}
             className="list_products"
           >
+            {productsToShow.map((product) => {
+              return (
+                <Product
+                  key={product.id}
+                  product={product}
+                  onAddToCart={onAddToCart}
+                  cart={cart}
+                />
+              );
+            })}
+            {productsToShow.map((product) => {
+              return (
+                <Product
+                  key={product.id}
+                  product={product}
+                  onAddToCart={onAddToCart}
+                  cart={cart}
+                />
+              );
+            })}
             {productsToShow.map((product) => {
               return (
                 <Product

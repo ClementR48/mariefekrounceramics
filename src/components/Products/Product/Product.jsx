@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Product.scss";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Product = ({ product, cart }) => {
   const [quantityProduct, setQuantityProduct] = useState(false);
 
   useEffect(() => {
-    if (cart.line_items !== '' && product !== undefined) {
+    if (cart.line_items !== undefined && product !== undefined) {
       const productInCart = cart.line_items.filter(
         (item) => item.product_id === product.id
       );
@@ -23,18 +24,23 @@ const Product = ({ product, cart }) => {
         setQuantityProduct(false);
       }
     }
-
   }, [cart, product]);
 
-  const arrEpuise = "épuisé".split('');
- 
+  const arrEpuise = "épuisé".split("");
+
+
+  const { ref: productRef, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
 
 
   return (
     <motion.li
-      className="product"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      ref={productRef}
+      className={inView ? "product isVisible" : "product"}
+      
     >
       {quantityProduct && (
         <ul className="epuise">

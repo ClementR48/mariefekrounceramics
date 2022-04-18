@@ -12,9 +12,6 @@ const Menuresponsive = ({ totalItems, openMenuFunc, openMenu }) => {
       <NavLink onClick={() => openMenuFunc()} exact="true" to="/products">
         Boutique
       </NavLink>
-      <NavLink onClick={() => openMenuFunc()} exact="true" to="/contact">
-        Contact
-      </NavLink>
       <NavLink onClick={() => openMenuFunc()} exact="true" to="/about">
         A propos
       </NavLink>
