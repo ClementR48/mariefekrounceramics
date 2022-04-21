@@ -52,8 +52,8 @@ const Product = ({ product, cart }) => {
       <Link to={`/products/${product.permalink}`}>
         <img src={product.image.url} alt={product.name} />
         <div className="caption">
-          <p>{product.name}</p>
-          <p>{product.price.formatted_with_code}</p>
+          <p className="name_product">{product.name}</p>
+          <p className="price_product">{product.price.formatted_with_symbol}</p>
         </div>
       </Link>
     </motion.li>

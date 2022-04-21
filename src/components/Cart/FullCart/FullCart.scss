@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
+  margin-bottom: 150px;
 
   @include desktop {
     flex-direction: column;
@@ -15,6 +16,7 @@
   
 
   .list_cart {
+    margin-top: 50px;
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
     width: 60%;
@@ -49,7 +51,7 @@
       height: 50px;
 
       @include tablet {
-        border-bottom: 5px solid $colorTitle;
+        
         display: block;
       }
     }
@@ -68,15 +70,15 @@
       .delete_items {
         cursor: pointer;
         border: none;
-        color: red;
-        border: 1px solid red;
+        color: $colorNavText;
+        border: 1px solid $colorNavText;
         background-color: transparent;
         padding: 5px;
         transition: all 0.2s ease-in-out;
 
         &:hover {
-          background-color: red;
-          color: black;
+          transform: scale(1.1);
+          
         }
       }
     }

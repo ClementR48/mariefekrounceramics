@@ -8,6 +8,7 @@
   }
 
   .list_categories {
+
     margin: 50px 0 ;
       width: 70%;
       display: flex;
@@ -24,13 +25,14 @@
 
     
      width: 100%;
-    padding: 20px;
+    
     background-color: transparent;
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap; 
+    margin-bottom: 150px  ;
 
     &.apparition {
       transform: translateY(100%);
@@ -38,7 +40,8 @@
     }
 
     @include tablet {
-      padding: 20px 0;
+      justify-content: center;
+
     }
 
     @keyframes apparition {

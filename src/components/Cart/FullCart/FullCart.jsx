@@ -37,7 +37,7 @@ const FullCart = ({
         className={loading? "list_cart loading" : "list_cart"}
       >
         
-        <caption>Récapitulatif de votre commande</caption>
+        {/* <caption>Récapitulatif de votre commande</caption> */}
         <tbody>
           {cart.line_items.map((item) => (
             <CartItem

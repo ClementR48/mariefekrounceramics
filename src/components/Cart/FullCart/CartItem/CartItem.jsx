@@ -37,14 +37,14 @@ const CartItem = ({
       <td>{item.line_total.formatted_with_code}</td>
       <td className="modify_item">
         <button onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}>
-          <Minus size={15} />
+          <Minus size={15} color='rgba(134, 90, 71, 1)'/>
         </button>
         <p>{item.quantity}</p>
         {available && (
           <button
             onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
           >
-            <Plus size={15} />
+            <Plus size={15} color='rgba(134, 90, 71, 1)' />
           </button>
         )}
 
@@ -52,7 +52,7 @@ const CartItem = ({
           className="delete_item"
           onClick={() => handleRemoveFromCart(item.id)}
         >
-          <Trash2 size={15} color="red" />
+          <Trash2 size={15} color="rgb(253,155,138)" />
         </button>
       </td>
     </tr>

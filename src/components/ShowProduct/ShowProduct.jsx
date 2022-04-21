@@ -136,7 +136,7 @@ const ShowProduct = ({
           >
             <h2>{product.name}</h2>
 
-            <p>{striptags(product.description)} </p>
+            <p className="description_product">{striptags(product.description)} </p>
             <div className="attributes_product">
               <p>{attributes("attr_RyWOwmdnWlnEa2")}</p>
               <p>{attributes("attr_31q0o3LJ85DdjR")}</p>

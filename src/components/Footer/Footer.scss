@@ -5,14 +5,16 @@
   left: 0;
   right: 0;
   height: 100px;
-  padding: 1%;
+  padding: 30px 0;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   background-color: rgb(248, 190, 183);
-  
 
-  
+  /* Test  */
+  height: 180px;
+  background-color: $colorTextMain;
+  font-size: 14px;
 
   .logo1 {
     position: absolute;
@@ -27,21 +29,29 @@
     }
   }
 
-  .logo2 {
-    position: absolute;
-    top: 50%;
-    right: 5vw;
-    transform: translateY(-50%);
-    width: 110px;
+  h3{
+    color: white;
+  }
 
-    @include mobile {
-      display: none;
+  li{
+    margin: 10px 0;
+    color: white;
+
+    a{
+      color: white;
     }
   }
 
-  .list-contact {
+  .list-contact{
+    margin-right: 100px;
+   
+  }
+
+
+/*   .list-contact {
     width: 80%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
 
@@ -53,19 +63,30 @@
       align-items: flex-end;
     }
 
+    h3{
+      color: white ;
+    }
+
     li {
       overflow-x: hidden;
 
       color: rgb(246, 136, 119);
       display: flex;
       align-items: center;
+
       
+
+      color: $colorNavBg;
+
       @include mobile {
         font-size: 16px;
       }
 
       svg {
         stroke: rgb(246, 136, 119);
+        
+
+        stroke: $colorNavBg;
       }
 
       a {
@@ -89,11 +110,17 @@
         &:hover::before {
           left: 0;
         }
+
+       
+
+        color: $colorNavBg;
       }
       .footer-contact {
         text-decoration: none;
         color: rgb(246, 136, 119);
+   
 
+        color: $colorNavBg;
         position: relative;
         transition: 0.5s;
 
@@ -113,5 +140,5 @@
         }
       }
     }
-  }
+  } */
 }

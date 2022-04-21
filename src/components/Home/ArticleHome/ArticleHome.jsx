@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import imgDesktop from "../../../assets/images/homeArticle650.jpg";
-import imgMobile from "../../../assets/images/homeArticle400.jpg";
+import imgDesktop1 from "../../../assets/images/homeArticle650.jpg";
+import imgMobile1 from "../../../assets/images/homeArticle400.jpg";
+import imgDesktop2 from "../../../assets/images/homeArticle2_650.JPG";
+import imgMobile2 from "../../../assets/images/homeArticle2_400.JPG";
 import "./ArticleHome.scss";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -38,8 +40,8 @@ const ArticleHome = () => {
           <Link to="/products">Accéder au shop</Link>
         </div>
         <picture className="picture">
-          <source srcSet={imgDesktop} media="(min-width: 400px)" />
-          <img src={imgMobile} alt="vases" />
+          <source srcSet={imgDesktop1} media="(min-width: 400px)" />
+          <img src={imgMobile1} alt="vases" />
         </picture>
       </div>
       <div
@@ -58,8 +60,8 @@ const ArticleHome = () => {
           <Link to="/products">Accéder au shop</Link>
         </div>
         <picture className="picture">
-          <source srcSet={imgDesktop} media="(min-width: 400px)" />
-          <img src={imgMobile} alt="vases" />
+          <source srcSet={imgDesktop2} media="(min-width: 400px)" />
+          <img src={imgMobile2} alt="vases" />
         </picture>
       </div>
     </motion.div>

@@ -1,10 +1,11 @@
 @import "../../../global.scss";
 
 .contact {
-  width: 100%;
+  width: 70%;
   height: 600px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 150px;
 
   @include tablet {
     height: auto;

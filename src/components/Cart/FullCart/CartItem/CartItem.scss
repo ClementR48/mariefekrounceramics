@@ -2,21 +2,22 @@
 
 .cartitem {
   @include tablet {
-    border-bottom: 5px solid $colorTitle;
+    margin-bottom: 100px;
     display: block;
   }
   td {
-    border-bottom: 1px solid $colorTitle;
+    
     padding: 5px 0;
     text-align: center;
     height: 120px;
     min-width: 90px;
+    font-size: 0.8em;
     @include tablet {
       height: auto;
-      border-bottom: 1px solid $colorTitle;
       display: block;
       font-size: 0.8em;
       text-align: center;
+      
     }
 
     a {
@@ -41,23 +42,32 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    position: relative;
 
     @include tablet {
       height: 50px;
-
-      justify-content: space-evenly;
+      
+      justify-content: center;
     }
 
     .delete_item {
       background-color: none;
       transition: 0.5s all;
+      border: none;
 
       &:hover {
         background-color: transparent;
       }
       &:hover svg {
         transform: scale(1.2);
-        color: white;
+        stroke: $colorNavText;
+      }
+
+      @include tablet {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
     }
 
@@ -74,10 +84,13 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s;
+      @include tablet{
+        margin: 0 20px;
+      }
 
       &:hover svg {
         transform: scale(1.2);
-        color: white;
+        stroke: white;
       }
       &:hover {
         background-color: $colorTextMain;

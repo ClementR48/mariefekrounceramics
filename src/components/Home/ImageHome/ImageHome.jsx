@@ -1,6 +1,7 @@
 import React from "react";
 import "./ImageHome.scss";
 import imgDesktop from "../../../assets/images/imageHome1900.jpg";
+
 import imgTablet from "../../../assets/images/imageHome800.jpg";
 import imgMobile from "../../../assets/images/imageHome500.jpg";
 

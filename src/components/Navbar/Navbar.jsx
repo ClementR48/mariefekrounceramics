@@ -84,6 +84,7 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
         addRefLink={addRefLink}
         totalItems={totalItems}
         hoverOff={hoverOff}
+        openMenu={openMenu}
       />
 
       <div

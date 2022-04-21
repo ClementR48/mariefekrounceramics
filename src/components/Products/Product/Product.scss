@@ -5,12 +5,17 @@
   max-width: 450px;
   width: 30%;
   height: 400px;
-  margin: 15px;
+ /*  margin: 15px; */
+ margin: 15px 0;
   overflow: hidden;
   position: relative;
   transform: translateY(20%);
   opacity: 0;
   transition: 0.8s ease-in-out;
+
+  @include tablet {
+    margin: 15px;
+  }
 
   &.isVisible {
     transform: translateY(0);
@@ -52,6 +57,14 @@
 
       @include tablet {
         transform: translateY(-100%);
+      }
+
+      .name_product{
+        font-weight: bold;
+      }
+
+      .price_product{
+        font-size: 14px;
       }
     }
 

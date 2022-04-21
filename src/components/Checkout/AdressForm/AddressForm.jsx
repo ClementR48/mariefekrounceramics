@@ -294,7 +294,7 @@ const AddressForm = ({
           onClick={() => openCheckoutFunc(false)}
         >
           <ArrowLeft size={17} color="red" />
-          <span>Panier</span>
+          
         </button>
         <button className="submit_btn" type="submit">
           <span>Paiement</span>

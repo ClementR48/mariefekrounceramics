@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingCart } from "react-feather";
 import { NavLink } from "react-router-dom";
 import logoPink from "../../../assets/images/logoRose.png";
@@ -12,17 +12,36 @@ const Nav = ({
   addRefLink,
   hover,
   hoverOff,
+  openMenu
 }) => {
+
+  const [logo, setLogo] = useState()
+  useEffect(() => {
+    if(openMenu){
+      setLogo(logoPink)
+    }else if(colorNavHome){
+      if(navBarScrollBackground){
+        setLogo(logoPink)
+      }else{
+        setLogo(logoWhite)
+      }
+      
+    }else {
+      setLogo(logoPink)
+    }
+
+  }, [colorNavHome, navBarScrollBackground, openMenu])
   return (
     <>
       <div className="nav_logo">
         <img
           src={
-            colorNavHome
+            logo
+            /* colorNavHome
               ? navBarScrollBackground
                 ? logoPink
                 : logoWhite
-              : logoPink
+              : logoPink */
           }
           alt="logo"
         />
