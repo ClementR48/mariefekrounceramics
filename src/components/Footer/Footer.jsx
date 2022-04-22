@@ -16,13 +16,14 @@ const Footer = () => {
             A propos
           </Link>
         </li>
-        <li>
+        <li className="instagram_link">
           <a
             target="_blank"
             rel="noreferrer"
             href="https://www.instagram.com/mariefekceramics/"
           >
-            <Instagram size="20" />: @mariefekceramics
+            <Instagram size="20" />
+            <span>@mariefekceramics</span>
           </a>
         </li>
         <li>marie.fekroun@gmail.com</li>
