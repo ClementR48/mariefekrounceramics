@@ -105,7 +105,7 @@ const ShowProduct = ({
               ? product.assets
                   .filter((img) => img.image_dimensions.width > 1200)
                   .map((img) => {
-                    return <img src={img.url} alt={product.name} />;
+                    return <img key={img.id} src={img.url} alt={product.name} />;
                   })
               : widthScreen > 424 && widthScreen < 1200
               ? product.assets
@@ -115,12 +115,12 @@ const ShowProduct = ({
                       img.image_dimensions.width < 1200
                   )
                   .map((img) => {
-                    return <img src={img.url} alt={product.name} />;
+                    return <img key={img.id} src={img.url} alt={product.name} />;
                   })
               : product.assets
-                  .filter((img) => img.image_dimensions.width < 425)
+                  .filter((img) => img.image_dimensions.width < 750)
                   .map((img) => {
-                    return <img src={img.url} alt={product.name} />;
+                    return <img key={img.id} src={img.url} alt={product.name} />;
                   })}
 
             <div ref={cursorRef} className="cursor">

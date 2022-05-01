@@ -295,7 +295,7 @@ function App() {
           />
         </Routes>
       </AnimatePresence>
-      <Footer />
+     {/*  <Footer /> */}
     </div>
   );
 }

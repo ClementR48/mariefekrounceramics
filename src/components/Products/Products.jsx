@@ -109,26 +109,6 @@ const Products = ({
                 />
               );
             })}
-            {productsToShow.map((product) => {
-              return (
-                <Product
-                  key={product.id}
-                  product={product}
-                  onAddToCart={onAddToCart}
-                  cart={cart}
-                />
-              );
-            })}
-            {productsToShow.map((product) => {
-              return (
-                <Product
-                  key={product.id}
-                  product={product}
-                  onAddToCart={onAddToCart}
-                  cart={cart}
-                />
-              );
-            })}
           </motion.ul>
         </>
       ) : (
