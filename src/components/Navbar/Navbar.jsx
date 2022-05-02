@@ -20,25 +20,52 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
     }
   };
 
+  const anim = allLink.current.filter(
+    (link) => link.className === "anim_hover_move"
+  );
+
   useEffect(() => {
     const anim = allLink.current.filter(
       (link) => link.className === "anim_hover_move"
     );
     anim[0].style.left = `${divAnim}px`;
+    anim[0].style.opacity = "1"
   }, [divAnim]);
 
   useEffect(() => {
-    const currentLink = allLink.current.filter(link => link.className === "active")
-    setDivAnim(currentLink[0].getBoundingClientRect().left + currentLink[0].offsetWidth / 2);
+    const currentLink = allLink.current.filter(
+      (link) => link.className === "active"
+    );
+    const anim = allLink.current.filter(
+      (link) => link.className === "anim_hover_move"
+    );
+    currentLink.length !== 0
+      ? setDivAnim(
+          currentLink[0].getBoundingClientRect().left +
+            currentLink[0].offsetWidth / 2
+        )
+      : (anim[0].style.opacity = "0");
   }, [location]);
 
   const hover = (e) => {
-    setDivAnim(e.target.getBoundingClientRect().left + e.target.offsetWidth / 2); 
+    setDivAnim(
+      e.target.getBoundingClientRect().left + e.target.offsetWidth / 2
+    );
   };
 
   const hoverOff = () => {
-    const currentLink = allLink.current.filter(link => link.className === "active")
-    setDivAnim(currentLink[0].getBoundingClientRect().left + currentLink[0].offsetWidth / 2);
+    const currentLink = allLink.current.filter(
+      (link) => link.className === "active"
+    );
+    const anim = allLink.current.filter(
+      (link) => link.className === "anim_hover_move"
+    );
+    currentLink.length !== 0
+      ? setDivAnim(
+          currentLink[0].getBoundingClientRect().left +
+            currentLink[0].offsetWidth / 2
+        )
+      : (anim[0].style.opacity = "0");
   };
 
   useEffect(() => {

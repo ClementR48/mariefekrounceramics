@@ -17,6 +17,19 @@ const Products = ({
   cart,
 }) => {
   const [activeCateg, setActiveCateg] = useState("all");
+  const [listLittle, setListLittle] = useState(false)
+
+  useEffect(() => {
+   
+
+      if(productsToShow.length < 3 && productsToShow.length > 0 ){
+        setListLittle(true)
+      }else{
+        setListLittle(false)
+      }
+    
+    
+  }, [productsToShow])
 
   useEffect(() => {
     if (activeCateg !== "all") {
@@ -97,7 +110,7 @@ const Products = ({
               translateY: 100,
               opacity: 0,
             }}
-            className="list_products"
+            className={listLittle ? "list_products little":"list_products"}
           >
             {productsToShow.map((product) => {
               return (

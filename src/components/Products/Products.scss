@@ -1,5 +1,4 @@
-@import '../../global.scss';
-
+@import "../../global.scss";
 
 .products {
   padding: 120px 5vw;
@@ -8,31 +7,35 @@
   }
 
   .list_categories {
+    margin: 50px 0;
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 
-    margin: 50px 0 ;
-      width: 70%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      
-      @include tablet {
-        justify-content: space-evenly;
-        width: 100%;
-      }
+    @include desktop {
+      justify-content: space-evenly;
+      width: 100%;
     }
-  .list_products{
-
-    
-     width: 100%;
-    
+  }
+  .list_products {
+    width: 100%;
     background-color: transparent;
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; 
-    margin-bottom: 150px  ;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+
+    &.little {
+      justify-content: center;
+      
+      li{
+        margin: 10px;
+      }
+    }
 
     &.apparition {
       transform: translateY(100%);
@@ -41,14 +44,12 @@
 
     @include tablet {
       justify-content: center;
-
     }
 
     @keyframes apparition {
-      100%{
+      100% {
         transform: translateY(0%);
       }
     }
-  } 
-
+  }
 }

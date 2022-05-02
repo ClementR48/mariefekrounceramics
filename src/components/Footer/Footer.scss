@@ -1,40 +1,43 @@
 @import "../../global.scss";
 .footer {
-  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 30px 0;
+  padding: 30px 10px;
   display: flex;
-  align-items: baseline;
-  justify-content: center;
-
-  height: 180px;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: auto;
   background-color: $colorTextMain;
   font-size: 14px;
 
+  @include tablet {
+    flex-direction: column;
+  }
   .logo1 {
-    position: absolute;
-    top: 50%;
-    left: 5vw;
-    transform: translateY(-50%);
-    width: 110px;
+   
 
-    @include mobile {
+    @include tablet {
       width: 100px;
-      left: 3vw;
+      margin-bottom: 20px;
     }
   }
 
   h3 {
     color: $colorNavText;
+    color: white;
+    margin-bottom: 15px;
+ 
   }
 
   li {
-    margin: 10px 0;
+
     color: white;
     overflow: hidden;
-    height: 30px;
+    height: 25px;
+    font-size: 12px;
+    
 
     a {
       color: white;
@@ -72,13 +75,27 @@
     }
   }
 
+  ul{
+    width: 200px;
+    
+  }
+
   .list-contact {
-    margin-right: 100px;
+    
+
+    @include tablet{
+      margin-bottom: 20px;
+    }
 
     .instagram_link {
       a {
+        
         display: flex;
         align-items: center;
+
+        span{
+          margin-left: 8px;
+        }
       }
     }
   }

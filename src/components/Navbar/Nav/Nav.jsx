@@ -12,40 +12,27 @@ const Nav = ({
   addRefLink,
   hover,
   hoverOff,
-  openMenu
+  openMenu,
 }) => {
-
-  const [logo, setLogo] = useState()
+  const [logo, setLogo] = useState();
   useEffect(() => {
-    if(openMenu){
-      setLogo(logoPink)
-    }else if(colorNavHome){
-      if(navBarScrollBackground){
-        setLogo(logoPink)
-      }else{
-        setLogo(logoWhite)
+    if (openMenu) {
+      setLogo(logoPink);
+    } else if (colorNavHome) {
+      if (navBarScrollBackground) {
+        setLogo(logoPink);
+      } else {
+        setLogo(logoWhite);
       }
-      
-    }else {
-      setLogo(logoPink)
+    } else {
+      setLogo(logoPink);
     }
-
-  }, [colorNavHome, navBarScrollBackground, openMenu])
+  }, [colorNavHome, navBarScrollBackground, openMenu]);
   return (
     <>
       <div className="nav_logo">
-        <img
-          src={
-            logo
-            /* colorNavHome
-              ? navBarScrollBackground
-                ? logoPink
-                : logoWhite
-              : logoPink */
-          }
-          alt="logo"
-        />
-      </div>
+        <img src={logo} alt="logo" />
+      </div> 
       <nav
         className={
           colorNavHome
@@ -94,9 +81,17 @@ const Nav = ({
           <span>{totalItems}</span>
         </NavLink>
       </nav>
-        <div className={colorNavHome ? navBarScrollBackground ?  "anim_hover" : "anim_hover home" : "anim_hover" }>
-          <div ref={addRefLink} className="anim_hover_move"></div>
-        </div>
+      <div
+        className={
+          colorNavHome
+            ? navBarScrollBackground
+              ? "anim_hover"
+              : "anim_hover home"
+            : "anim_hover"
+        }
+      >
+        <div ref={addRefLink} className="anim_hover_move"></div>
+      </div>
     </>
   );
 };

@@ -12,12 +12,14 @@ import ShowProduct from "./components/ShowProduct/ShowProduct";
 import Footer from "./components/Footer/Footer";
 import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
+import Condition from "./components/Condition/Condition";
 
 //Library
 import { commerce } from "./lib/commerce";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import Reseller from "./components/Reseller/Reseller";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -212,7 +214,6 @@ function App() {
 
   return (
     <div className={openCheckout ? "app checkout_active" : "app"}>
-      {/* <ScrollToTop /> */}
       {(openMenu || openCheckout) && (
         <Overlay
           openMenuFunc={openMenuFunc}
@@ -244,6 +245,8 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route exact="true" path="/" element={<Home />} />
           <Route exact="true" path="/about" element={<AboutContact />} />
+          <Route exact="true" path="/conditions" element={<Condition />} />
+          <Route exact="true" path="/reseller" element={<Reseller />} />
           <Route
             exact="true"
             path="/products/:id"
@@ -293,9 +296,10 @@ function App() {
               />
             }
           />
+          
         </Routes>
       </AnimatePresence>
-     {/*  <Footer /> */}
+      <Footer />
     </div>
   );
 }

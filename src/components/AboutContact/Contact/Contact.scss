@@ -1,13 +1,18 @@
 @import "../../../global.scss";
 
 .contact {
-  width: 70%;
-  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+  height: 500px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 150px;
+  margin-top: 100px;
+
+
 
   @include tablet {
+    width: 95%;
     height: auto;
     flex-direction: column;
     overflow: hidden;
@@ -24,6 +29,8 @@
     align-items: center;
     justify-content: space-around;
     z-index: 10;
+
+    
 
     @include tablet {
       background-image: url("../../../assets/images/contact800.jpg");
@@ -42,6 +49,13 @@
     p {
       color: white;
       font-size: 60px;
+
+      @include desktop {
+        font-size: 40px;
+      }
+      @include tablet {
+        font-size: 50px;
+      }
     }
     .success_message {
       
@@ -76,7 +90,9 @@
   .right {
     position: relative;
     z-index: 5;
+    //background-color: rgb(32, 32, 32);
     background-color: white;
+    border: 1px solid $colorNavText;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -84,6 +100,7 @@
     justify-content: space-evenly;
     position: relative;
     transition: 1s ease-in-out;
+    
 
     @include tablet {
       padding-top: 20px;
@@ -125,18 +142,30 @@
         border: none;
         border-bottom: 1px solid $colorNavText;
         padding: 7px;
+        color: $colorTextMain;
       }
     }
 
     .checkout {
       margin-top: 20px;
+      margin-bottom: 20px;
       width: 50%;
-      background-color: $colorNavBg;
+      background-color: transparent;
       position: relative;
       cursor: pointer;
       border: 1px solid $colorNavText;
       outline: none;
       transition: background-color 1s;
+
+      @include desktop {
+        width: 80%;
+      }
+      @include tablet {
+        width: 50%;
+      }
+      @include mobile {
+        width: 90%;
+      }
 
       &.none {
         cursor: none;

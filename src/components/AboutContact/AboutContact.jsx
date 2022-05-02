@@ -25,6 +25,15 @@ const AboutContact = () => {
         À propos
       </motion.h2>
     <About />
+    <motion.h2
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ delay: 0.5, duration: 1 }}
+        className='contact_title'
+      >
+        Contact
+      </motion.h2>
     <Contact />
       
       

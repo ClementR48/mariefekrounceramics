@@ -22,7 +22,7 @@ const Footer = () => {
             rel="noreferrer"
             href="https://www.instagram.com/mariefekceramics/"
           >
-            <Instagram size="20" />
+            <Instagram size="16" />
             <span>@mariefekceramics</span>
           </a>
         </li>
@@ -31,13 +31,18 @@ const Footer = () => {
       <ul className="list-utils">
         <h3>Liens utiles</h3>
         <li>
-          <Link className="footer-contact" to="/">
+          <Link className="footer-contact" to="/conditions">
             CGV
           </Link>
         </li>
         <li>
-          <Link className="footer-contact" to="/">
+          <Link className="footer-contact" to="/reseller">
             Listes des revendeurs
+          </Link>
+        </li>
+        <li>
+          <Link className="footer-contact" to="/">
+            Parutions
           </Link>
         </li>
       </ul>

@@ -20,11 +20,11 @@
 
   @include tablet {
     width: 80px;
-  height: 80px;
-  font-size: 15px;
+    height: 80px;
+    font-size: 15px;
   }
 
-  img{
+  img {
     position: absolute;
     width: 100px;
     height: 100px;
@@ -33,12 +33,33 @@
     transition: 0.5s ease-in-out;
     border-radius: 50%;
   }
-  &:hover img{
+
+  span {
+    transition: 0.5s 0.5s ease-in-out;
+  }
+  &:hover img {
     transform: scale(1);
+    transition: 0.5s 0.5s ease-in-out;
+  }
+  &:hover span {
+    transform: scale(0);
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover{
+    color: $colorCategBg;
+    background-color: $colorNavText;
   }
 
   &.selected {
     color: $colorCategBg;
     background-color: $colorNavText;
+
+    img {
+      transform: scale(1);
+    }
+    span {
+      transform: scale(0);
+    }
   }
 }

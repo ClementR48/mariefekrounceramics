@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import ScrollToTop from "../../ScrollToTop";
 import "./EmptyCart.scss";
 
 const EmptyCart = ({ categories }) => {
@@ -19,6 +20,7 @@ const EmptyCart = ({ categories }) => {
 
   return (
     <div className="cart_empty">
+      <ScrollToTop/>
       <div className="text_empty">
         <svg
           xmlns="http://www.w3.org/2000/svg"
