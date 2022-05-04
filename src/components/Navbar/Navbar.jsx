@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 import "./Navbar.scss";
 
-const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
+const Navbar = ({ totalItems, openMenu, openMenuFunc, width }) => {
   const [colorNavHome, setColorNavHome] = useState(true);
   const [divAnim, setDivAnim] = useState(0);
   const [navBarScrollBackground, setNavBarScrollBackground] = useState(false);
@@ -14,15 +14,15 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
   const location = useLocation();
   const allLink = useRef([]);
 
+
+
   const addRefLink = (el) => {
     if (el && !allLink.current.includes(el)) {
       allLink.current.push(el);
     }
   };
 
-  const anim = allLink.current.filter(
-    (link) => link.className === "anim_hover_move"
-  );
+
 
   useEffect(() => {
     const anim = allLink.current.filter(
@@ -45,7 +45,7 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc }) => {
             currentLink[0].offsetWidth / 2
         )
       : (anim[0].style.opacity = "0");
-  }, [location]);
+  }, [location, width]);
 
   const hover = (e) => {
     setDivAnim(

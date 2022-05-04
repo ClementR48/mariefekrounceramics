@@ -3,6 +3,7 @@ import "./AddressForm.scss";
 
 import { commerce } from "../../../lib/commerce";
 import { ArrowLeft, ArrowRight } from "react-feather";
+import { Link } from "react-router-dom";
 
 const AddressForm = ({
   checkoutToken,
@@ -17,7 +18,8 @@ const AddressForm = ({
   const [city, setCity] = useState("");
   const [codePost, setCodePost] = useState("");
   const [address, setAddress] = useState("");
-  const [errorMessage, setErrorMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [checkCVG, setCheckCVG] = useState(false);
 
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
@@ -173,7 +175,8 @@ const AddressForm = ({
       city !== "" &&
       codePost !== "" &&
       address !== "" &&
-      shippingOption !== ""
+      shippingOption !== "" &&
+      checkCVG
     ) {
       setValidateAdressForm(true);
       setShippingData({
@@ -188,26 +191,21 @@ const AddressForm = ({
         shippingOption: shippingOption,
       });
     } else {
-      setErrorMessage(true)
-      setValidateAdressForm(true);
-      setShippingData({
-        name: name,
-        lastname: lastname,
-        email: email,
-        shippingCountry: shippingCountry,
-        shippingSubDivision: shippingSubDivision,
-        shippingCity: city,
-        shippingPostCode: codePost,
-        shippingAddress: address,
-        shippingOption: shippingOption,
-      });
+      setErrorMessage(true);
+      setTimeout(() => {
+        setErrorMessage(false);
+      }, 5000)
     }
   };
 
   return (
     <form className="address_form" onSubmit={(e) => handleSubmitAdressForm(e)}>
       <h3>Informations</h3>
-      {errorMessage && <span className="error_message">Tous les champs doivent être remplis</span>}
+      {errorMessage && (
+        <span className="error_message">
+          Tous les champs doivent être remplis
+        </span>
+      )}
       <label>
         Nom
         <input
@@ -287,6 +285,16 @@ const AddressForm = ({
         <p>Livraison</p>
         <p className="price">{shippingOption.price_code}</p>
       </div>
+      <label className="checkbox">
+        <span>
+          J'accepte les termes des <Link onClick={() => openCheckoutFunc(false)}  to={"/conditions"}>CGV</Link>
+        </span>
+        <input
+          checked={checkCVG}
+          onChange={(e) => setCheckCVG(e.target.checked)}
+          type="checkbox"
+        />
+      </label>
       <div className="btn_address_form">
         <button
           className="back"
@@ -294,7 +302,6 @@ const AddressForm = ({
           onClick={() => openCheckoutFunc(false)}
         >
           <ArrowLeft size={17} color="red" />
-          
         </button>
         <button className="submit_btn" type="submit">
           <span>Paiement</span>

@@ -14,7 +14,6 @@ const ShowProduct = ({
   onAddToCart,
   fetchProducts,
   loading,
-  
 }) => {
   const { id } = useParams();
   const [available, setAvailable] = useState();
@@ -105,7 +104,9 @@ const ShowProduct = ({
               ? product.assets
                   .filter((img) => img.image_dimensions.width > 1200)
                   .map((img) => {
-                    return <img key={img.id} src={img.url} alt={product.name} />;
+                    return (
+                      <img key={img.id} src={img.url} alt={product.name} />
+                    );
                   })
               : widthScreen > 424 && widthScreen < 1200
               ? product.assets
@@ -115,12 +116,16 @@ const ShowProduct = ({
                       img.image_dimensions.width < 1200
                   )
                   .map((img) => {
-                    return <img key={img.id} src={img.url} alt={product.name} />;
+                    return (
+                      <img key={img.id} src={img.url} alt={product.name} />
+                    );
                   })
               : product.assets
                   .filter((img) => img.image_dimensions.width < 750)
                   .map((img) => {
-                    return <img key={img.id} src={img.url} alt={product.name} />;
+                    return (
+                      <img key={img.id} src={img.url} alt={product.name} />
+                    );
                   })}
 
             <div ref={cursorRef} className="cursor">
@@ -136,7 +141,9 @@ const ShowProduct = ({
           >
             <h2>{product.name}</h2>
 
-            <p className="description_product">{striptags(product.description)} </p>
+            <p className="description_product">
+              {striptags(product.description)}{" "}
+            </p>
             <div className="attributes_product">
               <p>{attributes("attr_RyWOwmdnWlnEa2")}</p>
               <p>{attributes("attr_31q0o3LJ85DdjR")}</p>
@@ -153,54 +160,28 @@ const ShowProduct = ({
                 <div className="span-container s1">
                   {textButtonLetters.map((letter, index) => {
                     return (
-                      <>
-                        {letter !== " " ? (
-                          <span
-                            key={index}
-                            style={{
-                              transitionDelay: ` ${0.05 * index}s`,
-                            }}
-                          >
-                            {letter}
-                          </span>
-                        ) : (
-                          <span
-                            key={index}
-                            style={{
-                              transitionDelay: ` ${0.05 * index}s`,
-                            }}
-                          >
-                            &nbsp;
-                          </span>
-                        )}
-                      </>
+                      <span
+                        key={index}
+                        style={{
+                          transitionDelay: ` ${0.05 * index}s`,
+                        }}
+                      >
+                        {letter}
+                      </span>
                     );
                   })}
                 </div>
                 <div className="span-container s2">
                   {textButtonLetters.map((letter, index) => {
                     return (
-                      <>
-                        {letter !== " " ? (
-                          <span
-                            key={index}
-                            style={{
-                              transitionDelay: ` ${0.05 * index}s`,
-                            }}
-                          >
-                            {letter}
-                          </span>
-                        ) : (
-                          <span
-                            key={index}
-                            style={{
-                              transitionDelay: ` ${0.05 * index}s`,
-                            }}
-                          >
-                            &nbsp;
-                          </span>
-                        )}
-                      </>
+                      <span
+                        key={index}
+                        style={{
+                          transitionDelay: ` ${0.05 * index}s`,
+                        }}
+                      >
+                        {letter}
+                      </span>
                     );
                   })}
                 </div>

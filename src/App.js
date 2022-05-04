@@ -13,13 +13,15 @@ import Footer from "./components/Footer/Footer";
 import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
 import Condition from "./components/Condition/Condition";
+import Loader from "./components/Loader/Loader";
 
 //Library
 import { commerce } from "./lib/commerce";
 import { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Reseller from "./components/Reseller/Reseller";
+import Thanks from "./components/Thanks/Thanks";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -34,6 +36,11 @@ function App() {
   const [width, setWidth] = useState(window.innerWidth);
   const [weight, setWeight] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [bigLoading, setBigLoading] = useState(false);
+  const [thanks, setThanks] = useState(false);
+  const [error, setError] = useState(false)
+
+  let navigate = useNavigate();
 
   //============================ Open modals ============================
 
@@ -168,17 +175,21 @@ function App() {
 
   // ============================ Checkout ============================
 
-  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+  const handleCaptureCheckout = (checkoutTokenId, newOrder) => {
+    setBigLoading(true);
     try {
-      const inComingOrder = await commerce.checkout.capture(
-        checkoutTokenId,
-        newOrder
-      );
-
-      setOrder(inComingOrder);
-      refreshCart();
+      commerce.checkout
+        .capture(checkoutTokenId, newOrder)
+        .then((item) => setOrder(item))
+        .then(() => setBigLoading(false))
+        .then(() => {
+          refreshCart();
+          setThanks(true);
+          navigate('/')
+        });
     } catch (error) {
-      console.log(error);
+      setBigLoading(false);
+      console.log('ok erreur ');
       setErrorMessage(error.data.error.message);
     }
   };
@@ -225,6 +236,7 @@ function App() {
           totalItems={cart.total_items}
           openMenu={openMenu}
           openMenuFunc={openMenuFunc}
+          width={width}
         />
       )}
       <Menuresponsive
@@ -232,6 +244,9 @@ function App() {
         openMenu={openMenu}
         totalItems={cart.total_items}
       />
+      {bigLoading && <Loader />}
+      {thanks && <Thanks setThanks={setThanks} />}
+      {error && <Thanks setThanks={setError} />}
       <Checkout
         cart={cart}
         order={order}
@@ -240,6 +255,7 @@ function App() {
         openCheckout={openCheckout}
         openCheckoutFunc={openCheckoutFunc}
         weight={weight}
+        setThanks={setThanks}
       />
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
@@ -296,7 +312,6 @@ function App() {
               />
             }
           />
-          
         </Routes>
       </AnimatePresence>
       <Footer />

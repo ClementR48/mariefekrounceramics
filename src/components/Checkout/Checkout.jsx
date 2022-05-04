@@ -16,7 +16,8 @@ const Checkout = ({
   error,
   openCheckout,
   openCheckoutFunc,
-  weight
+  weight,
+  setThanks
 }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
@@ -66,6 +67,7 @@ const Checkout = ({
               order={order}
               setValidateAdressForm={setValidateAdressForm}
               openCheckoutFunc={openCheckoutFunc}
+              setThanks={setThanks}
             />
           )}
         </>

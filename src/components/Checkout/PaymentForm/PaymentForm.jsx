@@ -15,7 +15,8 @@ const PaymentForm = ({
   shippingData,
   handleCaptureCheckout,
   setValidateAdressForm,
-  openCheckoutFunc
+  openCheckoutFunc,
+  setThanks
 }) => {
   const stripePromise = loadStripe(
     process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY
@@ -35,7 +36,7 @@ const PaymentForm = ({
     });
 
     if (error) {
-      console.log(error);
+      console.log("ok");
     } else {
       const orderData = {
         line_items: checkoutToken.live.line_items,
@@ -63,7 +64,8 @@ const PaymentForm = ({
       };
 
       handleCaptureCheckout(checkoutToken.id, orderData);
-      navigate("/");
+      
+      
       setValidateAdressForm(false)
       openCheckoutFunc(false)
     }

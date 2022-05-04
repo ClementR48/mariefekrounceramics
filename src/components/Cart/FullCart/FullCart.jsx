@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+
 import CartItem from "./CartItem/CartItem";
 import "./FullCart.scss";
 import ScrollToTop from "../../ScrollToTop";
@@ -12,13 +12,11 @@ const FullCart = ({
   products,
   handleEmptyCart,
   openCheckoutFunc,
-  loading
+  loading,
 }) => {
-  const [buttonAddProduct, setButtonAddProduct] = useState("Paiement");
+  const buttonAddProduct = "Paiement";
 
   const textButtonLetters = buttonAddProduct.split("");
-
-  console.log(loading);
 
   return (
     <motion.main
@@ -34,9 +32,8 @@ const FullCart = ({
         animate={{ opacity: 1, translateX: 0 }}
         exit={{ opacity: 0, translateX: -100 }}
         transition={{ delay: 0.5, duration: 1 }}
-        className={loading? "list_cart loading" : "list_cart"}
+        className={loading ? "list_cart loading" : "list_cart"}
       >
-        
         {/* <caption>Récapitulatif de votre commande</caption> */}
         <tbody>
           {cart.line_items.map((item) => (
@@ -63,7 +60,7 @@ const FullCart = ({
           </tr>
         </tbody>
       </motion.table>
-      
+
       <div className="subtotal">
         <p>Sous-total : {cart.subtotal.formatted_with_code}</p>
 
@@ -71,54 +68,28 @@ const FullCart = ({
           <div className="span-container s1">
             {textButtonLetters.map((letter, index) => {
               return (
-                <>
-                  {letter !== " " ? (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      {letter}
-                    </span>
-                  ) : (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      &nbsp;
-                    </span>
-                  )}
-                </>
+                <span
+                  key={index}
+                  style={{
+                    transitionDelay: ` ${0.05 * index}s`,
+                  }}
+                >
+                  {letter}
+                </span>
               );
             })}
           </div>
           <div className="span-container s2">
             {textButtonLetters.map((letter, index) => {
               return (
-                <>
-                  {letter !== " " ? (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      {letter}
-                    </span>
-                  ) : (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      &nbsp;
-                    </span>
-                  )}
-                </>
+                <span
+                  key={index}
+                  style={{
+                    transitionDelay: ` ${0.05 * index}s`,
+                  }}
+                >
+                  {letter}
+                </span>
               );
             })}
           </div>

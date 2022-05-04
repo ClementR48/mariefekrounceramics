@@ -15,6 +15,9 @@ const Nav = ({
   openMenu,
 }) => {
   const [logo, setLogo] = useState();
+  
+
+  
   useEffect(() => {
     if (openMenu) {
       setLogo(logoPink);

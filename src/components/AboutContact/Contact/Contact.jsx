@@ -22,7 +22,7 @@ const Contact = () => {
 
   const [successMessage, setSuccessMessage] = useState(false);
 
-  const [buttonAddProduct, setButtonAddProduct] = useState("Confirmer");
+  const buttonAddProduct = "Confirmer";
 
   const textButtonLetters = buttonAddProduct.split("");
 
@@ -127,54 +127,28 @@ const Contact = () => {
           <div className="span-container s1">
             {textButtonLetters.map((letter, index) => {
               return (
-                <>
-                  {letter !== " " ? (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      {letter}
-                    </span>
-                  ) : (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      &nbsp;
-                    </span>
-                  )}
-                </>
+                <span
+                  key={index}
+                  style={{
+                    transitionDelay: ` ${0.05 * index}s`,
+                  }}
+                >
+                  {letter}
+                </span>
               );
             })}
           </div>
           <div className="span-container s2">
             {textButtonLetters.map((letter, index) => {
               return (
-                <>
-                  {letter !== " " ? (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      {letter}
-                    </span>
-                  ) : (
-                    <span
-                      key={index}
-                      style={{
-                        transitionDelay: ` ${0.05 * index}s`,
-                      }}
-                    >
-                      &nbsp;
-                    </span>
-                  )}
-                </>
+                <span
+                  key={index}
+                  style={{
+                    transitionDelay: ` ${0.05 * index}s`,
+                  }}
+                >
+                  {letter}
+                </span>
               );
             })}
           </div>

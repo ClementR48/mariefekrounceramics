@@ -114,6 +114,10 @@
         outline: none;
         transition: background-color 1s;
 
+        @include mobile {
+          width: 80%;
+        }
+
         &.none {
           cursor: none;
           filter: blur(1px);
