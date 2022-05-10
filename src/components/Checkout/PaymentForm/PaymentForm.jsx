@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PaymentForm.scss";
 
 import {
@@ -8,7 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
-import {ArrowLeft } from "react-feather";
+import { ArrowLeft } from "react-feather";
 
 const PaymentForm = ({
   checkoutToken,
@@ -16,13 +16,17 @@ const PaymentForm = ({
   handleCaptureCheckout,
   setValidateAdressForm,
   openCheckoutFunc,
-  setThanks
+  setThanks,
 }) => {
+
+  const [errorMessage, setErrorMessage] = useState('')
+  const buttonAddProduct = "Confirmer";
+
+  const textButtonLetters = buttonAddProduct.split("");
+
   const stripePromise = loadStripe(
     process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY
   );
-
-  const navigate = useNavigate();
 
   const handleSumbitPayment = async (e, elements, stripe) => {
     e.preventDefault();
@@ -36,7 +40,11 @@ const PaymentForm = ({
     });
 
     if (error) {
-      console.log("ok");
+      
+      setErrorMessage(error.message)
+      setValidateAdressForm(true);
+      openCheckoutFunc(true);
+
     } else {
       const orderData = {
         line_items: checkoutToken.live.line_items,
@@ -63,19 +71,17 @@ const PaymentForm = ({
         },
       };
 
+      console.log("tac");
       handleCaptureCheckout(checkoutToken.id, orderData);
-      
-      
-      setValidateAdressForm(false)
-      openCheckoutFunc(false)
+      setValidateAdressForm(false);
+      openCheckoutFunc(false);
     }
   };
-
- 
 
   return (
     <div className="payment_form">
       <h3>Paiement</h3>
+      <span className="error_message">{errorMessage}</span>
       <ul>
         {checkoutToken.live.line_items.map((product) => (
           <li key={product.id}>
@@ -89,7 +95,13 @@ const PaymentForm = ({
         </li>
       </ul>
 
-      <p> Total à payer : {(checkoutToken.live.subtotal.raw + shippingData.shippingOption.price).toFixed(2)} EUR </p>
+      <p>
+        Total à payer :
+        {(
+          checkoutToken.live.subtotal.raw + shippingData.shippingOption.price
+        ).toFixed(2)}
+        EUR
+      </p>
 
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -102,14 +114,43 @@ const PaymentForm = ({
               <br />
               <div className="btn_form">
                 <button
-                className="back"
+                  className="back"
                   onClick={() => setValidateAdressForm(false)}
                   type="button"
                 >
-                  <ArrowLeft size={17} color="red" />
+                  <ArrowLeft size={20} color="rgb(253, 155, 138)" />
                   <span>Informations</span>
                 </button>
-                <button className="submit_btn" type="submit">Confirmer</button>
+                <button className="checkout" onClick={() => openCheckoutFunc()}>
+                  <div className="span-container s1">
+                    {textButtonLetters.map((letter, index) => {
+                      return (
+                        <span
+                          key={index}
+                          style={{
+                            transitionDelay: ` ${0.05 * index}s`,
+                          }}
+                        >
+                          {letter}
+                        </span>
+                      );
+                    })}
+                  </div>
+                  <div className="span-container s2">
+                    {textButtonLetters.map((letter, index) => {
+                      return (
+                        <span
+                          key={index}
+                          style={{
+                            transitionDelay: ` ${0.05 * index}s`,
+                          }}
+                        >
+                          {letter}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </button>
               </div>
             </form>
           )}

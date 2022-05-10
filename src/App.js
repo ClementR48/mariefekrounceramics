@@ -14,14 +14,15 @@ import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
 import Overlay from "./components/Overlay/Overlay";
 import Condition from "./components/Condition/Condition";
 import Loader from "./components/Loader/Loader";
+import Reseller from "./components/Reseller/Reseller";
+import Thanks from "./components/Thanks/Thanks";
 
 //Library
 import { commerce } from "./lib/commerce";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Reseller from "./components/Reseller/Reseller";
-import Thanks from "./components/Thanks/Thanks";
+import { motion } from "framer-motion";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -38,7 +39,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [bigLoading, setBigLoading] = useState(false);
   const [thanks, setThanks] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   let navigate = useNavigate();
 
@@ -184,12 +185,12 @@ function App() {
         .then(() => setBigLoading(false))
         .then(() => {
           refreshCart();
+          fetchProducts();
           setThanks(true);
-          navigate('/')
+          navigate("/");
         });
     } catch (error) {
       setBigLoading(false);
-      console.log('ok erreur ');
       setErrorMessage(error.data.error.message);
     }
   };
@@ -224,7 +225,13 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className={openCheckout ? "app checkout_active" : "app"}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ delay: 0.5, duration: 2 }}
+      className={openCheckout ? "app checkout_active" : "app"}
+    >
       {(openMenu || openCheckout) && (
         <Overlay
           openMenuFunc={openMenuFunc}
@@ -315,7 +322,7 @@ function App() {
         </Routes>
       </AnimatePresence>
       <Footer />
-    </div>
+    </motion.div>
   );
 }
 

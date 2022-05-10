@@ -2,7 +2,6 @@
 .showproduct {
   padding: 120px 5vw;
 
-
   .product_info {
     display: flex;
     height: calc(100vh - 120px);
@@ -48,7 +47,7 @@
 
     .right {
       position: relative;
-      background-color: rgba(255 , 255,255 ,0.1);
+      background-color: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(5px);
       width: 50%;
       padding: 7vh 5vw;
@@ -56,6 +55,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       @include desktop {
         font-size: 0.8em;
         padding: 10px 20px;
@@ -69,24 +69,20 @@
         align-items: center;
       }
 
-
       h2 {
         text-transform: capitalize;
         font-size: 50px;
         color: $colorTitle;
         @include tablet {
-          margin: 10px ;
+          margin: 50px 0 10px 0;
         }
       }
-
-     
 
       p {
         width: 60%;
         @include desktop {
           width: 100%;
         }
-        
       }
 
       .attributes_product {
@@ -96,11 +92,10 @@
         border-bottom: 1px solid $colorTextMain;
         @include desktop {
           width: 100%;
-          margin: 10px 0 ;
+          margin: 10px 0;
         }
         @include tablet {
-          
-          margin: 20px 0 ;
+          margin: 20px 0;
         }
       }
 
@@ -137,36 +132,36 @@
         .span-container {
           padding: 10px 17px;
         }
-      
-      span {
-        font-family: "Caladea", sans-serif;
-        color: $colorPointNav;
-        transition: 0.25s;
-        will-change: transform;
-        display: inline-block;
-        font-size: 25px;
-        letter-spacing: 5px;
-        @include mobile {
-          font-size: 20px;
+
+        span {
+          font-family: "Caladea", sans-serif;
+          color: $colorPointNav;
+          transition: 0.25s;
+          will-change: transform;
+          display: inline-block;
+          font-size: 25px;
+          letter-spacing: 5px;
+          @include mobile {
+            font-size: 20px;
+          }
+        }
+
+        .s1 span {
+          transform-origin: bottom;
+        }
+
+        .s2 span {
+          transform-origin: top;
+          transform: translateY(100%) rotateX(-90deg);
+        }
+
+        .s2 {
+          position: absolute;
+
+          width: 100%;
+          top: 0;
         }
       }
-
-      .s1 span {
-        transform-origin: bottom;
-      }
-
-      .s2 span {
-        transform-origin: top;
-        transform: translateY(100%) rotateX(-90deg);
-      }
-
-      .s2 {
-        position: absolute;
-
-        width: 100%;
-        top: 0;
-      }
-    }
 
       .back {
         background-color: transparent;

@@ -301,11 +301,12 @@ const AddressForm = ({
           type="button"
           onClick={() => openCheckoutFunc(false)}
         >
-          <ArrowLeft size={17} color="red" />
+          <ArrowLeft size={20} color="rgb(253, 155, 138)" />
+          <span>Retour</span>
         </button>
         <button className="submit_btn" type="submit">
           <span>Paiement</span>
-          <ArrowRight size={17} color="blue" />
+          <ArrowRight size={20} color="rgba(222, 208, 242, 1)" />
         </button>
       </div>
     </form>

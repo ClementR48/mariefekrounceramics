@@ -4,10 +4,17 @@ import { Link } from "react-router-dom";
 //import logo from '../../assets/images/logoRose.png'
 import logo from "../../assets/images/logoBlanc.png";
 import "./Footer.scss";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ delay: 2, duration: 3 }}
+      className="footer"
+    >
       <img className="logo1" src={logo} alt="logo"></img>
       <ul className="list-contact">
         <h3>Contact</h3>
@@ -46,7 +53,7 @@ const Footer = () => {
           </Link>
         </li>
       </ul>
-    </footer>
+    </motion.footer>
   );
 };
 
