@@ -16,8 +16,9 @@ const Footer = () => {
       className="footer"
     >
       <img className="logo1" src={logo} alt="logo"></img>
+      <div>
+      <h3>Contact</h3>
       <ul className="list-contact">
-        <h3>Contact</h3>
         <li>
           <Link className="footer-contact" to="/about">
             A propos
@@ -35,8 +36,10 @@ const Footer = () => {
         </li>
         <li>marie.fekroun@gmail.com</li>
       </ul>
+      </div>
+      <div>
+      <h3>Liens utiles</h3>
       <ul className="list-utils">
-        <h3>Liens utiles</h3>
         <li>
           <Link className="footer-contact" to="/conditions">
             CGV
@@ -48,11 +51,12 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link className="footer-contact" to="/">
+          <Link className="footer-contact" to="/parutions">
             Parutions
           </Link>
         </li>
       </ul>
+      </div>
     </motion.footer>
   );
 };

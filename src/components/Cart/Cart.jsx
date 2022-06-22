@@ -34,7 +34,7 @@ const Cart = ({
     >
       <h2>Votre panier</h2>
       {!cart.line_items.length ? (
-        <EmptyCart categories={categories} />
+        <EmptyCart categories={categories} products={products} />
       ) : (
         <FullCart
           cart={cart}

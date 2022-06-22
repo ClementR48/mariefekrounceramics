@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ScrollToTop from "../../ScrollToTop";
 import "./EmptyCart.scss";
 
-const EmptyCart = ({ categories }) => {
+const EmptyCart = ({ categories, products }) => {
 
   let cursorRef = useRef();
 
@@ -64,28 +64,29 @@ const EmptyCart = ({ categories }) => {
             <span>Shop</span>
           </div>
           <Link to="/products" className="image-container">
-            {categories.map((category) => (
+            {products.map((product) => (
+              
               <img
-                key={category.id}
+                key={product.id}
                 src={
-                  category.assets.filter(
-                    (img) => img.image_dimensions.width > 300
+                  product.assets.filter(
+                    (img) => img.image_dimensions.width > 300 
                   )[0].url
                 }
-                alt={category.name}
+                alt={product.name}
               ></img>
             ))}
           </Link>
           <Link to="/products" className="image-container second">
-            {categories.map((category) => (
+            {products.map((product) => (
               <img
-                key={category.id}
+                key={product.id}
                 src={
-                  category.assets.filter(
+                  product.assets.filter(
                     (img) => img.image_dimensions.width > 300
                   )[0].url
                 }
-                alt={category.name}
+                alt={product.name}
               ></img>
             ))}
           </Link>

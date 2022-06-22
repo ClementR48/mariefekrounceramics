@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import imgDesktop1 from "../../../assets/images/homeArticle650.jpg";
-import imgMobile1 from "../../../assets/images/homeArticle400.jpg";
+import imgDesktop1 from "../../../assets/images/homeArticle650.webp";
+import imgMobile1 from "../../../assets/images/homeArticle400.webp";
 import imgDesktop2 from "../../../assets/images/homeArticle2_650.JPG";
 import imgMobile2 from "../../../assets/images/homeArticle2_400.JPG";
 import "./ArticleHome.scss";
@@ -29,13 +29,9 @@ const ArticleHome = () => {
         ref={firstArticle}
       >
         <div className="informations">
-          <h2 className="title">Parler avec la nature</h2>
+          <h2 className="title">Parler avec la terre</h2>
           <p className="text">
-            Avoir les mains dans la terre et se laisser guider par elle. Parler
-            avec la terre, mais aussi dire la terre. Pour moi il s’agit d’une
-            démarche profondément instinctive et libre. Grâce à la technique des
-            terres mêlées, ou nériage, je laisse les terres se mélanger et
-            dessiner des marbrures uniques.
+            Chaque pièce ici est unique, faite à la main grâce aux techniques du colombin, du pincé, de la plaque, et parfois du tour. Une série de recherches de textures, de mélange de terres et d’émaux me mène aux résultats présentés. Je crois aux irrégularités et aux imperfections, chaque détail qui rendra la pièce unique et pleine d'émotions !
           </p>
           <Link to="/products">Accéder au shop</Link>
         </div>
@@ -49,13 +45,9 @@ const ArticleHome = () => {
         ref={secondArticle}
       >
         <div className="informations">
-          <h2 className="title">Parler avec la nature</h2>
+          <h2 className="title">Revaloriser l'artisanat</h2>
           <p className="text">
-            Avoir les mains dans la terre et se laisser guider par elle. Parler
-            avec la terre, mais aussi dire la terre. Pour moi il s’agit d’une
-            démarche profondément instinctive et libre. Grâce à la technique des
-            terres mêlées, ou nériage, je laisse les terres se mélanger et
-            dessiner des marbrures uniques.
+          La pratique de la céramique s'inscrit pour moi dans une profonde reconnexion à la nature et à l'humain : la création de lien social et la transmission des savoirs faire s'allient à un mode de fabrication respectueux, pour des objets durables et une rémunération plus juste.
           </p>
           <Link to="/products">Accéder au shop</Link>
         </div>

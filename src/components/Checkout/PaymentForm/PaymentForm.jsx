@@ -71,7 +71,6 @@ const PaymentForm = ({
         },
       };
 
-      console.log("tac");
       handleCaptureCheckout(checkoutToken.id, orderData);
       setValidateAdressForm(false);
       openCheckoutFunc(false);

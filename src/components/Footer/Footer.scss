@@ -9,7 +9,7 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   height: auto;
-  background-color: $colorTextMain;
+  background-color: rgb(162, 119, 106);
   font-size: 14px;
   z-index: 100;
 
@@ -17,8 +17,6 @@
     flex-direction: column;
   }
   .logo1 {
-   
-
     @include tablet {
       width: 100px;
       margin-bottom: 20px;
@@ -29,16 +27,13 @@
     color: $colorNavText;
     color: white;
     margin-bottom: 15px;
- 
   }
 
   li {
-
     color: white;
     overflow: hidden;
     height: 25px;
     font-size: 12px;
-    
 
     a {
       color: white;
@@ -71,127 +66,29 @@
       &:hover::before {
         transform: translateX(0);
       }
-
-      
     }
   }
 
-  ul{
+  ul {
     width: 200px;
-    
   }
 
   .list-contact {
-    
-
-    @include tablet{
+    @include tablet {
       margin-bottom: 20px;
     }
 
     .instagram_link {
       a {
-        
         display: flex;
         align-items: center;
 
-        span{
+        span {
           margin-left: 8px;
         }
       }
     }
   }
 
-  /*   .list-contact {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
 
-    @include desktop {
-      flex-direction: column;
-    }
-    @include mobile {
-      width: 90%;
-      align-items: flex-end;
-    }
-
-    h3{
-      color: white ;
-    }
-
-    li {
-      overflow-x: hidden;
-
-      color: rgb(246, 136, 119);
-      display: flex;
-      align-items: center;
-
-      
-
-      color: $colorNavBg;
-
-      @include mobile {
-        font-size: 16px;
-      }
-
-      svg {
-        stroke: rgb(246, 136, 119);
-        
-
-        stroke: $colorNavBg;
-      }
-
-      a {
-        text-decoration: none;
-        color: rgb(246, 136, 119);
-        display: flex;
-        align-items: center;
-        position: relative;
-        transition: 0.5s;
-        &::before {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: -100%;
-          height: 1px;
-          width: 100%;
-          background-color: rgb(246, 136, 119);
-          transition: 0.5s;
-        }
-
-        &:hover::before {
-          left: 0;
-        }
-
-       
-
-        color: $colorNavBg;
-      }
-      .footer-contact {
-        text-decoration: none;
-        color: rgb(246, 136, 119);
-   
-
-        color: $colorNavBg;
-        position: relative;
-        transition: 0.5s;
-
-        &::before {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: -100%;
-          height: 1px;
-          width: 100%;
-          background-color: rgb(246, 136, 119);
-          transition: 0.5s;
-        }
-
-        &:hover::before {
-          left: 0;
-        }
-      }
-    }
-  } */
 }

@@ -15,6 +15,7 @@ import Overlay from "./components/Overlay/Overlay";
 import Condition from "./components/Condition/Condition";
 import Loader from "./components/Loader/Loader";
 import Reseller from "./components/Reseller/Reseller";
+import Parutions from "./components/Parutions/Parutions";
 import Thanks from "./components/Thanks/Thanks";
 
 //Library
@@ -270,6 +271,7 @@ function App() {
           <Route exact="true" path="/about" element={<AboutContact />} />
           <Route exact="true" path="/conditions" element={<Condition />} />
           <Route exact="true" path="/reseller" element={<Reseller />} />
+          <Route exact="true" path="/parutions" element={<Parutions />} />
           <Route
             exact="true"
             path="/products/:id"

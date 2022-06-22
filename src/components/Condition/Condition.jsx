@@ -1,10 +1,14 @@
 import React from "react";
 import "./Condition.scss";
+import { motion } from "framer-motion";
 import ScrollToTop from '../ScrollToTop'
 
 const Condition = () => {
   return (
-    <div className="conditions">
+    <motion.div       initial={{ translateY: -300, opacity: 0 }}
+    exit={{ translateY: -300, opacity: 0 }}
+    animate={{ translateY: 0, opacity: 1 }}
+    transition={{ duration: 1 }} className="conditions">
       <ScrollToTop />
       <h2>Conditions Générales de Vente</h2>
       <div>
@@ -172,7 +176,7 @@ const Condition = () => {
         présentes CGV, ainsi que toutes les opérations d'achat et de vente qui y
         sont visées, seront soumises au droit français.
       </div>
-    </div>
+    </motion.div>
   );
 };
 
