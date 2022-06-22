@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ShoppingCart } from "react-feather";
 import { NavLink } from "react-router-dom";
-import logoPink from "../../../assets/images/logoRose.png";
-import logoWhite from "../../../assets/images/logoBlanc.png";
+import logoPink from "../../../assets/images/logoRose.webp";
+import logoWhite from "../../../assets/images/logoBlanc.webp";
 import "./Nav.scss";
 
 const Nav = ({

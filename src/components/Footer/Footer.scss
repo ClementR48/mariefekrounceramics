@@ -17,8 +17,11 @@
     flex-direction: column;
   }
   .logo1 {
+    width: 120px;
+    height: 120px;
     @include tablet {
       width: 100px;
+      height: 100px;
       margin-bottom: 20px;
     }
   }

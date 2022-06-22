@@ -16,6 +16,7 @@
 
   img {
     width: 300px;
+    
     animation: turn 10s infinite linear;
 
     @include mobile {

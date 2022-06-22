@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import "./Contact.scss";
 import { Instagram } from "react-feather";
 
-import logo from "../../../assets/images/logoBlanc.png";
+import logo from "../../../assets/images/logoBlanc.webp";
 import { useInView } from "react-intersection-observer";
 
 const Contact = () => {

@@ -1,8 +1,7 @@
 import React from "react";
 import { Instagram } from "react-feather";
 import { Link } from "react-router-dom";
-//import logo from '../../assets/images/logoRose.png'
-import logo from "../../assets/images/logoBlanc.png";
+import logo from "../../assets/images/logoBlanc.webp";
 import "./Footer.scss";
 import { motion } from "framer-motion";
 
