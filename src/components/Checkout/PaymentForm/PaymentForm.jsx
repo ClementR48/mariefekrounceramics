@@ -6,8 +6,7 @@ import {
   CardElement,
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import { useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { ArrowLeft } from "react-feather";
 
 const PaymentForm = ({
@@ -23,10 +22,10 @@ const PaymentForm = ({
   const buttonAddProduct = "Confirmer";
 
   const textButtonLetters = buttonAddProduct.split("");
-
-  const stripePromise = loadStripe(
+  const [stripePromise, setStripePromise] = useState(() => loadStripe(process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY))
+  /* const stripePromise = loadStripe(
     process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY
-  );
+  ); */
 
   const handleSumbitPayment = async (e, elements, stripe) => {
     e.preventDefault();

@@ -40,7 +40,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [bigLoading, setBigLoading] = useState(false);
   const [thanks, setThanks] = useState(false);
-  const [error, setError] = useState(false);
+  const [errorMessagePayment, setErrorMessagePayment] = useState(false)
 
   let navigate = useNavigate();
 
@@ -189,8 +189,14 @@ function App() {
           fetchProducts();
           setThanks(true);
           navigate("/");
+        })
+        .catch((error) => {
+          setThanks(true)
+          setBigLoading(false);
+          setErrorMessagePayment(error);
         });
     } catch (error) {
+      
       setBigLoading(false);
       setErrorMessage(error.data.error.message);
     }
@@ -253,8 +259,7 @@ function App() {
         totalItems={cart.total_items}
       />
       {bigLoading && <Loader />}
-      {thanks && <Thanks setThanks={setThanks} />}
-      {error && <Thanks setThanks={setError} />}
+      {(thanks || errorMessagePayment) && <Thanks setThanks={setThanks} error={errorMessagePayment} setError = {setErrorMessagePayment} />}
       <Checkout
         cart={cart}
         order={order}

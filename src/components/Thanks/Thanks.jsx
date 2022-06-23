@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./Thanks.scss";
 
-const Thanks = ({ setThanks }) => {
+const Thanks = ({ setThanks, error, setError }) => {
   let cursorRef = useRef();
 
   const mousepos = (e) => {
@@ -11,19 +11,32 @@ const Thanks = ({ setThanks }) => {
     );
   };
   return (
-    <div onMouseMove={mousepos} onClick={() => setThanks(false)}  className="thanks">
+    <div
+      onMouseMove={mousepos}
+      onClick={() =>{
+        setThanks(false)
+        setError(false)
+      } }
+      className="thanks"
+    >
       <div className="container">
-      <div ref={cursorRef} className="cursor">
-              <span>à bientôt</span>
-            </div>
-        <p>
-          <span>Merci pour votre commande :)</span>
-          <br /> Vous allez bientôt recevoir un mail de confirmation. <br />
-          Votre pièce sera emballée avec amour et expédiée dans les prochains
-          jours.
-        </p>
+        <div ref={cursorRef} className="cursor">
+          <span>{error ? "Revenir au site" : "à bientôt"}</span>
+        </div>
+        {error ? (
+          <span>
+            Malheureusement une erreur s'est produite. <br /> Veuillez réessayer
+            dans quelques instants. <br />{" "}
+          </span>
+        ) : (
+          <p>
+            <span>Merci pour votre commande :)</span>
+            <br /> Vous allez bientôt recevoir un mail de confirmation. <br />
+            Votre pièce sera emballée avec amour et expédiée dans les prochains
+            jours.
+          </p>
+        )}
       </div>
-      
     </div>
   );
 };

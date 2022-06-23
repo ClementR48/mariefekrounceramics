@@ -11,18 +11,18 @@ const About = () => {
           <source srcSet={imgDesktop} media="(min-width: 1000px)" />
 
           <motion.img
-            initial={{ translateX: -200, opacity: 0 }}
+            initial={{ translateX: -20, opacity: 0 }}
             animate={{ opacity: 1, translateX: 0 }}
-            exit={{ translateX: -200, opacity: 0 }}
+            exit={{ translateX: -20, opacity: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
             src={imgMobile}
             alt="vases"
           />
         </picture>
         <motion.p
-          initial={{ translateX: 200, opacity: 0 }}
+          initial={{ translateX: 20, opacity: 0 }}
           animate={{ opacity: 1, translateX: 0 }}
-          exit={{ translateX: 200, opacity: 0 }}
+          exit={{ translateX: 20, opacity: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
           Je m’appelle Marie Fekroun, j’ai 27 ans et je pratique la céramique

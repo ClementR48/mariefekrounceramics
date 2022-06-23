@@ -93,9 +93,9 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc, width }) => {
 
   return (
     <motion.header
-      initial={{ opacity: 0 }}
+/*       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 0 }} */
       className={
         openMenu
           ? "header active"

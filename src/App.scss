@@ -44,6 +44,7 @@
 
 
 html body {
+  
   min-height: 100vh;
   position: relative;
   font-family: $mainFont;
@@ -51,19 +52,6 @@ html body {
   font-size: 17px;
   color: $colorTextMain;
   background-color: $colorNavBg;
-/*   background-image: url("./assets/images/bg/bgDesktop.png");
-  background-size: cover;
-
-  @include desktop {
-    background-image: url("./assets/images/bg/bgDesktop2.png");
-  }
-  @include tablet {
-    background-image: url("./assets/images/bg/bgTablet.png");
-  }
-  @include mobile {
-    background-image: url("./assets/images/bg/bgMobile.png");
-    background-size: contain;
-  } */
 }
 
 ul {

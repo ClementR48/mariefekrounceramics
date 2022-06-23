@@ -1,7 +1,6 @@
 @import "../../global.scss";
 .header {
-  right: 0;
-  left: 0;
+  width: 100vw;
   height: 90px;
   padding: 5px 0;
   display: flex;
@@ -20,7 +19,9 @@
   &.active {
     backdrop-filter: blur(0);
     background-color: transparent;
-    left: 30vw;
+    width: 70vw;
+    transform: translateX(30vw);
+    margin-right: auto;
   }
 
   .hamburger {
