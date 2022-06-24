@@ -17,7 +17,7 @@ const PaymentForm = ({
   openCheckoutFunc,
   setThanks,
 }) => {
-
+  
   const [errorMessage, setErrorMessage] = useState('')
   const buttonAddProduct = "Confirmer";
 
