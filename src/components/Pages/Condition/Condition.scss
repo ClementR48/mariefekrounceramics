@@ -1,0 +1,32 @@
+@import '../../../global.scss';
+.conditions{
+  min-height: 100vh;
+  padding: 200px ;
+
+  @include desktop{
+    padding: 200px 150px;
+  }
+  @include tablet{
+    padding: 200px 50px;
+    font-size: 14px;
+  }
+  @include mobile{
+    padding: 200px 5px;
+    
+  }
+
+  h2{
+    
+    margin-bottom: 100px;
+  }
+
+  div{
+   
+    width: 75%;
+    margin-bottom: 75px;
+
+    @include desktop{
+      width: 100%;
+    }
+  }
+}

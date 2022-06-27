@@ -1,0 +1,100 @@
+@import "../../../../../global.scss";
+
+.cartitem {
+  @include tablet {
+    margin-bottom: 100px;
+    display: block;
+  }
+  td {
+    
+    padding: 5px 0;
+    text-align: center;
+    height: 120px;
+    min-width: 90px;
+    font-size: 0.8em;
+    @include tablet {
+      height: auto;
+      display: block;
+      font-size: 0.8em;
+      text-align: center;
+      
+    }
+
+    a {
+      text-transform: none;
+      color: $colorTextMain;
+    }
+
+    img {
+      width: 80%;
+      height: 100%;
+      object-fit: cover;
+
+      @include tablet {
+        width: 30%;
+        min-width: 150px;
+      }
+    }
+  }
+
+  .modify_item {
+    height: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+
+    @include tablet {
+      height: 50px;
+      
+      justify-content: center;
+    }
+
+    .delete_item {
+      background-color: none;
+      transition: 0.5s all;
+      border: none;
+
+      &:hover {
+        background-color: transparent;
+      }
+      &:hover svg {
+        transform: scale(1.2);
+        stroke: $colorNavText;
+      }
+
+      @include tablet {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    button {
+      outline: none;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border: 1px solid $colorTextMain;
+      border-radius: 50%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      @include tablet{
+        margin: 0 20px;
+      }
+
+      &:hover svg {
+        transform: scale(1.2);
+        stroke: white;
+      }
+      &:hover {
+        background-color: $colorTextMain;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@import "../../../global.scss";
+
+.products {
+  padding: 120px 5vw;
+  @include mobile {
+    padding: 120px 0;
+  }
+
+  .list_categories {
+    margin: 50px 0;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    @include desktop {
+      justify-content: space-evenly;
+      width: 100%;
+    }
+  }
+  .list_products {
+    width: 100%;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+
+    &.little {
+      justify-content: center;
+      
+      li{
+        margin: 10px;
+      }
+    }
+
+    &.apparition {
+      transform: translateY(100%);
+      animation: apparition 2s forwards;
+    }
+
+    @include tablet {
+      justify-content: center;
+    }
+
+    @keyframes apparition {
+      100% {
+        transform: translateY(0%);
+      }
+    }
+  }
+}

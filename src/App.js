@@ -2,21 +2,21 @@
 import "./App.scss";
 
 // Components
-import Checkout from "./components/Checkout/Checkout";
-import Navbar from "./components/Navbar/Navbar";
-import Products from "./components/Products/Products";
-import Home from "./components/Home/Home";
-import AboutContact from "./components/AboutContact/AboutContact";
-import Cart from "./components/Cart/Cart";
-import ShowProduct from "./components/ShowProduct/ShowProduct";
-import Footer from "./components/Footer/Footer";
-import Menuresponsive from "./components/MenuResponsive/Menuresponsive";
-import Overlay from "./components/Overlay/Overlay";
-import Condition from "./components/Condition/Condition";
-import Loader from "./components/Loader/Loader";
-import Reseller from "./components/Reseller/Reseller";
-import Parutions from "./components/Parutions/Parutions";
-import Thanks from "./components/Thanks/Thanks";
+import Checkout from "./components/Pages/Checkout/Checkout";
+import Navbar from "./components/Others/Navbar/Navbar";
+import Products from "./components/Pages/Products/Products";
+import Home from "./components/Pages/Home/Home";
+import AboutContact from "./components/Pages/AboutContact/AboutContact";
+import Cart from "./components/Pages/Cart/Cart";
+import ShowProduct from "./components/Pages/ShowProduct/ShowProduct";
+import Footer from "./components/Others/Footer/Footer";
+import Menuresponsive from "./components/Others/MenuResponsive/Menuresponsive";
+import Overlay from "./components/Others/Overlay/Overlay";
+import Condition from "./components/Pages/Condition/Condition";
+import Loader from "./components/Others/Loader/Loader";
+import Reseller from "./components/Pages/Reseller/Reseller";
+import Parutions from "./components/Pages/Parutions/Parutions";
+import Thanks from "./components/Others/Thanks/Thanks";
 
 //Library
 import { commerce } from "./lib/commerce";
@@ -144,36 +144,7 @@ function App() {
 
   //Calculate the weight
 
-  const weightProductsInCart = () => {
-    if (cart.line_items !== undefined) {
-      let productInCartInfo = [];
-      let gramme = [0];
-
-      for (let index = 0; index < cart.line_items.length; index++) {
-        for (let j = 0; j < products.length; j++) {
-          if (products[j].id === cart.line_items[index].product_id) {
-            productInCartInfo.push({
-              id: products[j].id,
-              qty: cart.line_items[index].quantity,
-              weight: products[j].attributes.filter(
-                (att) => att.name === "Poids"
-              )[0].value,
-            });
-          }
-        }
-      }
-
-      for (let index = 0; index < productInCartInfo.length; index++) {
-        gramme.push(
-          productInCartInfo[index].qty *
-            parseInt(productInCartInfo[index].weight)
-        );
-      }
-
-      const reducer = (accumulator, curr) => accumulator + curr;
-      setWeight(gramme.reduce(reducer));
-    }
-  };
+  
 
   // ============================ Checkout ============================
 
@@ -205,6 +176,36 @@ function App() {
   //useEffect for the weight
 
   useEffect(() => {
+    const weightProductsInCart = () => {
+      if (cart.line_items !== undefined) {
+        let productInCartInfo = [];
+        let gramme = [0];
+  
+        for (let index = 0; index < cart.line_items.length; index++) {
+          for (let j = 0; j < products.length; j++) {
+            if (products[j].id === cart.line_items[index].product_id) {
+              productInCartInfo.push({
+                id: products[j].id,
+                qty: cart.line_items[index].quantity,
+                weight: products[j].attributes.filter(
+                  (att) => att.name === "Poids"
+                )[0].value,
+              });
+            }
+          }
+        }
+  
+        for (let index = 0; index < productInCartInfo.length; index++) {
+          gramme.push(
+            productInCartInfo[index].qty *
+              parseInt(productInCartInfo[index].weight)
+          );
+        }
+  
+        const reducer = (accumulator, curr) => accumulator + curr;
+        setWeight(gramme.reduce(reducer));
+      }
+    };
     weightProductsInCart();
   }, [cart, products]);
 
@@ -290,6 +291,7 @@ function App() {
                 products={products}
                 fetchProducts={fetchProducts}
                 loading={loading}
+                width={width}
               />
             }
           />
@@ -321,7 +323,6 @@ function App() {
                 products={products}
                 categories={categories}
                 openCheckoutFunc={openCheckoutFunc}
-                weightProductsInCart={weightProductsInCart}
                 loading={loading}
               />
             }

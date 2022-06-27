@@ -1,0 +1,200 @@
+@import "../../../global.scss";
+.showproduct {
+  padding: 120px 5vw;
+
+  .product_info {
+    display: flex;
+    height: calc(100vh - 120px);
+    justify-content: space-between;
+    margin-bottom: 150px;
+
+    @include tablet {
+      flex-direction: column;
+      height: auto;
+      text-align: center;
+    }
+
+    .left {
+      cursor: none;
+      overflow-y: scroll;
+      width: 50%;
+      img {
+        width: 100%;
+      }
+      @include tablet {
+        width: 100%;
+        overflow-y: visible;
+        height: auto;
+      }
+
+      .cursor {
+        background-color: white;
+        width: 80px;
+        height: 80px;
+        font-size: 16px;
+        border: 1px white solid;
+        color: black;
+        position: fixed;
+        pointer-events: none;
+        border-radius: 50%;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        mix-blend-mode: screen;
+      }
+    }
+
+    .right {
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      width: 50%;
+      padding: 7vh 5vw;
+      font-size: 0.8em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      @include desktop {
+        font-size: 0.8em;
+        padding: 10px 20px;
+      }
+      @include tablet {
+        width: 100%;
+        height: auto;
+        margin: 5vh 0 0 0;
+        padding: 5vh 0 0 0;
+        font-size: 0.9em;
+        align-items: center;
+      }
+
+      h2 {
+        text-transform: capitalize;
+        font-size: 50px;
+        color: $colorTitle;
+        @include tablet {
+          margin: 50px 0 10px 0;
+        }
+      }
+
+      p {
+        width: 60%;
+        @include desktop {
+          width: 100%;
+        }
+      }
+
+      .attributes_product {
+        padding: 10px 0;
+        width: 60%;
+        border-top: 1px solid $colorTextMain;
+        border-bottom: 1px solid $colorTextMain;
+        @include desktop {
+          width: 100%;
+          margin: 10px 0;
+        }
+        @include tablet {
+          margin: 20px 0;
+        }
+      }
+
+      .price{
+        margin-bottom: 25px;
+      }
+
+      
+
+      /* .checkout {
+        margin-top: 20px;
+        width: 50%;
+        background-color: $colorNavBg;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid $colorCategBg;
+        outline: none;
+        transition: background-color 1s;
+
+        @include mobile {
+          width: 80%;
+        }
+
+        &.none {
+          cursor: none;
+          filter: blur(1px);
+        }
+
+        
+
+        &:hover .s1 span {
+          transform: translateY(-100%) rotateX(-90deg);
+        }
+        &:hover .s2 span {
+          transform: translateY(0%) rotateX(0deg);
+        }
+
+        .span-container {
+          padding: 10px 17px;
+        }
+
+        span {
+          font-family: "Caladea", sans-serif;
+          color: $colorCategBg;
+          transition: 0.25s;
+          will-change: transform;
+          display: inline-block;
+          font-size: 25px;
+          letter-spacing: 5px;
+          @include mobile {
+            font-size: 20px;
+          }
+        }
+
+        .s1 span {
+          transform-origin: bottom;
+        }
+
+        .s2 span {
+          transform-origin: top;
+          transform: translateY(100%) rotateX(-90deg);
+        }
+
+        .s2 {
+          position: absolute;
+
+          width: 100%;
+          top: 0;
+        }
+      } */
+
+      .back {
+        background-color: transparent;
+        outline: none;
+        border: 1px solid $colorTitle;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transition: 0.2s all;
+        cursor: pointer;
+
+        span {
+          color: $colorTitle;
+          transition: 0.2s all;
+        }
+        &:hover {
+          background-color: $colorTitle;
+        }
+
+        &:hover span {
+          color: white;
+        }
+      }
+    }
+  }
+}

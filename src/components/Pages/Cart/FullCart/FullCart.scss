@@ -1,0 +1,171 @@
+@import "../../../../global.scss";
+
+.fullcart {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  margin-bottom: 150px;
+  
+
+  @include desktop {
+    flex-direction: column;
+  }
+  @include tablet {
+    align-items: center;
+  }
+
+  
+
+  .list_cart {
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    width: 60%;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: 0.5s ease-in-out;
+
+    &.loading{
+      &::after{
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        opacity: 0.1;
+        background-color: black;
+        position: absolute;
+        
+      }
+    }
+
+    
+    @include desktop {
+      width: 100%;
+    }
+
+    caption {
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .thead {
+      height: 50px;
+
+      @include tablet {
+        
+        display: block;
+      }
+    }
+
+    .btn_delete {
+      text-align: center;
+
+      @include tablet {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8em;
+        text-align: center;
+      }
+      .delete_items {
+        cursor: pointer;
+        border: none;
+        color: $colorNavText;
+        border: 1px solid $colorNavText;
+        background-color: transparent;
+        padding: 5px;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+          
+        }
+      }
+    }
+
+  }
+  .loading_cart{
+
+  }
+
+  .subtotal {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    width: 20%;
+    min-width: 250px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+    @include desktop {
+      margin-bottom: 25px;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    .checkout {
+      
+      width: 100%;
+      background-color: $colorNavBg;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid $colorCategBg;
+      outline: none;
+      transition: background-color 1s;
+
+      &.none {
+        cursor: none;
+        filter: blur(1px);
+      }
+
+      &:hover .s1 span {
+        transform: translateY(-100%) rotateX(-90deg);
+      }
+      &:hover .s2 span {
+        transform: translateY(0%) rotateX(0deg);
+      }
+
+      .span-container {
+        padding: 10px 17px;
+      }
+
+      span {
+        font-family: "Caladea", sans-serif;
+        color: $colorCategBg;
+        transition: 0.25s;
+        will-change: transform;
+        display: inline-block;
+        font-size: 25px;
+        letter-spacing: 5px;
+        @include mobile {
+          font-size: 20px;
+        }
+      }
+
+      .s1 span {
+        transform-origin: bottom;
+      }
+
+      .s2 span {
+        transform-origin: top;
+        transform: translateY(100%) rotateX(-90deg);
+      }
+
+      .s2 {
+        position: absolute;
+
+        width: 100%;
+        top: 0;
+      }
+    }
+    @include desktop {
+      margin-top: 25px;
+    }
+  }
+}

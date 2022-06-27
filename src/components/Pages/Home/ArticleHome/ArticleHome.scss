@@ -1,0 +1,257 @@
+@import "../../../../global.scss";
+
+.home-article {
+  padding: 5vw 5vw calc((5vw + 180px)) 5vw;
+  .article {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-2%);
+    opacity: 0;
+    transition: 1s ease-in-out;
+
+    &.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @include tablet {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+      height: auto;
+    }
+
+    .informations {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      height: 100%;
+      width: 50%;
+      padding: 0 50px;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      
+
+      @include desktop {
+        width: 70%;
+      }
+
+      @include tablet {
+        text-align: center;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 400px;
+        margin-top: 5vh;
+      }
+
+      @include mobile {
+        padding: 0;
+      }
+
+      .text {
+        text-align: right;
+        line-height: 25px;
+        color: $colorTextMain;
+        margin: 10vh 0;
+        width: 80%;
+        font-size: 15px;
+
+        @include tablet {
+          text-align: center;
+          margin: 20px 0;
+        }
+
+        @include mobile {
+          font-size: 14px;
+        }
+      }
+
+      a {
+        width: fit-content;
+        height: 40px;
+        text-align: right;
+        color: $colorTitle;
+
+        transition: letter-spacing 0.3s ease-in-out;
+        font-size: 20px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+
+        @include tablet {
+          font-size: 16px;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: 0;
+          left: -100%;
+          background-color: $colorTitle;
+          transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+          font-weight: bolder;
+          letter-spacing: 1px;
+        }
+        &:hover::before {
+          left: 0;
+        }
+      }
+    }
+
+    .picture {
+      min-width: 200px;
+      min-height: 200px;
+      border-radius: 50%;
+      height: 30vw;
+      width: 30vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  /* =============article 2=============== */
+
+  .article2 {
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    transform: translateX(2%);
+    opacity: 0;
+    transition: 1s ease-in-out;
+
+    &.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @include tablet {
+      flex-direction: column-reverse;
+
+      align-items: center;
+      margin-top: 100px;
+      height: auto;
+    }
+
+    .informations {
+      height: 100%;
+      width: 50%;
+      padding: 0 50px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+
+      @include desktop {
+        width: 70%;
+      }
+
+      @include tablet {
+        text-align: center;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 400px;
+        margin-top: 5vh;
+      }
+
+      @include mobile {
+        padding: 0;
+      }
+
+      .text {
+        width: 80%;
+        text-align: left;
+        line-height: 25px;
+        color: $colorTextMain;
+        margin: 10vh 0;
+        font-size: 15px;
+
+        @include tablet {
+          text-align: center;
+          margin: 20px 0;
+        }
+
+        @include mobile {
+          font-size: 14px;
+        }
+      }
+
+      a {
+        width: fit-content;
+        height: 40px;
+        text-align: right;
+        color: $colorTitle;
+
+        transition: letter-spacing 0.3s ease-in-out;
+        font-size: 20px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+
+        @include tablet {
+          font-size: 16px;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: 0;
+          left: -100%;
+          background-color: $colorTitle;
+          transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+          font-weight: bolder;
+          letter-spacing: 1px;
+        }
+        &:hover::before {
+          left: 0;
+        }
+      }
+    }
+
+    .picture {
+      min-width: 200px;
+      min-height: 200px;
+      border-radius: 50%;
+      height: 30vw;
+      width: 30vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+}
