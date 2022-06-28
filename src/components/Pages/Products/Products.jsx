@@ -36,6 +36,7 @@ const Products = ({
       changeListProducts(activeCateg);
     } else {
       setProductsToShow(products);
+      
     }
   }, [activeCateg]);
 

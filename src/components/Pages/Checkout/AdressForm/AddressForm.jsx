@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./AddressForm.scss";
 
 import { commerce } from "../../../../lib/commerce";
-import { ArrowLeft, ArrowRight } from "react-feather";
+import { ArrowLeft, ArrowRight, Loader } from "react-feather";
 import { Link } from "react-router-dom";
+
 
 const AddressForm = ({
   checkoutToken,
   setShippingData,
   openCheckoutFunc,
-  setValidateAdressForm,
+  setCheckoutPageNumber,
   weight,
 }) => {
   const [name, setName] = useState("");
@@ -20,7 +21,7 @@ const AddressForm = ({
   const [address, setAddress] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [checkCVG, setCheckCVG] = useState(false);
-
+  const [delivery, setDelivery] = useState("true");
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubDivisions, setShippingSubDivisions] = useState([]);
@@ -59,7 +60,14 @@ const AddressForm = ({
   };
 
   const calculShipping = (state) => {
-    if (weight < 250) {
+    if (delivery === "false") {
+      const obj = state.filter((option) => option.description === "sur place");
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
+    } else if (weight < 250) {
       const obj = state.filter((option) => option.description === "250");
 
       setShippingOption({
@@ -132,7 +140,7 @@ const AddressForm = ({
         }
       }
     }
-  }, [shippingOptions, weight, shippingCountry]);
+  }, [shippingOptions, weight, shippingCountry, delivery]);
 
   const fetchShippingOptions = async (
     checkoutTokenId,
@@ -163,6 +171,14 @@ const AddressForm = ({
         shippingCountry,
         shippingSubDivision
       );
+
+    return () => {
+      setShippingOption({
+        id: "",
+        price_code: "",
+        price: "",
+      });
+    };
   }, [shippingSubDivision]);
 
   const handleSubmitAdressForm = (e) => {
@@ -178,7 +194,7 @@ const AddressForm = ({
       shippingOption !== "" &&
       checkCVG
     ) {
-      setValidateAdressForm(true);
+      setCheckoutPageNumber(1);
       setShippingData({
         name: name,
         lastname: lastname,
@@ -194,7 +210,7 @@ const AddressForm = ({
       setErrorMessage(true);
       setTimeout(() => {
         setErrorMessage(false);
-      }, 5000)
+      }, 5000);
     }
   };
 
@@ -206,109 +222,127 @@ const AddressForm = ({
           Tous les champs doivent être remplis
         </span>
       )}
-      <label>
-        Nom
-        <input
-          type="text"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
-      </label>
-      <label>
-        Prénom
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-
-      <label>
-        Email
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Pays
-        <select
-          value={shippingCountry}
-          onChange={(e) => setShippingCountry(e.target.value)}
-        >
-          {countries.map((country) => (
-            <option key={country.id} value={country.id}>
-              {country.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Region
-        <select
-          value={shippingSubDivision}
-          onChange={(e) => setShippingSubDivision(e.target.value)}
-        >
-          {subdivisions.map((subdivision) => (
-            <option key={subdivision.id} value={subdivision.id}>
-              {subdivision.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Adresse
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </label>
-      <label>
-        Ville
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-      </label>
-      <label>
-        Code Postal
-        <input
-          type="text"
-          value={codePost}
-          onChange={(e) => setCodePost(e.target.value)}
-        />
-      </label>
-      <div className="price_delivery">
-        <p>Livraison</p>
-        <p className="price">{shippingOption.price_code}</p>
-      </div>
-      <label className="checkbox">
-        <span>
-          J'accepte les termes des <Link onClick={() => openCheckoutFunc(false)}  to={"/conditions"}>CGV</Link>
-        </span>
-        <input
-          checked={checkCVG}
-          onChange={(e) => setCheckCVG(e.target.checked)}
-          type="checkbox"
-        />
-      </label>
-      <div className="btn_address_form">
-        <button
-          className="back"
-          type="button"
-          onClick={() => openCheckoutFunc(false)}
-        >
-          <ArrowLeft size={20} color="rgb(253, 155, 138)" />
-          <span>Retour</span>
-        </button>
-        <button className="submit_btn" type="submit">
-          <span>Paiement</span>
-          <ArrowRight size={20} color="rgba(222, 208, 242, 1)" />
-        </button>
-      </div>
+      {shippingOption.id !== '' ? (
+        <>
+          <label>
+            Mode de réception
+            <select
+              value={delivery}
+              onChange={(e) => setDelivery(e.target.value)}
+            >
+              <option value="true">Livraison</option>
+              <option value="false">Atelier</option>
+            </select>
+          </label>
+          <label>
+            Nom
+            <input
+              type="text"
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+            />
+          </label>
+          <label>
+            Prénom
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Email
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            Pays
+            <select
+              value={shippingCountry}
+              onChange={(e) => setShippingCountry(e.target.value)}
+            >
+              {countries.map((country) => (
+                <option key={country.id} value={country.id}>
+                  {country.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Region
+            <select
+              value={shippingSubDivision}
+              onChange={(e) => setShippingSubDivision(e.target.value)}
+            >
+              {subdivisions.map((subdivision) => (
+                <option key={subdivision.id} value={subdivision.id}>
+                  {subdivision.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Adresse
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <label>
+            Ville
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </label>
+          <label>
+            Code Postal
+            <input
+              type="text"
+              value={codePost}
+              onChange={(e) => setCodePost(e.target.value)}
+            />
+          </label>
+          <div className="price_delivery">
+            <p>Livraison</p>
+            <p className="price">{shippingOption.price_code}</p>
+          </div>
+          <label className="checkbox">
+            <span>
+              J'accepte les termes des{" "}
+              <Link onClick={() => openCheckoutFunc(false)} to={"/conditions"}>
+                CGV
+              </Link>
+            </span>
+            <input
+              checked={checkCVG}
+              onChange={(e) => setCheckCVG(e.target.checked)}
+              type="checkbox"
+            />
+          </label>
+          <div className="btn_address_form">
+            <button
+              className="back"
+              type="button"
+              onClick={() => setCheckoutPageNumber(0)}
+            >
+              <ArrowLeft size={20} color="rgb(253, 155, 138)" />
+              <span>Retour</span>
+            </button>
+            <button className="submit_btn" type="submit" >
+              <span>Paiement</span>
+              <ArrowRight size={20} color="rgba(222, 208, 242, 1)" />
+            </button>
+          </div>{" "}
+        </>
+      ) : (
+        <Loader />
+      )}
     </form>
   );
 };

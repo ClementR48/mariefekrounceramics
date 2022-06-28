@@ -14,15 +14,13 @@ const PaymentForm = ({
   checkoutToken,
   shippingData,
   handleCaptureCheckout,
-  setValidateAdressForm,
   openCheckoutFunc,
-  setThanks,
+  delivery,
+  setCheckoutPageNumber,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const buttonAddProduct = "Confirmer";
 
-  const textButtonLetters = buttonAddProduct.split("");
-  const [stripePromise, setStripePromise] = useState(() =>
+  const [stripePromise] = useState(() =>
     loadStripe(process.env.REACT_APP_MARIEFEKROUN_STRIPE_PUBLIC_KEY)
   );
 
@@ -39,7 +37,7 @@ const PaymentForm = ({
 
     if (error) {
       setErrorMessage(error.message);
-      setValidateAdressForm(true);
+      
       openCheckoutFunc(true);
     } else {
       const orderData = {
@@ -68,7 +66,6 @@ const PaymentForm = ({
       };
 
       handleCaptureCheckout(checkoutToken.id, orderData);
-      setValidateAdressForm(false);
       openCheckoutFunc(false);
     }
   };
@@ -110,7 +107,11 @@ const PaymentForm = ({
               <div className="btn_form">
                 <button
                   className="back"
-                  onClick={() => setValidateAdressForm(false)}
+                  onClick={() =>
+                    delivery
+                      ? setCheckoutPageNumber(2)
+                      : setCheckoutPageNumber(1)
+                  }
                   type="button"
                 >
                   <ArrowLeft size={20} color="rgb(253, 155, 138)" />
