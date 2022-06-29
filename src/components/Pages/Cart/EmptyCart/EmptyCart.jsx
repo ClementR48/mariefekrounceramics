@@ -1,10 +1,8 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import ScrollToTop from "../../../Others/ScrollToTop";
 import "./EmptyCart.scss";
 
-const EmptyCart = ({ categories, products }) => {
-
+const EmptyCart = ({ products }) => {
   let cursorRef = useRef();
 
   const mousePos = (e) => {
@@ -20,7 +18,6 @@ const EmptyCart = ({ categories, products }) => {
 
   return (
     <div className="cart_empty">
-      <ScrollToTop/>
       <div className="text_empty">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,12 +62,11 @@ const EmptyCart = ({ categories, products }) => {
           </div>
           <Link to="/products" className="image-container">
             {products.map((product) => (
-              
               <img
                 key={product.id}
                 src={
                   product.assets.filter(
-                    (img) => img.image_dimensions.width > 300 
+                    (img) => img.image_dimensions.width > 300
                   )[0].url
                 }
                 alt={product.name}

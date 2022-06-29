@@ -31,7 +31,12 @@ const ArticleHome = () => {
         <div className="informations">
           <h2 className="title">Parler avec la terre</h2>
           <p className="text">
-            Chaque pièce ici est unique, faite à la main grâce aux techniques du colombin, du pincé, de la plaque, et parfois du tour. Une série de recherches de textures, de mélange de terres et d’émaux me mène aux résultats présentés. Je crois aux irrégularités et aux imperfections, chaque détail qui rendra la pièce unique et pleine d'émotions !
+            Chaque pièce ici est unique, faite à la main grâce aux techniques du
+            colombin, du pincé, de la plaque, et parfois du tour. Une série de
+            recherches de textures, de mélange de terres et d’émaux me mène aux
+            résultats présentés. Je crois aux irrégularités et aux
+            imperfections, chaque détail qui rendra la pièce unique et pleine
+            d'émotions !
           </p>
           <Link to="/products">Accéder au shop</Link>
         </div>
@@ -47,7 +52,11 @@ const ArticleHome = () => {
         <div className="informations">
           <h2 className="title">Revaloriser l'artisanat</h2>
           <p className="text">
-          La pratique de la céramique s'inscrit pour moi dans une profonde reconnexion à la nature et à l'humain : la création de lien social et la transmission des savoirs faire s'allient à un mode de fabrication respectueux, pour des objets durables et une rémunération plus juste.
+            La pratique de la céramique s'inscrit pour moi dans une profonde
+            reconnexion à la nature et à l'humain : la création de lien social
+            et la transmission des savoirs faire s'allient à un mode de
+            fabrication respectueux, pour des objets durables et une
+            rémunération plus juste.
           </p>
           <Link to="/products">Accéder au shop</Link>
         </div>

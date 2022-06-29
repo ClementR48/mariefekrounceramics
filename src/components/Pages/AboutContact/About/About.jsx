@@ -1,6 +1,6 @@
 import React from 'react';
-import imgDesktop from "../../../../assets/images/marieAboutDesktop.jpg";
-import imgMobile from "../../../../assets/images/marieAboutMobile.jpg";
+import imgDesktop from "../../../../assets/images/marieAboutDesktop.webp";
+import imgMobile from "../../../../assets/images/marieAboutMobile.webp";
 import { motion } from "framer-motion";
 import './About.scss'
 

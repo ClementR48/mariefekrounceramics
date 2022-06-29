@@ -3,9 +3,10 @@ import "./Loader.scss";
 
 import imgMobile from "../../../assets/images/logoRose.webp";
 
-const Loader = () => {
+const Loader = ({ bigLoading }) => {
+  
   return (
-    <div className="loader">
+    <div className={bigLoading ? "loader" : "loader small"} >
       <img src={imgMobile} alt="vases" />
     </div>
   );

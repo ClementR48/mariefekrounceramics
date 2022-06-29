@@ -1,14 +1,19 @@
+import { useEffect } from 'react';
 
-import { useEffect } from "react";
+const ScrollToTop = ({location = ""}) => {
   
-export default function GoToTop() {
-
   const onTop = () => {
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1000)
+    
   }
   useEffect(() => {
     onTop()
-  }, []);
-  
-  return null;
-}
+  }, [location.pathname]);
+  return (
+    null
+  );
+};
+
+export default ScrollToTop;

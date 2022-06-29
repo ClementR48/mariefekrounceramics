@@ -18,6 +18,8 @@ import Reseller from "./components/Pages/Reseller/Reseller";
 import Parutions from "./components/Pages/Parutions/Parutions";
 import Thanks from "./components/Others/Thanks/Thanks";
 
+import ScrollToTop from "./components/Others/ScrollToTop";
+
 //Library
 import { commerce } from "./lib/commerce";
 import { useEffect, useState } from "react";
@@ -40,35 +42,55 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [bigLoading, setBigLoading] = useState(false);
   const [thanks, setThanks] = useState(false);
-  const [errorMessagePayment, setErrorMessagePayment] = useState(false)
 
   let navigate = useNavigate();
 
   //============================ Open modals ============================
 
   const openMenuFunc = (value = "") => {
-    if (value !== "") {
-      setOpenMenu(value);
-    } else {
-      setOpenMenu((prevState) => !prevState);
-    }
+    value !== "" ? setOpenMenu(value) : setOpenMenu((prevState) => !prevState);
   };
 
   const openCheckoutFunc = (value = "") => {
-    if (value !== "") {
-      setOpenCheckout(value);
-    } else {
-      setOpenCheckout((prevState) => !prevState);
-    }
+    value !== ""
+      ? setOpenCheckout(value)
+      : setOpenCheckout((prevState) => !prevState);
   };
 
   //============================ Products ============================
 
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
+  const fetchProducts = (bigloading = "") => {
+    bigloading === "" ? setLoading(true) : setBigLoading(true);
+    commerce.products
+      .list()
+      .then((products) => {
+        setProducts(products.data);
+        setProductsToShow(products.data);
+        bigloading === "" ? setLoading(false) : setBigLoading(false);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          bigloading === "" ? setLoading(false) : setBigLoading(false);
+        }, 1000);
+        navigate("/");
+      });
+  };
 
-    setProducts(data);
-    setProductsToShow(data);
+  const fetchOneProduct = (permalink) => {
+    setBigLoading(true);
+    commerce.products
+      .retrieve(permalink, { type: "permalink" })
+      .then((product) => {
+        setBigLoading(false);
+        setProduct(product);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          setBigLoading(false);
+        }, 1000);
+
+        navigate("/");
+      });
   };
 
   const changeListProducts = (idCategory) => {
@@ -81,20 +103,21 @@ function App() {
     }
   };
 
-  const fetchOneProduct = (permalink) => {
-    const filteredProduct = products.filter(
-      (product) => product.permalink === permalink
-    );
-
-    setProduct(filteredProduct[0]);
-  };
-
   //Categories
 
-  const fetchCategories = async () => {
-    const { data } = await commerce.categories.list();
-
-    setCategories(data);
+  const fetchCategories = () => {
+    setBigLoading(true);
+    commerce.categories
+      .list()
+      .then((categ) => {
+        setCategories(categ.data);
+        setBigLoading(false);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          setBigLoading(false);
+        }, 1000);
+      });
   };
 
   //============================ Cart ============================
@@ -108,16 +131,25 @@ function App() {
     setLoading(true);
     commerce.cart
       .add(productId, quantity)
-      .then((item) => setCart(item.cart))
-      .then(() => setLoading(false));
+      .then((item) => {
+        setCart(item.cart);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+
+        navigate("/");
+      });
   };
 
   const handleUpdateCartQty = (productId, quantity) => {
     setLoading(true);
-    commerce.cart
-      .update(productId, { quantity })
-      .then((item) => setCart(item.cart))
-      .then(() => setLoading(false));
+    commerce.cart.update(productId, { quantity }).then((item) => {
+      setCart(item.cart);
+      setLoading(false);
+    });
   };
 
   const handleRemoveFromCart = (productId) => {
@@ -125,7 +157,14 @@ function App() {
     commerce.cart
       .remove(productId)
       .then((item) => setCart(item.cart))
-      .then(() => setLoading(false));
+      .then(() => setLoading(false))
+      .catch((error) => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+
+        navigate("/");
+      });
   };
 
   const handleEmptyCart = () => {
@@ -133,7 +172,14 @@ function App() {
     commerce.cart
       .empty()
       .then((item) => setCart(item.cart))
-      .then(() => setLoading(false));
+      .then(() => setLoading(false))
+      .catch((error) => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+
+        navigate("/");
+      });
   };
 
   const refreshCart = async () => {
@@ -142,10 +188,6 @@ function App() {
     setCart(newCart);
   };
 
-  //Calculate the weight
-
-  
-
   // ============================ Checkout ============================
 
   const handleCaptureCheckout = (checkoutTokenId, newOrder) => {
@@ -153,21 +195,20 @@ function App() {
     try {
       commerce.checkout
         .capture(checkoutTokenId, newOrder)
-        .then((item) => setOrder(item))
-        .then(() => setBigLoading(false))
-        .then(() => {
+        .then((item) => {
+          setOrder(item);
+          setBigLoading(false);
           refreshCart();
           fetchProducts();
           setThanks(true);
           navigate("/");
         })
         .catch((error) => {
-          setThanks(true)
+          setThanks(true);
           setBigLoading(false);
-          setErrorMessagePayment(error);
+          setErrorMessage(error);
         });
     } catch (error) {
-      
       setBigLoading(false);
       setErrorMessage(error.data.error.message);
     }
@@ -180,7 +221,7 @@ function App() {
       if (cart.line_items !== undefined) {
         let productInCartInfo = [];
         let gramme = [0];
-  
+
         for (let index = 0; index < cart.line_items.length; index++) {
           for (let j = 0; j < products.length; j++) {
             if (products[j].id === cart.line_items[index].product_id) {
@@ -194,14 +235,14 @@ function App() {
             }
           }
         }
-  
+
         for (let index = 0; index < productInCartInfo.length; index++) {
           gramme.push(
             productInCartInfo[index].qty *
               parseInt(productInCartInfo[index].weight)
           );
         }
-  
+
         const reducer = (accumulator, curr) => accumulator + curr;
         setWeight(gramme.reduce(reducer));
       }
@@ -240,6 +281,7 @@ function App() {
       transition={{ delay: 0.5, duration: 2 }}
       className={openCheckout ? "app checkout_active" : "app"}
     >
+      <ScrollToTop location={location} />
       {(openMenu || openCheckout) && (
         <Overlay
           openMenuFunc={openMenuFunc}
@@ -259,17 +301,23 @@ function App() {
         openMenu={openMenu}
         totalItems={cart.total_items}
       />
-      {bigLoading && <Loader />}
-      {(thanks || errorMessagePayment) && <Thanks setThanks={setThanks} error={errorMessagePayment} setError = {setErrorMessagePayment} />}
+      {bigLoading && <Loader bigLoading={bigLoading} />}
+      {(thanks || errorMessage) && (
+        <Thanks
+          setThanks={setThanks}
+          error={errorMessage}
+          setError={setErrorMessage}
+        />
+      )}
       <Checkout
         cart={cart}
         order={order}
-        error={errorMessage}
         handleCaptureCheckout={handleCaptureCheckout}
         openCheckout={openCheckout}
         openCheckoutFunc={openCheckoutFunc}
         weight={weight}
         setThanks={setThanks}
+        setErrorMessage={setErrorMessage}
       />
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
@@ -283,34 +331,35 @@ function App() {
             path="/products/:id"
             element={
               <ShowProduct
+                fetchProducts={fetchProducts}
+                products={products}
+                cart={cart}
                 fetchOneProduct={fetchOneProduct}
                 product={product}
                 setProduct={setProduct}
-                cart={cart}
                 onAddToCart={handleAddToCart}
-                products={products}
-                fetchProducts={fetchProducts}
                 loading={loading}
                 width={width}
               />
             }
           />
-          <Route
-            exact="true"
-            path="/products"
-            element={
-              <Products
-                products={products}
-                productsToShow={productsToShow}
-                onAddToCart={handleAddToCart}
-                cart={cart}
-                categories={categories}
-                changeListProducts={changeListProducts}
-                loading={loading}
-                setProductsToShow={setProductsToShow}
-              />
-            }
-          />
+          {
+            <Route
+              exact="true"
+              path="/products"
+              element={
+                <Products
+                  products={products}
+                  categories={categories}
+                  productsToShow={productsToShow}
+                  setProductsToShow={setProductsToShow}
+                  changeListProducts={changeListProducts}
+                  cart={cart}
+                  loading={loading}
+                />
+              }
+            />
+          }
           <Route
             exact="true"
             path="/cart"

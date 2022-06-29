@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Loader from "../../Others/Loader/Loader";
+
 import "./ShowProduct.scss";
 import striptags from "striptags";
 import { motion } from "framer-motion";
@@ -28,13 +28,13 @@ const ShowProduct = ({
   // Récuperation du produit
 
   useEffect(() => {
-    products ? fetchOneProduct(id) : fetchProducts();
-  }, [products, fetchOneProduct, fetchProducts, id]);
+    products ? fetchOneProduct(id) : fetchProducts("bigloading");
+  }, []);
 
   //Verification de la quantité
 
   useEffect(() => {
-    if (cart !== "" && product !== undefined) {
+    if (cart.id !== undefined && product !== undefined) {
       const productInCart = cart.line_items.filter(
         (item) => item.product_id === product.id
       );
@@ -51,16 +51,6 @@ const ShowProduct = ({
       }
     }
   }, [cart, product]);
-
-  //Bouton
-
-  const [buttonAddProduct, setButtonAddProduct] = useState("Panier");
-
-  const textButtonLetters = buttonAddProduct.split("");
-
-  useEffect(() => {
-    loading ? setButtonAddProduct("Patientez") : setButtonAddProduct("Panier");
-  }, [loading]);
 
   //animation au hover
 
@@ -104,14 +94,13 @@ const ShowProduct = ({
 
   return (
     <main className="showproduct">
-      <ScrollToTop />
-      {product ? (
+      {product && (
         <div className="product_info">
           <motion.div
             initial={{ translateX: -300, opacity: 0 }}
             exit={{ translateX: -300, opacity: 0 }}
             animate={{ translateX: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
             onMouseLeave={mouseLeave}
             onMouseMove={mousepos}
             className="left"
@@ -128,7 +117,7 @@ const ShowProduct = ({
             initial={{ translateX: 300, opacity: 0 }}
             exit={{ translateX: 300, opacity: 0 }}
             animate={{ translateX: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
             className="right"
           >
             <h2>{product.name}</h2>
@@ -162,8 +151,6 @@ const ShowProduct = ({
             </button>
           </motion.div>
         </div>
-      ) : (
-        <Loader />
       )}
     </main>
   );

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import "./Contact.scss";
 import { Instagram } from "react-feather";
@@ -9,7 +8,6 @@ import { useInView } from "react-intersection-observer";
 
 const Contact = () => {
   const [validate, setValidate] = useState(false);
-
   const [name, setName] = useState("");
   const [objet, setObjet] = useState("");
   const [email, setEmail] = useState("");
@@ -21,6 +19,7 @@ const Contact = () => {
   });
 
   const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false)
 
   const buttonAddProduct = "Confirmer";
 
@@ -39,6 +38,7 @@ const Contact = () => {
         .then(
           (result) => {
             setSuccessMessage(true);
+            setErrorMessage(false)
             setTimeout(() => {
               setSuccessMessage(false);
               setEmail("");
@@ -48,7 +48,8 @@ const Contact = () => {
             }, [7000]);
           },
           (error) => {
-            console.log(error);
+            setErrorMessage(true)
+            setSuccessMessage(true)
           }
         );
     } else {
@@ -76,7 +77,7 @@ const Contact = () => {
             successMessage ? "success_message send" : "success_message"
           }
         >
-          Votre message a bien été envoyé.
+          {errorMessage ? "Votre message n'a pas pu être envoyé. Réessayez plus tard." : 'Votre message a bien été envoyé.'}
         </div>
       </div>
       <form

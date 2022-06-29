@@ -2,9 +2,9 @@ import React from "react";
 
 import CartItem from "./CartItem/CartItem";
 import "./FullCart.scss";
-import ScrollToTop from "../../../Others/ScrollToTop";
 import { motion } from "framer-motion";
 import Button from "../../../Others/Button/Button";
+import Loader from "../../../Others/Loader/Loader";
 
 const FullCart = ({
   cart,
@@ -23,15 +23,9 @@ const FullCart = ({
       transition={{ delay: 0.5, duration: 1 }}
       className="fullcart"
     >
-      <ScrollToTop />
       <motion.table
-        initial={{ opacity: 0, translateX: -100 }}
-        animate={{ opacity: 1, translateX: 0 }}
-        exit={{ opacity: 0, translateX: -100 }}
-        transition={{ delay: 0.5, duration: 1 }}
-        className={loading ? "list_cart loading" : "list_cart"}
+        className={loading ? "list_cart loading_cart" : "list_cart"}
       >
-        {/* <caption>Récapitulatif de votre commande</caption> */}
         <tbody>
           {cart.line_items.map((item) => (
             <CartItem

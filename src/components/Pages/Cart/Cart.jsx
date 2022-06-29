@@ -13,7 +13,6 @@ const Cart = ({
   handleRemoveFromCart,
   handleUpdateCartQty,
   products,
-  categories,
   openCheckoutFunc,
   loading,
 }) => {
@@ -29,7 +28,7 @@ const Cart = ({
     >
       <h2>Votre panier</h2>
       {!cart.line_items.length ? (
-        <EmptyCart categories={categories} products={products} />
+        <EmptyCart  products={products} />
       ) : (
         <FullCart
           cart={cart}

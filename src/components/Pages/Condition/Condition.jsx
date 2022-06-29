@@ -1,15 +1,16 @@
 import React from "react";
 import "./Condition.scss";
 import { motion } from "framer-motion";
-import ScrollToTop from '../../Others/ScrollToTop'
 
 const Condition = () => {
   return (
-    <motion.div       initial={{ translateY: -300, opacity: 0 }}
-    exit={{ translateY: -300, opacity: 0 }}
-    animate={{ translateY: 0, opacity: 1 }}
-    transition={{ duration: 1 }} className="conditions">
-      <ScrollToTop />
+    <motion.div
+      initial={{ translateY: -300, opacity: 0 }}
+      exit={{ translateY: -300, opacity: 0 }}
+      animate={{ translateY: 0, opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="conditions"
+    >
       <h2>Conditions Générales de Vente</h2>
       <div>
         Entre l'entreprise Marie Fekroun immatriculée sous le numéro SIRET

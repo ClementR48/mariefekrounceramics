@@ -22,8 +22,6 @@ const Navbar = ({ totalItems, openMenu, openMenuFunc, width }) => {
     }
   };
 
-
-
   useEffect(() => {
     
     const anim = allLink.current.filter(

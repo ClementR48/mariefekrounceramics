@@ -50,14 +50,14 @@
     &.active {
       span {
         &:first-child {
-          background-color: $colorTitle;
+          background-color: $colorCategBg;
           transform: rotate(45deg);
         }
         &:nth-child(2) {
           opacity: 0;
         }
         &:last-child {
-          background-color: $colorTitle;
+          background-color: $colorCategBg;
           transform: rotate(-45deg);
         }
       }

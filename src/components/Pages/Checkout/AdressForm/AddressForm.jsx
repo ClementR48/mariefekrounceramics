@@ -5,7 +5,6 @@ import { commerce } from "../../../../lib/commerce";
 import { ArrowLeft, ArrowRight, Loader } from "react-feather";
 import { Link } from "react-router-dom";
 
-
 const AddressForm = ({
   checkoutToken,
   setShippingData,
@@ -58,6 +57,8 @@ const AddressForm = ({
     setShippingSubDivisions(response.subdivisions);
     setShippingSubDivision(Object.keys(response.subdivisions)[0]);
   };
+
+  //calcul du prix de livraison
 
   const calculShipping = (state) => {
     if (delivery === "false") {
@@ -171,14 +172,6 @@ const AddressForm = ({
         shippingCountry,
         shippingSubDivision
       );
-
-    return () => {
-      setShippingOption({
-        id: "",
-        price_code: "",
-        price: "",
-      });
-    };
   }, [shippingSubDivision]);
 
   const handleSubmitAdressForm = (e) => {
@@ -222,7 +215,7 @@ const AddressForm = ({
           Tous les champs doivent être remplis
         </span>
       )}
-      {shippingOption.id !== '' ? (
+      {shippingOption.id !== "" ? (
         <>
           <label>
             Mode de réception
@@ -334,7 +327,7 @@ const AddressForm = ({
               <ArrowLeft size={20} color="rgb(253, 155, 138)" />
               <span>Retour</span>
             </button>
-            <button className="submit_btn" type="submit" >
+            <button className="submit_btn" type="submit">
               <span>Paiement</span>
               <ArrowRight size={20} color="rgba(222, 208, 242, 1)" />
             </button>

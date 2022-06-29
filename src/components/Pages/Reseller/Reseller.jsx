@@ -1,5 +1,4 @@
 import React from "react";
-import ScrollToTop from "../../Others/ScrollToTop";
 import { motion } from "framer-motion";
 import "./Reseller.scss";
 
@@ -12,7 +11,6 @@ const Reseller = () => {
       transition={{ duration: 1 }}
       className="reseller"
     >
-      <ScrollToTop />
       <h2>Liste des revendeurs</h2>
       <ul>
         <li>

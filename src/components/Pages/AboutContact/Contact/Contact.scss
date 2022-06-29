@@ -21,7 +21,7 @@
   .left {
     position: relative;
     width: 50%;
-    background-image: url("../../../../assets/images/contact1900.jpg");
+    background-image: url("../../../../assets/images/contact1900.webp");
     background-size: cover;
     background-position: left;
     display: flex;
@@ -33,7 +33,7 @@
     
 
     @include tablet {
-      background-image: url("../../../../assets/images/contact800.jpg");
+      background-image: url("../../../../assets/images/contact800.webp");
       width: 100%;
       height: 350px;
     }
