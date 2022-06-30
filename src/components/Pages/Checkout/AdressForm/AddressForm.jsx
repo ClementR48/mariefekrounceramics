@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./AddressForm.scss";
 
 import { commerce } from "../../../../lib/commerce";
-import { ArrowLeft, ArrowRight, Loader } from "react-feather";
+import { ArrowLeft, ArrowRight } from "react-feather";
 import { Link } from "react-router-dom";
+import Loader from "../../../Others/Loader/Loader";
 
 const AddressForm = ({
   checkoutToken,
@@ -19,6 +20,7 @@ const AddressForm = ({
   const [codePost, setCodePost] = useState("");
   const [address, setAddress] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
+
   const [checkCVG, setCheckCVG] = useState(false);
   const [delivery, setDelivery] = useState("true");
   const [shippingCountries, setShippingCountries] = useState([]);
@@ -192,6 +194,7 @@ const AddressForm = ({
         name: name,
         lastname: lastname,
         email: email,
+        delivery: delivery,
         shippingCountry: shippingCountry,
         shippingSubDivision: shippingSubDivision,
         shippingCity: city,
@@ -215,6 +218,7 @@ const AddressForm = ({
           Tous les champs doivent être remplis
         </span>
       )}
+
       {shippingOption.id !== "" ? (
         <>
           <label>
@@ -224,9 +228,14 @@ const AddressForm = ({
               onChange={(e) => setDelivery(e.target.value)}
             >
               <option value="true">Livraison</option>
-              <option value="false">Atelier</option>
+              <option value="false">Remise en main propre (Marseille)</option>
             </select>
           </label>
+          {delivery === "false" && (
+            <span className="delivery_message">
+              * Une fois votre commande finalisée, vous recevrez un mail pour que nous fixions un rendez-vous ensemble.
+            </span>
+          )}
           <label>
             Nom
             <input
@@ -322,7 +331,7 @@ const AddressForm = ({
             <button
               className="back"
               type="button"
-              onClick={() => setCheckoutPageNumber(0)}
+              onClick={() => openCheckoutFunc(false)}
             >
               <ArrowLeft size={20} color="rgb(253, 155, 138)" />
               <span>Retour</span>
@@ -331,7 +340,7 @@ const AddressForm = ({
               <span>Paiement</span>
               <ArrowRight size={20} color="rgba(222, 208, 242, 1)" />
             </button>
-          </div>{" "}
+          </div>
         </>
       ) : (
         <Loader />

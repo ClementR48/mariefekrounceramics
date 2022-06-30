@@ -18,6 +18,9 @@ const Products = ({
   const [activeCateg, setActiveCateg] = useState("all");
   const [listLittle, setListLittle] = useState(false);
 
+  
+
+
   useEffect(() => {
     productsToShow.length < 3 && productsToShow.length > 0
       ? setListLittle(true)
@@ -109,7 +112,7 @@ const Products = ({
           )}
         </motion.ul>
       </>
-      )
+      
     </motion.main>
   );
 };

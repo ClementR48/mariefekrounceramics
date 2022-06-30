@@ -73,60 +73,7 @@
         flex-direction: column-reverse;
       }
 
-      .checkout {
-        background-color: $colorNavBg;
-        position: relative;
-        cursor: pointer;
-        border: 1px solid $colorCategBg;
-        outline: none;
-        transition: background-color 1s;
-
-        &.none {
-          cursor: none;
-          filter: blur(1px);
-        }
-
-
-        &:hover .s1 span {
-          transform: translateY(-100%) rotateX(-90deg);
-        }
-        &:hover .s2 span {
-          transform: translateY(0%) rotateX(0deg);
-        }
-
-        .span-container {
-          padding: 10px 17px;
-        }
-
-        span {
-          font-family: "Caladea", sans-serif;
-          color: $colorCategBg;
-          transition: 0.25s;
-          will-change: transform;
-          display: inline-block;
-          font-size: 17px;
-          letter-spacing: 5px;
-          @include mobile {
-            font-size: 20px;
-          }
-        }
-
-        .s1 span {
-          transform-origin: bottom;
-        }
-
-        .s2 span {
-          transform-origin: top;
-          transform: translateY(100%) rotateX(-90deg);
-        }
-
-        .s2 {
-          position: absolute;
-
-          width: 100%;
-          top: 0;
-        }
-      }
+      
 
       .back {
         background-color: transparent;
@@ -145,7 +92,7 @@
 
         span {
           transition: 0.2s all ease-in-out;
-          color: red;
+          color: rgb(253, 155, 138);
           opacity: 0;
           transform: translateX(-50%);
         }

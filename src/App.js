@@ -34,16 +34,20 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const [openCheckout, setOpenCheckout] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [weight, setWeight] = useState(0);
   const [loading, setLoading] = useState(false);
   const [bigLoading, setBigLoading] = useState(false);
-  const [thanks, setThanks] = useState(false);
+  const [thanks, setThanks] = useState({
+    isValid: false,
+    error: false,
+    delivery: 'false',
+  });
 
   let navigate = useNavigate();
+
 
   //============================ Open modals ============================
 
@@ -188,9 +192,11 @@ function App() {
     setCart(newCart);
   };
 
+
+
   // ============================ Checkout ============================
 
-  const handleCaptureCheckout = (checkoutTokenId, newOrder) => {
+  const handleCaptureCheckout = (checkoutTokenId, newOrder, delivery) => {
     setBigLoading(true);
     try {
       commerce.checkout
@@ -200,17 +206,16 @@ function App() {
           setBigLoading(false);
           refreshCart();
           fetchProducts();
-          setThanks(true);
+          setThanks({isValid: true, error: false, delivery: delivery});
           navigate("/");
         })
         .catch((error) => {
-          setThanks(true);
+          setThanks({isValid: true, error: true, delivery: delivery});
           setBigLoading(false);
-          setErrorMessage(error);
         });
     } catch (error) {
       setBigLoading(false);
-      setErrorMessage(error.data.error.message);
+      
     }
   };
 
@@ -302,11 +307,10 @@ function App() {
         totalItems={cart.total_items}
       />
       {bigLoading && <Loader bigLoading={bigLoading} />}
-      {(thanks || errorMessage) && (
+      {thanks.isValid && (
         <Thanks
+          thanks={thanks}
           setThanks={setThanks}
-          error={errorMessage}
-          setError={setErrorMessage}
         />
       )}
       <Checkout
@@ -317,7 +321,7 @@ function App() {
         openCheckoutFunc={openCheckoutFunc}
         weight={weight}
         setThanks={setThanks}
-        setErrorMessage={setErrorMessage}
+        
       />
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>

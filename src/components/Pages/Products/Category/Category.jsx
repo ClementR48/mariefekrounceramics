@@ -2,6 +2,7 @@ import React from "react";
 import "./Category.scss";
 
 const Category = ({ category }) => {
+  
   const img = category.assets.filter(
     (img) => img.image_dimensions.width < 400
   )[0];

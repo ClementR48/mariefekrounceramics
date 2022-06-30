@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 
 const Product = ({ product, cart }) => {
   const [quantityProduct, setQuantityProduct] = useState(false);
-
+  
   useEffect(() => {
     if (cart.line_items !== undefined && product !== undefined) {
       const productInCart = cart.line_items.filter(

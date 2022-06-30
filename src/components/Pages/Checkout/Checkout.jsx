@@ -14,7 +14,6 @@ const Checkout = ({
   openCheckoutFunc,
   weight,
   setThanks,
-  setErrorMessage,
 }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
@@ -35,8 +34,11 @@ const Checkout = ({
         }
       } catch (error) {
         navigate("/");
-        setThanks(true);
-        setErrorMessage(true); 
+        setThanks({
+          isValid: true,
+          error: true,
+          delivery: true,
+        });
       }
     };
     if (cart.line_items) {
@@ -53,7 +55,9 @@ const Checkout = ({
               checkoutToken={checkoutToken}
               setShippingData={setShippingData}
               setCheckoutPageNumber={setCheckoutPageNumber}
+              openCheckoutFunc={openCheckoutFunc}
               weight={weight}
+              
             />
           )}
           {checkoutPageNumber === 1 && (
@@ -64,7 +68,6 @@ const Checkout = ({
               handleCaptureCheckout={handleCaptureCheckout}
               order={order}
               openCheckoutFunc={openCheckoutFunc}
-              setThanks={setThanks}
             />
           )}
         </>

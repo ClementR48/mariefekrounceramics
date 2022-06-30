@@ -15,7 +15,6 @@ const PaymentForm = ({
   shippingData,
   handleCaptureCheckout,
   openCheckoutFunc,
-  delivery,
   setCheckoutPageNumber,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,7 +36,6 @@ const PaymentForm = ({
 
     if (error) {
       setErrorMessage(error.message);
-      
       openCheckoutFunc(true);
     } else {
       const orderData = {
@@ -65,8 +63,10 @@ const PaymentForm = ({
         },
       };
 
-      handleCaptureCheckout(checkoutToken.id, orderData);
+      handleCaptureCheckout(checkoutToken.id, orderData, shippingData.delivery );
       openCheckoutFunc(false);
+      setCheckoutPageNumber(0)
+
     }
   };
 
@@ -107,11 +107,7 @@ const PaymentForm = ({
               <div className="btn_form">
                 <button
                   className="back"
-                  onClick={() =>
-                    delivery
-                      ? setCheckoutPageNumber(2)
-                      : setCheckoutPageNumber(1)
-                  }
+                  onClick={() => setCheckoutPageNumber(0)}
                   type="button"
                 >
                   <ArrowLeft size={20} color="rgb(253, 155, 138)" />
