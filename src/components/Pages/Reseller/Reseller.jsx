@@ -23,7 +23,21 @@ const Reseller = () => {
             rel="noreferrer"
             href="https://www.solariummarseille.fr/"
           >
-            {" "}
+
+            Lien vers leur site
+          </a>
+        </li>
+        <li>
+          <h3>La butinerie</h3>
+          <span>103 rue Sainte </span>
+          <span>13007 Marseille</span>
+
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://instagram.com/labutinerie.marseille?igshid=YmMyMTA2M2Y="
+          >
+
             Lien vers leur site
           </a>
         </li>

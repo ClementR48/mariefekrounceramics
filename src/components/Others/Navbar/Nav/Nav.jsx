@@ -52,7 +52,7 @@ const Nav = ({
           exact="true"
           to="/"
         >
-          Acceuil
+          Accueil
         </NavLink>
         <NavLink
           onMouseEnter={(e) => hover(e)}

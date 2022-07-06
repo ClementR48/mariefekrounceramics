@@ -54,7 +54,7 @@ const ArticleHome = () => {
           <p className="text">
             La pratique de la céramique s'inscrit pour moi dans une profonde
             reconnexion à la nature et à l'humain : la création de lien social
-            et la transmission des savoirs faire s'allient à un mode de
+            et la transmission des savoir-faire s'allient à un mode de
             fabrication respectueux, pour des objets durables et une
             rémunération plus juste.
           </p>
