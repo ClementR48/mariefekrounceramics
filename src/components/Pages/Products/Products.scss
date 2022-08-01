@@ -3,7 +3,7 @@
 .products {
   padding: 120px 5vw;
   @include mobile {
-    padding: 120px 0;
+    padding: 100px 0;
   }
 
   .list_categories {
@@ -20,13 +20,19 @@
     }
   }
   .list_products {
-    width: 100%;
+    /* width: 100%;
     background-color: transparent;
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+     */
+    
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 150px;
 
     &.little {
@@ -41,6 +47,8 @@
       transform: translateY(100%);
       animation: apparition 2s forwards;
     }
+
+   
 
     @include tablet {
       justify-content: center;

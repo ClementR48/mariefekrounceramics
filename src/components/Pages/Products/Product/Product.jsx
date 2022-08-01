@@ -29,7 +29,8 @@ const Product = ({ product, cart }) => {
   const arrEpuise = "épuisé".split("");
 
   const { ref: productRef, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
+    rootMargin: '50px',
     triggerOnce: true,
   });
 
@@ -37,6 +38,7 @@ const Product = ({ product, cart }) => {
     <motion.li
       ref={productRef}
       className={inView ? "product isVisible" : "product"}
+      
     >
       {quantityProduct && (
         <ul className="epuise">

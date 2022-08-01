@@ -17,6 +17,7 @@ const Products = ({
 }) => {
   const [activeCateg, setActiveCateg] = useState("all");
   const [listLittle, setListLittle] = useState(false);
+  
 
   
 
@@ -77,6 +78,7 @@ const Products = ({
             })}
           <li>
             <span
+            id="list"
               className={
                 "all" === activeCateg ? "category selected" : "category"
               }
