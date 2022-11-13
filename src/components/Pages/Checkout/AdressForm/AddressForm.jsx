@@ -70,6 +70,14 @@ const AddressForm = ({
         price_code: obj[0].price.formatted_with_code,
         price: obj[0].price.raw,
       });
+    } else if (weight < 100) {
+      const obj = state.filter((option) => option.description === "100");
+
+      setShippingOption({
+        id: obj[0].id,
+        price_code: obj[0].price.formatted_with_code,
+        price: obj[0].price.raw,
+      });
     } else if (weight < 250) {
       const obj = state.filter((option) => option.description === "250");
 
@@ -233,7 +241,8 @@ const AddressForm = ({
           </label>
           {delivery === "false" && (
             <span className="delivery_message">
-              * Une fois votre commande finalisée, vous recevrez un mail pour que nous fixions un rendez-vous ensemble.
+              * Une fois votre commande finalisée, vous recevrez un mail pour
+              que nous fixions un rendez-vous ensemble.
             </span>
           )}
           <label>
