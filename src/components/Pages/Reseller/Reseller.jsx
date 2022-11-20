@@ -23,7 +23,24 @@ const Reseller = () => {
             rel="noreferrer"
             href="https://www.solariummarseille.fr/"
           >
-            {" "}
+            Lien vers leur site
+          </a>
+        </li>
+        <li>
+          <h3>C sur Terre</h3>
+          <span>2 rue du Pontis </span>
+          <span>06560 Valbonne</span>
+
+          <a target="_blank" rel="noreferrer" href="https://www.csurterre.com/">
+            Lien vers leur site
+          </a>
+        </li>
+        <li>
+          <h3>Maison Makeba</h3>
+          <span>55 Chemin de Savignol</span>
+          <span>31320 Castanet Tolosan</span>
+
+          <a target="_blank" rel="noreferrer" href="https://shop.maisonmakeba.fr/">
             Lien vers leur site
           </a>
         </li>

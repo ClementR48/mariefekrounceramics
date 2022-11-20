@@ -43,11 +43,10 @@ function App() {
   const [thanks, setThanks] = useState({
     isValid: false,
     error: false,
-    delivery: 'false',
+    delivery: "false",
   });
 
   let navigate = useNavigate();
-
 
   //============================ Open modals ============================
 
@@ -192,8 +191,6 @@ function App() {
     setCart(newCart);
   };
 
-
-
   // ============================ Checkout ============================
 
   const handleCaptureCheckout = (checkoutTokenId, newOrder, delivery) => {
@@ -206,16 +203,15 @@ function App() {
           setBigLoading(false);
           refreshCart();
           fetchProducts();
-          setThanks({isValid: true, error: false, delivery: delivery});
+          setThanks({ isValid: true, error: false, delivery: delivery });
           navigate("/");
         })
         .catch((error) => {
-          setThanks({isValid: true, error: true, delivery: delivery});
+          setThanks({ isValid: true, error: true, delivery: delivery });
           setBigLoading(false);
         });
     } catch (error) {
       setBigLoading(false);
-      
     }
   };
 
@@ -249,7 +245,8 @@ function App() {
         }
 
         const reducer = (accumulator, curr) => accumulator + curr;
-        setWeight(gramme.reduce(reducer));
+
+        setWeight(gramme.reduce(reducer) * 1.8);
       }
     };
     weightProductsInCart();
@@ -307,12 +304,7 @@ function App() {
         totalItems={cart.total_items}
       />
       {bigLoading && <Loader bigLoading={bigLoading} />}
-      {thanks.isValid && (
-        <Thanks
-          thanks={thanks}
-          setThanks={setThanks}
-        />
-      )}
+      {thanks.isValid && <Thanks thanks={thanks} setThanks={setThanks} />}
       <Checkout
         cart={cart}
         order={order}
@@ -321,7 +313,6 @@ function App() {
         openCheckoutFunc={openCheckoutFunc}
         weight={weight}
         setThanks={setThanks}
-        
       />
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
