@@ -1,8 +1,8 @@
 import React from "react";
 import "./ImageHome.scss";
 import imgDesktop from "../../../../assets/images/imageHome1900.JPG";
-import imgTablet from "../../../../assets/images/imageHome800.webp";
-import imgMobile from "../../../../assets/images/imageHome500.webp";
+import imgTablet from "../../../../assets/images/imageHome800.JPG";
+import imgMobile from "../../../../assets/images/imageHome500.JPG";
 
 import { motion } from "framer-motion";
 
@@ -33,7 +33,7 @@ const ImageHome = () => {
             fill="none"
             stroke="transparent"
           />
-          <text x="7%" filter="blur(10px)">
+          <text x="7%">
             <animate
               attributeName="x"
               from="100%"

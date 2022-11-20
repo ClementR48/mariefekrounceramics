@@ -15,9 +15,7 @@ const Nav = ({
   openMenu,
 }) => {
   const [logo, setLogo] = useState();
-  
 
-  
   useEffect(() => {
     if (openMenu) {
       setLogo(logoPink);
@@ -35,7 +33,7 @@ const Nav = ({
     <>
       <div className="nav_logo">
         <img src={logo} alt="logo" />
-      </div> 
+      </div>
       <nav
         className={
           colorNavHome
@@ -52,7 +50,7 @@ const Nav = ({
           exact="true"
           to="/"
         >
-          Acceuil
+          Accueil
         </NavLink>
         <NavLink
           onMouseEnter={(e) => hover(e)}

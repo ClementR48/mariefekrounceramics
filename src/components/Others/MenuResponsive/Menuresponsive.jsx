@@ -7,7 +7,7 @@ const Menuresponsive = ({ totalItems, openMenuFunc, openMenu }) => {
   return (
     <nav className={openMenu ? "menuresponsive active" : "menuresponsive"}>
       <NavLink onClick={() => openMenuFunc()} exact="true" to="/">
-        Acceuil
+        Accueil
       </NavLink>
       <NavLink onClick={() => openMenuFunc()} exact="true" to="/products">
         Boutique
