@@ -18,7 +18,7 @@ const ImageHome = () => {
       <picture>
         <source srcSet={imgDesktop} media="(min-width: 800px)" />
         <source srcSet={imgTablet} media="(min-width: 500px)" />
-        <img src={imgMobile} alt="vases" />
+        <img src={imgTablet} alt="vases" />
       </picture>
       <div className="text">
         <svg
