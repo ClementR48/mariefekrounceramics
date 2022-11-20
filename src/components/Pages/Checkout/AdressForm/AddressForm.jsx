@@ -140,7 +140,16 @@ const AddressForm = ({
   useEffect(() => {
     if (shippingOptions !== "") {
       if (shippingOptions[0]) {
-        calculShipping(shippingOptions);
+        if (shippingOptions[0].description === "International") {
+          setShippingOption({
+            id: shippingOptions[0].id,
+            price_code: shippingOptions[0].price.formatted_with_code,
+            price: shippingOptions[0].price.raw,
+          });
+        } else {
+          
+          calculShipping(shippingOptions);
+        }
       }
     }
   }, [shippingOptions, weight, shippingCountry, delivery]);
