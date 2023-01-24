@@ -11,7 +11,6 @@ const CartItem = ({
 }) => {
   const [available, setAvailable] = useState(true);
 
-
   useEffect(() => {
     const product = products.filter(
       (product) => product.id === item.product_id
@@ -23,8 +22,13 @@ const CartItem = ({
         setAvailable(true);
       }
     }
-    
   }, [item, products]);
+
+  const productDiscount = () => {
+    const priceWithDiscount =
+      item.line_total.raw - (item.line_total.raw * 15) / 100;
+    return <td className="price_product_discount">{`€${priceWithDiscount}`}</td>;
+  };
 
   return (
     <tr className="cartitem">
@@ -34,17 +38,18 @@ const CartItem = ({
       <td>
         <Link to={`/products/${item.permalink}`}>{item.name}</Link>
       </td>
-      <td>{item.line_total.formatted_with_code}</td>
+      {/* <td>{item.line_total.formatted_with_code}</td> */}
+      {productDiscount()}
       <td className="modify_item">
         <button onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}>
-          <Minus size={15} color='rgba(134, 90, 71, 1)'/>
+          <Minus size={15} color="rgba(134, 90, 71, 1)" />
         </button>
         <p>{item.quantity}</p>
         {available && (
           <button
             onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
           >
-            <Plus size={15} color='rgba(134, 90, 71, 1)' />
+            <Plus size={15} color="rgba(134, 90, 71, 1)" />
           </button>
         )}
 

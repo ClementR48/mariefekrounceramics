@@ -15,6 +15,13 @@ const FullCart = ({
   openCheckoutFunc,
   loading,
 }) => {
+
+
+  const totalPriceDiscount = () => {
+    const priceWithDiscount =cart.subtotal.raw - (cart.subtotal.raw * 15) / 100;
+    return `${priceWithDiscount} EUR`
+  };
+
   return (
     <motion.main
       initial={{ opacity: 0, translateX: -100 }}
@@ -53,7 +60,8 @@ const FullCart = ({
       </motion.table>
 
       <div className="subtotal">
-        <p>Sous-total : {cart.subtotal.formatted_with_code}</p>
+        {/* <p>Sous-total : {cart.subtotal.formatted_with_code}</p> */}
+        <p>Sous-total : {totalPriceDiscount()}</p>
         <Button
           text="Paiement"
           size="100%"

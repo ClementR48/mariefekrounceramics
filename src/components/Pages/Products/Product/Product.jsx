@@ -26,6 +26,11 @@ const Product = ({ product, cart }) => {
     }
   }, [cart, product]);
 
+  const productDiscount = () => {
+    const priceWithDiscount =product.price.raw - (product.price.raw * 15 / 100);
+    return <p className="price_product_discount">{`€${priceWithDiscount}`}</p>
+  }
+
   const arrEpuise = "épuisé".split("");
 
   const { ref: productRef, inView } = useInView({
@@ -50,6 +55,7 @@ const Product = ({ product, cart }) => {
         <div className="caption">
           <p className="name_product">{product.name}</p>
           <p className="price_product">{product.price.formatted_with_symbol}</p>
+          {productDiscount()}
         </div>
       </Link>
     </motion.li>

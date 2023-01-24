@@ -17,6 +17,7 @@ const PaymentForm = ({
   openCheckoutFunc,
   setCheckoutPageNumber,
 }) => {
+  console.log(checkoutToken)
   const [errorMessage, setErrorMessage] = useState("");
 
   const [stripePromise] = useState(() =>
@@ -70,6 +71,12 @@ const PaymentForm = ({
     }
   };
 
+  const productPriceDiscount = (producPrice) => {
+    const priceWithDiscount =
+    producPrice.line_total.raw - (producPrice.line_total.raw * 15) / 100;
+    return <p className="price_product_discount">{`${priceWithDiscount} EUR`}</p>;
+  };
+
   return (
     <div className="payment_form">
       <h3>Paiement</h3>
@@ -78,7 +85,8 @@ const PaymentForm = ({
         {checkoutToken.live.line_items.map((product) => (
           <li key={product.id}>
             <p>{product.name}</p>
-            <p>{product.line_total.formatted_with_code}</p>
+{/*             <p>{product.line_total.formatted_with_code}</p>
+ */}            {productPriceDiscount(product)}
           </li>
         ))}
         <li>
@@ -90,7 +98,7 @@ const PaymentForm = ({
       <p>
         Total à payer :
         {(
-          checkoutToken.live.subtotal.raw + shippingData.shippingOption.price
+          (checkoutToken.live.subtotal.raw - (checkoutToken.live.subtotal.raw * 15 /100)) + shippingData.shippingOption.price
         ).toFixed(2)}
         EUR
       </p>

@@ -92,6 +92,11 @@ const ShowProduct = ({
     return `${att[0].name} : ${att[0].value}`;
   };
 
+  const productDiscount = () => {
+    const priceWithDiscount =product.price.raw - (product.price.raw * 15 / 100);
+    return <p className="price_product_discount">{`${priceWithDiscount} EUR`}</p>
+  }
+
   return (
     <main className="showproduct">
       {product && (
@@ -133,6 +138,7 @@ const ShowProduct = ({
               <p>{attributes("attr_aZWNoyYPzo80JA")} cm</p>
             </div>
             <p className="price">{product.price.formatted_with_code}</p>
+            {productDiscount()}
             {available ? (
               <Button
                 text="Panier"
