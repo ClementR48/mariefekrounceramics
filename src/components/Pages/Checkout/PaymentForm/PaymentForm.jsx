@@ -17,7 +17,6 @@ const PaymentForm = ({
   openCheckoutFunc,
   setCheckoutPageNumber,
 }) => {
-  console.log(checkoutToken)
   const [errorMessage, setErrorMessage] = useState("");
 
   const [stripePromise] = useState(() =>

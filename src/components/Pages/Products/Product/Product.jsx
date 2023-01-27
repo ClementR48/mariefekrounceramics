@@ -8,6 +8,7 @@ const Product = ({ product, cart }) => {
   const [quantityProduct, setQuantityProduct] = useState(false);
   
   useEffect(() => {
+    product.price.discountPrice = product.price.raw - (product.price.raw * 15 / 100)
     if (cart.line_items !== undefined && product !== undefined) {
       const productInCart = cart.line_items.filter(
         (item) => item.product_id === product.id
@@ -24,6 +25,7 @@ const Product = ({ product, cart }) => {
         setQuantityProduct(false);
       }
     }
+
   }, [cart, product]);
 
   const productDiscount = () => {
