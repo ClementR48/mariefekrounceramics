@@ -65,6 +65,13 @@
 
       .price_product{
         font-size: 14px;
+        margin-right: 20px;
+        text-decoration: line-through ;
+      }
+
+      .caption_price{
+        display: flex;
+        align-items: baseline ;
       }
     }
 

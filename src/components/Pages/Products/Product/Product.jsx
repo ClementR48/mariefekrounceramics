@@ -6,9 +6,9 @@ import { useInView } from "react-intersection-observer";
 
 const Product = ({ product, cart }) => {
   const [quantityProduct, setQuantityProduct] = useState(false);
-  
+
   useEffect(() => {
-    product.price.discountPrice = product.price.raw - (product.price.raw * 15 / 100)
+    //product.price.discountPrice = product.price.raw - (product.price.raw * 15 / 100)
     if (cart.line_items !== undefined && product !== undefined) {
       const productInCart = cart.line_items.filter(
         (item) => item.product_id === product.id
@@ -25,13 +25,13 @@ const Product = ({ product, cart }) => {
         setQuantityProduct(false);
       }
     }
-
   }, [cart, product]);
 
   const productDiscount = () => {
-    const priceWithDiscount =product.price.raw - (product.price.raw * 15 / 100);
-    return <p className="price_product_discount">{`€${priceWithDiscount}`}</p>
-  }
+    const priceWithDiscount =
+      product.price.raw - (product.price.raw * 15) / 100;
+    return <p className="price_product_discount">{`€${priceWithDiscount}`}</p>;
+  };
 
   const arrEpuise = "épuisé".split("");
 
@@ -56,8 +56,12 @@ const Product = ({ product, cart }) => {
         <img src={product.image.url} alt={product.name} />
         <div className="caption">
           <p className="name_product">{product.name}</p>
-          <p className="price_product">{product.price.formatted_with_symbol}</p>
-          {productDiscount()}
+          <div className="caption_price">
+            <p className="price_product">
+              {product.price.formatted_with_symbol}
+            </p>
+            {productDiscount()}
+          </div>
         </div>
       </Link>
     </motion.li>
