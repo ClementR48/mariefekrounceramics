@@ -93,9 +93,12 @@ const ShowProduct = ({
   };
 
   const productDiscount = () => {
-    const priceWithDiscount =product.price.raw - (product.price.raw * 15 / 100);
-    return <p className="price_product_discount">{`${priceWithDiscount} EUR`}</p>
-  }
+    const priceWithDiscount =
+      product.price.raw - (product.price.raw * 15) / 100;
+    return (
+      <p className="price_product_discount">{`${priceWithDiscount} EUR`}</p>
+    );
+  };
 
   return (
     <main className="showproduct">
@@ -137,8 +140,10 @@ const ShowProduct = ({
               <p>{attributes("attr_8XO3wpWzXlYAzQ")} cm</p>
               <p>{attributes("attr_aZWNoyYPzo80JA")} cm</p>
             </div>
-            <p className="price">{product.price.formatted_with_code}</p>
-            {productDiscount()}
+            <div className="prices">
+              <p className="price">{product.price.formatted_with_code}</p>
+              {productDiscount()}
+            </div>
             {available ? (
               <Button
                 text="Panier"

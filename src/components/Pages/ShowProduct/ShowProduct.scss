@@ -99,12 +99,17 @@
           margin: 20px 0;
         }
       }
-
-      .price{
-        margin-bottom: 25px;
+      .prices{
+        display: flex;
+        width: fit-content;
       }
-
-      
+      .price_product_discount {
+        font-weight: bold;
+      }
+      .price {
+        text-decoration: line-through;
+        margin-bottom: 20px;
+      }
 
       /* .checkout {
         margin-top: 20px;
