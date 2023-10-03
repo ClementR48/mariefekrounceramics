@@ -25,23 +25,23 @@ const About = () => {
         exit={{ translateX: 20, opacity: 0 }}
         transition={{ delay: 0.5, duration: 1 }}
       >
-        Je m’appelle Marie Fekroun, j’ai 28 ans et je pratique la céramique
-        essentiellement en autodidacte depuis 2018. J’aime dire que c’est
-        voyager au bout du monde qui m’a donné envie de travailler la terre, et
-        de m’encrer dans les éléments. J’étais en quête de sens et cette
-        rencontre a été une évidence. Lors de mes voyages, j’ai assisté à
-        plusieurs manifestations de l’art céramique et j’ai pu voir comment
-        différentes culture se l’était approprié au fil des siècles. Ca a été un
-        fil conducteur pour moi, quelque chose de toujours présent en fond, qui
-        me guidait de destination en destination, jusqu’à atterrir en Colombie,
-        chez Margarita Casas, qui m’a ouvert sa maison et son atelier pendant
-        deux mois. Après cette immersion je n’avais plus que l’argile en tête.
-        Aujourd'hui de retour à Marseille, je travaille dans un atelier partagé
-        où j'expérimente beaucoup, je mélange, superpose, joue avec les terres
-        et les émaux. Mes pièces sont modelées à la main grâce aux techniques du
-        colombin, du pincé et de la plaque. Je crois aux imperfections, aux
-        irrégularités, aux traces de pinceaux, traces de doigts. Chaque détail
-        qui rendra la pièce unique et pleine d'émotion.
+        Marie découvre l’argile au Népal, à la fin d’un voyage d’un an et demi
+        en Asie et dans le Pacifique. C’est un coup de coeur pour la matière.
+        S’ensuit un voyage en Colombie, au cours duquel elle passera plusieurs
+        mois chez la céramiste Margarita Casas. Elle y découvrira la vie
+        d'atelier et commencera son apprentissage sur un tour de potier. Après
+        cette expérience privilégiée, Marie n'aura plus que l'argile en tête et
+        décide à son retour de partir se former en Espagne à Séville, puis à
+        Grenade. Elle y sera assistante de production dans un atelier en échange
+        de cours du soir. Aujourd’hui de retour à Marseille où elle a grandi,
+        Marie est installée à l’Atelier Déméterre, où elle façonne des objets
+        décoratifs et utilitaires en petite série. L’essentiel de ses recherches
+        s’organise autour des mélanges et des textures. Grâce à ces deux
+        procédés, elle crée des pièces organiques et brutes, largement inspirées
+        de la nature: texture corail ou écaille, mouvement de l'eau ou dunes de
+        sable. Chaque objet est façonné à la main selon les techniques lentes du
+        modelage, puis texturé, encore plus lentement, grâce à un processus
+        d'empreinte.
       </motion.p>
     </div>
   );
