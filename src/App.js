@@ -47,6 +47,23 @@ function App() {
   });
 
   let navigate = useNavigate();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/texts");
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données : ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data)
 
   //============================ Open modals ============================
 
