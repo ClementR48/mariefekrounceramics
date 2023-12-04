@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { Loader } from "react-feather";
 import "./Overlay.scss";
 
 const Overlay = ({ openMenuFunc, openCheckoutFunc }) => {
