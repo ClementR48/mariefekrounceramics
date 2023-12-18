@@ -84,7 +84,8 @@ function App() {
   const fetchProducts = (bigloading = "") => {
     bigloading === "" ? setLoading(true) : setBigLoading(true);
 
-    commerce.products.list()
+    commerce.products
+      .list()
       .then((products) => {
         if (products && products.data) {
           setProducts(products.data);
@@ -340,7 +341,7 @@ function App() {
         weight={weight}
         setThanks={setThanks}
       />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route exact="true" path="/" element={<Home />} />
           <Route exact="true" path="/about" element={<AboutContact />} />
