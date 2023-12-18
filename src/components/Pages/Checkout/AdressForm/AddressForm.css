@@ -1,0 +1,229 @@
+/* couleurs */
+/* Font */
+.address_form {
+  width: 100%;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 20px;
+}
+
+@media screen and (max-width: 770px) {
+  .address_form {
+    padding: 10px;
+  }
+}
+
+.address_form h3 {
+  margin-bottom: 20px;
+}
+
+.address_form label,
+.address_form .price_delivery {
+  font-size: 15px;
+  width: 80%;
+  margin-bottom: 17px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media screen and (max-width: 770px) {
+  .address_form label,
+  .address_form .price_delivery {
+    width: 90%;
+  }
+}
+
+.address_form label input,
+.address_form label select,
+.address_form label .price,
+.address_form .price_delivery input,
+.address_form .price_delivery select,
+.address_form .price_delivery .price {
+  color: black;
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dashed black;
+  outline: none;
+}
+
+.address_form .checkbox {
+  color: black;
+  font-size: 14px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.address_form .checkbox input {
+  margin-right: 10px;
+}
+
+.address_form .error_message {
+  color: red;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.address_form .delivery_message {
+  color: #fd9b8a;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.address_form .btn_address_form {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+@media screen and (max-width: 770px) {
+  .address_form .btn_address_form {
+    width: 90%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .address_form .btn_address_form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+}
+
+.address_form .btn_address_form .back {
+  background-color: transparent;
+  padding: 5px 15px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media screen and (max-width: 426px) {
+  .address_form .btn_address_form .back {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.address_form .btn_address_form .back span {
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+  color: #fd9b8a;
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.address_form .btn_address_form .back svg {
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+}
+
+.address_form .btn_address_form .back:hover svg {
+  -webkit-transform: translateX(-10px);
+          transform: translateX(-10px);
+  stroke: #fd9b8a;
+}
+
+.address_form .btn_address_form .back:hover span {
+  -webkit-transform: translateX(-5px);
+          transform: translateX(-5px);
+  opacity: 1;
+}
+
+.address_form .btn_address_form .submit_btn {
+  background-color: transparent;
+  padding: 5px 15px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media screen and (max-width: 426px) {
+  .address_form .btn_address_form .submit_btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.address_form .btn_address_form .submit_btn span {
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+  color: #865a47;
+  margin-right: 15px;
+  -webkit-transform: translateX(10px);
+          transform: translateX(10px);
+}
+
+.address_form .btn_address_form .submit_btn svg {
+  stroke: #865a47;
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+}
+
+.address_form .btn_address_form .submit_btn:hover svg {
+  -webkit-transform: translateX(10px);
+          transform: translateX(10px);
+}
+
+.address_form .btn_address_form .submit_btn:hover span {
+  -webkit-transform: translateX(5px);
+          transform: translateX(5px);
+  color: #865a47;
+}
+/*# sourceMappingURL=AddressForm.css.map */

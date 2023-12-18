@@ -1,0 +1,58 @@
+/* couleurs */
+/* Font */
+.reseller {
+  min-height: 100vh;
+  padding: 200px;
+}
+
+@media screen and (max-width: 1200px) {
+  .reseller {
+    padding: 200px 150px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .reseller {
+    padding: 200px 50px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .reseller {
+    padding: 200px 5px;
+  }
+}
+
+.reseller h2 {
+  margin-bottom: 100px;
+}
+
+@media screen and (max-width: 426px) {
+  .reseller h2 {
+    margin-bottom: 50px;
+  }
+}
+
+.reseller ul {
+  margin-left: 50px;
+  list-style-type: disc;
+}
+
+@media screen and (max-width: 426px) {
+  .reseller ul {
+    margin-left: 20px;
+  }
+}
+
+.reseller ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 40px;
+}
+/*# sourceMappingURL=Reseller.css.map */

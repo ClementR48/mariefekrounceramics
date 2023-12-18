@@ -1,0 +1,100 @@
+/* couleurs */
+/* Font */
+.menuresponsive {
+  width: 70vw;
+  height: 100vh;
+  background-color: #fffaf4;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 400;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: 0.5s -webkit-transform ease-in-out;
+  transition: 0.5s -webkit-transform ease-in-out;
+  transition: 0.5s transform ease-in-out;
+  transition: 0.5s transform ease-in-out, 0.5s -webkit-transform ease-in-out;
+  display: none;
+}
+
+@media screen and (max-width: 770px) {
+  .menuresponsive {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.menuresponsive.active {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.menuresponsive.active a {
+  -webkit-animation: apparition 1s forwards;
+          animation: apparition 1s forwards;
+}
+
+.menuresponsive a {
+  text-decoration: none;
+  color: #fd9b8a;
+  margin-top: 50px;
+  position: relative;
+  -webkit-transition: 0.2s ease-in-out color;
+  transition: 0.2s ease-in-out color;
+  -webkit-transform: translateY(200%);
+          transform: translateY(200%);
+  opacity: 0;
+}
+
+@-webkit-keyframes apparition {
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes apparition {
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.menuresponsive a:hover {
+  color: #d9dcc0;
+}
+
+.menuresponsive a::before {
+  content: "";
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #d9dcc0;
+  left: -10px;
+  top: 50%;
+  display: none;
+}
+
+.menuresponsive a.active::before {
+  display: block;
+}
+
+.menuresponsive a.active {
+  color: #d9dcc0;
+}
+/*# sourceMappingURL=Menuresponsive.css.map */

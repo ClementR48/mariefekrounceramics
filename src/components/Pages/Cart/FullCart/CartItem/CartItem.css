@@ -1,0 +1,132 @@
+/* couleurs */
+/* Font */
+@media screen and (max-width: 770px) {
+  .cartitem {
+    margin-bottom: 100px;
+    display: block;
+  }
+}
+
+.cartitem td {
+  padding: 5px 0;
+  text-align: center;
+  height: 120px;
+  min-width: 90px;
+  font-size: 0.8em;
+}
+
+@media screen and (max-width: 770px) {
+  .cartitem td {
+    height: auto;
+    display: block;
+    font-size: 0.8em;
+    text-align: center;
+  }
+}
+
+.cartitem td a {
+  text-transform: none;
+  color: #865a47;
+}
+
+.cartitem td img {
+  width: 80%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media screen and (max-width: 770px) {
+  .cartitem td img {
+    width: 30%;
+    min-width: 150px;
+  }
+}
+
+.cartitem .modify_item {
+  height: 125px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  position: relative;
+}
+
+@media screen and (max-width: 770px) {
+  .cartitem .modify_item {
+    height: 50px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.cartitem .modify_item .delete_item {
+  background-color: none;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  border: none;
+}
+
+.cartitem .modify_item .delete_item:hover {
+  background-color: transparent;
+}
+
+.cartitem .modify_item .delete_item:hover svg {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  stroke: #fd9b8a;
+}
+
+@media screen and (max-width: 770px) {
+  .cartitem .modify_item .delete_item {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+
+.cartitem .modify_item button {
+  outline: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #865a47;
+  border-radius: 50%;
+  background-color: transparent;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+@media screen and (max-width: 770px) {
+  .cartitem .modify_item button {
+    margin: 0 20px;
+  }
+}
+
+.cartitem .modify_item button:hover svg {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  stroke: white;
+}
+
+.cartitem .modify_item button:hover {
+  background-color: #865a47;
+}
+/*# sourceMappingURL=CartItem.css.map */

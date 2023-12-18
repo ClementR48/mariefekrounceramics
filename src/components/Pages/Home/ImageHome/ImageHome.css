@@ -1,0 +1,41 @@
+/* couleurs */
+/* Font */
+.image-home-container {
+  width: 100vw;
+  position: relative;
+}
+
+.image-home-container picture {
+  position: relative;
+}
+
+.image-home-container picture img {
+  width: 100%;
+  height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+@media screen and (max-width: 770px) {
+  .image-home-container picture img {
+    height: 70vh;
+  }
+}
+
+.image-home-container .text {
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+}
+
+.image-home-container .text svg {
+  width: 100%;
+  height: 100%;
+}
+/*# sourceMappingURL=ImageHome.css.map */

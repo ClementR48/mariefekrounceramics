@@ -22,10 +22,14 @@ import ScrollToTop from "./components/Others/ScrollToTop";
 
 //Library
 import { commerce } from "./lib/commerce";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
+import BackOffice from "./components/Pages/BackOffice/BackOffice";
+import PrivateRoute from "./components/Others/PrivateRoute";
+import Login from "./components/Others/Login/Login";
+import NotFound from "./components/Pages/NotFound/NotFound";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -63,8 +67,6 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(data)
-
   //============================ Open modals ============================
 
   const openMenuFunc = (value = "") => {
@@ -81,11 +83,18 @@ function App() {
 
   const fetchProducts = (bigloading = "") => {
     bigloading === "" ? setLoading(true) : setBigLoading(true);
-    commerce.products
-      .list()
+
+    commerce.products.list()
       .then((products) => {
-        setProducts(products.data);
-        setProductsToShow(products.data);
+        if (products && products.data) {
+          setProducts(products.data);
+          setProductsToShow(products.data);
+        } else {
+          console.error(
+            "Products data is undefined or missing 'list' property."
+          );
+        }
+
         bigloading === "" ? setLoading(false) : setBigLoading(false);
       })
       .catch((error) => {
@@ -338,6 +347,16 @@ function App() {
           <Route exact="true" path="/conditions" element={<Condition />} />
           <Route exact="true" path="/reseller" element={<Reseller />} />
           <Route exact="true" path="/parutions" element={<Parutions />} />
+          <Route exact="true" path="/login" element={<Login />} />
+          <Route
+            exact="true"
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <BackOffice />
+              </PrivateRoute>
+            }
+          />
           <Route
             exact="true"
             path="/products/:id"
@@ -388,6 +407,7 @@ function App() {
               />
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
       <Footer />

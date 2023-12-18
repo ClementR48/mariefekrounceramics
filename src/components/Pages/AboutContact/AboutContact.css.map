@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,cAAc;AASd,UAAU;ADRV,AAAA,MAAM,CAAC;EACL,OAAO,EAAE,SAAS;CAiBnB;;AAlBD,AAGE,MAHI,CAGJ,EAAE,CAAC;EACD,UAAU,EAAE,IAAI;EAChB,SAAS,EAAE,IAAI;EACf,OAAO,EAAE,MAAM;EACf,UAAU,EAAE,KAAK;EACjB,aAAa,EAAE,IAAI;CACpB;;AATH,AAWE,MAXI,CAWJ,cAAc,CAAA;EACZ,UAAU,EAAE,IAAI;EAChB,SAAS,EAAE,IAAI;EACf,OAAO,EAAE,MAAM;EACf,UAAU,EAAE,IAAI;EAChB,aAAa,EAAE,IAAI;CACpB",
+    "sources": [
+        "AboutContact.scss",
+        "../../../global.scss"
+    ],
+    "names": [],
+    "file": "AboutContact.css"
+}
