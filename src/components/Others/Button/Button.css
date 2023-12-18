@@ -1,0 +1,73 @@
+/* couleurs */
+/* Font */
+.btn {
+  background-color: #fffaf4;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #d9dcc0;
+  outline: none;
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s;
+}
+
+@media screen and (max-width: 426px) {
+  .btn {
+    width: 80%;
+  }
+}
+
+.btn.none {
+  cursor: none;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.btn:hover .s1 span {
+  -webkit-transform: translateY(-100%) rotateX(-90deg);
+          transform: translateY(-100%) rotateX(-90deg);
+}
+
+.btn:hover .s2 span {
+  -webkit-transform: translateY(0%) rotateX(0deg);
+          transform: translateY(0%) rotateX(0deg);
+}
+
+.btn .span-container {
+  padding: 10px 17px;
+}
+
+.btn span {
+  font-family: "Caladea", sans-serif;
+  color: #d9dcc0;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  will-change: transform;
+  display: inline-block;
+  font-size: 25px;
+  letter-spacing: 5px;
+}
+
+@media screen and (max-width: 426px) {
+  .btn span {
+    font-size: 20px;
+  }
+}
+
+.btn .s1 span {
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
+}
+
+.btn .s2 span {
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transform: translateY(100%) rotateX(-90deg);
+          transform: translateY(100%) rotateX(-90deg);
+}
+
+.btn .s2 {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+/*# sourceMappingURL=Button.css.map */

@@ -1,0 +1,41 @@
+/* couleurs */
+/* Font */
+.conditions {
+  min-height: 100vh;
+  padding: 200px;
+}
+
+@media screen and (max-width: 1200px) {
+  .conditions {
+    padding: 200px 150px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .conditions {
+    padding: 200px 50px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .conditions {
+    padding: 200px 5px;
+  }
+}
+
+.conditions h2 {
+  margin-bottom: 100px;
+}
+
+.conditions div {
+  width: 75%;
+  margin-bottom: 75px;
+}
+
+@media screen and (max-width: 1200px) {
+  .conditions div {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=Condition.css.map */

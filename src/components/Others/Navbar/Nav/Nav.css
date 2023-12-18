@@ -1,0 +1,78 @@
+/* couleurs */
+/* Font */
+.nav_logo {
+  width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-left: 60px;
+}
+
+.nav_logo img {
+  width: 100px;
+  height: 100px;
+}
+
+.anim_hover {
+  position: absolute;
+  bottom: 10px;
+  height: 7px;
+  width: 100%;
+}
+
+@media screen and (max-width: 770px) {
+  .anim_hover {
+    display: none;
+  }
+}
+
+.anim_hover.home .anim_hover_move {
+  background-color: white;
+}
+
+.anim_hover .anim_hover_move {
+  width: 7px;
+  height: 100%;
+  background-color: #d9dcc0;
+  border-radius: 50%;
+  -webkit-transition: 0.5s all ease-in-out;
+  transition: 0.5s all ease-in-out;
+  opacity: 1;
+  position: absolute;
+}
+
+.nav_links {
+  position: relative;
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.nav_links.home_nav a {
+  color: white;
+}
+
+.nav_links a {
+  color: #fd9b8a;
+  text-decoration: none;
+  position: relative;
+}
+
+@media screen and (max-width: 770px) {
+  .nav_links {
+    display: none;
+  }
+}
+/*# sourceMappingURL=Nav.css.map */

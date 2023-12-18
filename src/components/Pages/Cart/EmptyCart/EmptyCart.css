@@ -1,0 +1,119 @@
+/* couleurs */
+/* Font */
+.cart_empty {
+  margin-bottom: 150px;
+}
+
+.cart_empty .text_empty {
+  margin-bottom: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.cart_empty svg {
+  width: 1000px;
+}
+
+.cart_empty svg text {
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.cart_empty .carousel-empty {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  width: 100%;
+  cursor: none;
+}
+
+@media screen and (max-width: 426px) {
+  .cart_empty .carousel-empty {
+    padding: 10px;
+  }
+}
+
+.cart_empty .carousel-empty .cursor {
+  z-index: 1000;
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  font-size: 16px;
+  border: 1px white solid;
+  color: black;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  mix-blend-mode: screen;
+}
+
+.cart_empty .carousel-empty .carousel-container {
+  cursor: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.cart_empty .carousel-empty .image-container {
+  cursor: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-animation: carousel infinite linear 50s;
+          animation: carousel infinite linear 50s;
+  margin: 0;
+}
+
+.cart_empty .carousel-empty .image-container img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: none;
+  width: 15vw;
+  height: 15vw;
+  margin: 20px;
+}
+
+@media screen and (max-width: 770px) {
+  .cart_empty .carousel-empty .image-container img {
+    width: 20vw;
+    height: 20vw;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .cart_empty .carousel-empty .image-container img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+  }
+}
+
+@-webkit-keyframes carousel {
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes carousel {
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+/*# sourceMappingURL=EmptyCart.css.map */

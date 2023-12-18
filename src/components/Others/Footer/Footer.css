@@ -1,0 +1,124 @@
+/* couleurs */
+/* Font */
+.footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: auto;
+  background-color: #a2776a;
+  font-size: 14px;
+  z-index: 100;
+}
+
+@media screen and (max-width: 770px) {
+  .footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.footer .logo1 {
+  width: 120px;
+  height: 120px;
+}
+
+@media screen and (max-width: 770px) {
+  .footer .logo1 {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+}
+
+.footer h3 {
+  color: #fd9b8a;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.footer li {
+  color: white;
+  overflow: hidden;
+  height: 25px;
+  font-size: 12px;
+}
+
+.footer li a {
+  color: white;
+  position: relative;
+  text-decoration: none;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+.footer li a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  z-index: 0;
+}
+
+.footer li a::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  width: 100%;
+  height: 1px;
+  background-color: #fd9b8a;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.footer li a:hover::before {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.footer ul {
+  width: 200px;
+}
+
+@media screen and (max-width: 770px) {
+  .footer .list-contact {
+    margin-bottom: 20px;
+  }
+}
+
+.footer .list-contact .instagram_link a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.footer .list-contact .instagram_link a span {
+  margin-left: 8px;
+}
+/*# sourceMappingURL=Footer.css.map */
