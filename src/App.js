@@ -84,7 +84,8 @@ function App() {
   const fetchProducts = (bigloading = "") => {
     bigloading === "" ? setLoading(true) : setBigLoading(true);
 
-    commerce.products.list()
+    commerce.products
+      .list()
       .then((products) => {
         if (products && products.data) {
           setProducts(products.data);
