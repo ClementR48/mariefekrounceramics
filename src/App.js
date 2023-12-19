@@ -314,7 +314,7 @@ function App() {
         weight={weight}
         setThanks={setThanks}
       />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route exact="true" path="/" element={<Home />} />
           <Route exact="true" path="/about" element={<AboutContact />} />
