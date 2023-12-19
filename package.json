@@ -13,6 +13,7 @@
     "react-feather": "^2.0.9",
     "react-intersection-observer": "^8.34.0",
     "react-router-dom": "^6.21.0",
+    "sass": "^1.69.5",
     "striptags": "^3.2.0"
   },
   "devDependencies": {

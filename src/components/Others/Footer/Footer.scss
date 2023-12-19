@@ -12,6 +12,7 @@
   background-color: rgb(162, 119, 106);
   font-size: 14px;
   z-index: 100;
+  position: absolute;
 
   @include tablet {
     flex-direction: column;
