@@ -67,6 +67,8 @@ function App() {
     fetchData();
   }, []);
 
+  console.log(data)
+
   //============================ Open modals ============================
 
   const openMenuFunc = (value = "") => {
