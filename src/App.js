@@ -22,7 +22,7 @@ import ScrollToTop from "./components/Others/ScrollToTop";
 
 //Library
 import { commerce } from "./lib/commerce";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
@@ -35,7 +35,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
   const [product, setProduct] = useState();
-  const [categories, setCategories] = useState([]);
+
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [openMenu, setOpenMenu] = useState(false);
@@ -51,7 +51,7 @@ function App() {
   });
 
   let navigate = useNavigate();
-  const [data, setData] = useState(null);
+  /*   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,9 +65,9 @@ function App() {
     };
 
     fetchData();
-  }, []);
+  }, []); */
 
-  console.log(data)
+  console.count("premier rendu");
 
   //============================ Open modals ============================
 
@@ -83,7 +83,7 @@ function App() {
 
   //============================ Products ============================
 
-  const fetchProducts = (bigloading = "") => {
+  const fetchProducts = useCallback((bigloading = "") => {
     bigloading === "" ? setLoading(true) : setBigLoading(true);
 
     commerce.products
@@ -106,7 +106,7 @@ function App() {
         }, 1000);
         navigate("/");
       });
-  };
+  }, []);
 
   const fetchOneProduct = (permalink) => {
     setBigLoading(true);
@@ -137,21 +137,6 @@ function App() {
 
   //Categories
 
-  const fetchCategories = () => {
-    setBigLoading(true);
-    commerce.categories
-      .list()
-      .then((categ) => {
-        setCategories(categ.data);
-        setBigLoading(false);
-      })
-      .catch((error) => {
-        setTimeout(() => {
-          setBigLoading(false);
-        }, 1000);
-      });
-  };
-
   //============================ Cart ============================
 
   const fetchCart = async () => {
@@ -167,44 +152,6 @@ function App() {
         setCart(item.cart);
         setLoading(false);
       })
-      .catch((error) => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
-
-        navigate("/");
-      });
-  };
-
-  const handleUpdateCartQty = (productId, quantity) => {
-    setLoading(true);
-    commerce.cart.update(productId, { quantity }).then((item) => {
-      setCart(item.cart);
-      setLoading(false);
-    });
-  };
-
-  const handleRemoveFromCart = (productId) => {
-    setLoading(true);
-    commerce.cart
-      .remove(productId)
-      .then((item) => setCart(item.cart))
-      .then(() => setLoading(false))
-      .catch((error) => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
-
-        navigate("/");
-      });
-  };
-
-  const handleEmptyCart = () => {
-    setLoading(true);
-    commerce.cart
-      .empty()
-      .then((item) => setCart(item.cart))
-      .then(() => setLoading(false))
       .catch((error) => {
         setTimeout(() => {
           setLoading(false);
@@ -282,9 +229,9 @@ function App() {
   }, [cart, products]);
 
   useEffect(() => {
-    fetchProducts();
-    fetchCart();
-    fetchCategories();
+    //fetchProducts();
+    //fetchCart();
+    //fetchCategories();
   }, []);
 
   //useEffect Responsive
@@ -384,7 +331,6 @@ function App() {
               element={
                 <Products
                   products={products}
-                  categories={categories}
                   productsToShow={productsToShow}
                   setProductsToShow={setProductsToShow}
                   changeListProducts={changeListProducts}
@@ -400,11 +346,8 @@ function App() {
             element={
               <Cart
                 cart={cart}
-                handleUpdateCartQty={handleUpdateCartQty}
-                handleRemoveFromCart={handleRemoveFromCart}
-                handleEmptyCart={handleEmptyCart}
+                setCart={setCart}
                 products={products}
-                categories={categories}
                 openCheckoutFunc={openCheckoutFunc}
                 loading={loading}
               />

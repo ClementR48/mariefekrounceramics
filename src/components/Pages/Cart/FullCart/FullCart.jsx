@@ -5,16 +5,50 @@ import "./FullCart.scss";
 import { motion } from "framer-motion";
 import Button from "../../../Others/Button/Button";
 import Loader from "../../../Others/Loader/Loader";
+import { commerce } from "../../../../lib/commerce";
+import { useNavigate } from "react-router-dom";
 
-const FullCart = ({
-  cart,
-  handleRemoveFromCart,
-  handleUpdateCartQty,
-  products,
-  handleEmptyCart,
-  openCheckoutFunc,
-  loading,
-}) => {
+const FullCart = ({ cart, setCart, products, openCheckoutFunc, loading }) => {
+  let navigate = useNavigate();
+  const handleUpdateCartQty = (productId, quantity) => {
+    commerce.cart.update(productId, { quantity }).then((item) => {
+      setCart(item.cart);
+    });
+  };
+
+  const handleRemoveFromCart = (productId) => {
+    commerce.cart
+      .remove(productId)
+      .then((item) => setCart(item.cart))
+
+      .catch((error) => {
+        navigate("/");
+      });
+  };
+
+/*   const handleEmptyCart = () => {
+    setLoading(true);
+    commerce.cart
+      .empty()
+      .then((item) => setCart(item.cart))
+      .then(() => setLoading(false))
+      .catch((error) => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+
+        navigate("/");
+      });
+  }; */
+
+  const handleEmptyCart = () => {
+    commerce.cart
+      .empty()
+      .then((item) => setCart(item.cart))
+      .catch((error) => {
+        navigate("/");
+      });
+  };
   return (
     <motion.main
       initial={{ opacity: 0, translateX: -100 }}

@@ -9,14 +9,14 @@ import { motion } from "framer-motion";
 
 const Cart = ({
   cart,
-  handleEmptyCart,
-  handleRemoveFromCart,
-  handleUpdateCartQty,
+  setCart,
   products,
   openCheckoutFunc,
   loading,
 }) => {
   if (!cart.line_items) return <Loader />;
+
+
 
   return (
     <motion.div
@@ -28,13 +28,11 @@ const Cart = ({
     >
       <h2>Votre panier</h2>
       {!cart.line_items.length ? (
-        <EmptyCart  products={products} />
+        <EmptyCart products={products} />
       ) : (
         <FullCart
           cart={cart}
-          handleEmptyCart={handleEmptyCart}
-          handleRemoveFromCart={handleRemoveFromCart}
-          handleUpdateCartQty={handleUpdateCartQty}
+          setCart={setCart}
           products={products}
           openCheckoutFunc={openCheckoutFunc}
           loading={loading}

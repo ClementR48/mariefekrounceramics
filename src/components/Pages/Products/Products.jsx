@@ -1,37 +1,59 @@
-import React, {useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Loader from "../../Others/Loader/Loader";
 
 import Categories from "./Category/Category";
 import Product from "./Product/Product";
 import "./Products.scss";
 import { motion } from "framer-motion";
+import { commerce } from "../../../lib/commerce";
 
-const Products = ({
-  products,
-  categories,
-  setProductsToShow,
-  productsToShow,
-  changeListProducts,
-  cart,
-  loading,
-}) => {
-  const [activeCateg, setActiveCateg] = useState("all");
-  const [listLittle, setListLittle] = useState(false);
+const Products = ({ cart }) => {
+  const [selectedCateg, setSelectCateg] = useState(undefined);
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  
+  const fetchCategories = useCallback(() => {
+    setLoading(true);
 
+    commerce.categories
+      .list()
+      .then((response) => {
+        if (response) {
+          setCategories(response.data);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des catégories :", error);
+        setLoading(false);
+      });
+  }, []);
+
+  const filterByCategory = () => {
+    setLoading(true);
+    commerce.products
+      .list(selectedCateg ? { category_id: [selectedCateg] } : {})
+      .then((product) => {
+        if (product) {
+          setProducts(product.data);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const memoizedCategories = useMemo(() => categories, [categories]);
 
   useEffect(() => {
-    productsToShow.length < 3 && productsToShow.length > 0
-      ? setListLittle(true)
-      : setListLittle(false);
-  }, [productsToShow]);
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
-    activeCateg !== "all"
-      ? changeListProducts(activeCateg)
-      : setProductsToShow(products);
-  }, [activeCateg, products]);
+    filterByCategory();
+  }, [selectedCateg]);
 
   return (
     <motion.main
@@ -58,29 +80,22 @@ const Products = ({
           }}
           className="list_categories"
         >
-          {categories
+          {memoizedCategories
             .filter((category) => category.products !== 0)
             .map((category) => {
               return (
-                <li
-                  className={
-                    category.id === activeCateg
-                      ? "category selected"
-                      : "category"
-                  }
+                <Categories
                   key={category.id}
-                  onClick={() => setActiveCateg(category.id)}
-                >
-                  <Categories category={category} />
-                </li>
+                  category={category}
+                  onClick={setSelectCateg}
+                  selectedCateg={selectedCateg}
+                />
               );
             })}
           <li>
             <span
-              className={
-                "all" === activeCateg ? "category selected" : "category"
-              }
-              onClick={() => setActiveCateg("all")}
+              className={!selectedCateg ? "category selected" : "category"}
+              onClick={() => setSelectCateg(undefined)}
             >
               Tout
             </span>
@@ -101,18 +116,17 @@ const Products = ({
             translateY: 100,
             opacity: 0,
           }}
-          className={listLittle ? "list_products little" : "list_products"}
+          className={"list_products"}
         >
           {loading ? (
             <Loader />
           ) : (
-            productsToShow.map((product) => {
+            products?.map((product) => {
               return <Product key={product.id} product={product} cart={cart} />;
             })
           )}
         </motion.ul>
       </>
-      
     </motion.main>
   );
 };
