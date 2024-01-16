@@ -6,6 +6,7 @@ import Product from "./Product/Product";
 import "./Products.scss";
 import { motion } from "framer-motion";
 import { commerce } from "../../../lib/commerce";
+import useFetch from "../../../hook/useFetch";
 
 const Products = ({ cart }) => {
   const [selectedCateg, setSelectCateg] = useState(undefined);
@@ -13,22 +14,12 @@ const Products = ({ cart }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchCategories = useCallback(() => {
-    setLoading(true);
+  const fetchCategories = useFetch(commerce.categories);
+  const fetchProductsByCategory = useFetch(
+    commerce.products,
+  );
 
-    commerce.categories
-      .list()
-      .then((response) => {
-        if (response) {
-          setCategories(response.data);
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la récupération des catégories :", error);
-        setLoading(false);
-      });
-  }, []);
+  console.log(selectedCateg);
 
   const filterByCategory = () => {
     setLoading(true);
@@ -45,15 +36,12 @@ const Products = ({ cart }) => {
       });
   };
 
-  const memoizedCategories = useMemo(() => categories, [categories]);
-
   useEffect(() => {
-    fetchCategories();
-  }, []);
 
-  useEffect(() => {
-    filterByCategory();
   }, [selectedCateg]);
+
+  if (fetchCategories.loading) return <p>Loading...</p>;
+  if (fetchProductsByCategory.loading) return <p>Loading...</p>;
 
   return (
     <motion.main
@@ -80,7 +68,7 @@ const Products = ({ cart }) => {
           }}
           className="list_categories"
         >
-          {memoizedCategories
+          {fetchCategories?.data
             .filter((category) => category.products !== 0)
             .map((category) => {
               return (
@@ -121,7 +109,7 @@ const Products = ({ cart }) => {
           {loading ? (
             <Loader />
           ) : (
-            products?.map((product) => {
+            fetchProductsByCategory?.data.map((product) => {
               return <Product key={product.id} product={product} cart={cart} />;
             })
           )}
